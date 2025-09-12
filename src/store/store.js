@@ -1,5 +1,6 @@
 // re-earth-frontend/src/store/store.js
 import { configureStore } from '@reduxjs/toolkit'
+
 import authReducer from '../features/authSlice'
 
 const store = configureStore({
