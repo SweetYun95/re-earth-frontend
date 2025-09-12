@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
+@font-face {
+   font-family: 'GMarketSans';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+   font-weight: 500;
+   font-display: swap;
+}
+
+/* 디폴트 CSS */
+html,
+*,
+p h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+span,
+a,
+img,
+ul,
+li,
+header,
+section,
+article,
+button {
+   padding: 0;
+   margin: 0;
+}
+body {
+   width: 100%;
+   box-sizing: border-box;
+   font-family: 'Pretendard', sans-serif;
+}
+a,
+a:hover {
+   color: inherit;
+   text-decoration: none;
+}
+ul,
+li {
+   list-style: none;
+}
+img {
+   display: block;
+   max-width: 100%;
+}
+
+/* 폰트 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-family: var(--headings);
+}
+
+/* margin top */
+.mt-20 {
+   margin-top: 20px;
+}
+.mt-40 {
+   margin-top: 40px;
+}
+.mt-80 {
+   margin-top: 80px;
+}
+.mt-120 {
+   margin-top: 120px;
+}
+
+/* 텍스트사이즈 - 본문 */
+.text-body {
+   color: var(--maintext);
+}
+.text-body.large {
+   font-size: 1.125rem;
+   line-height: 1.6;
+   font-weight: 500;
+}
+.text-body.regular {
+   font-size: 1rem;
+   line-height: 1.6;
+   font-weight: 400;
+}
+.text-body.caption {
+   font-size: 0.875rem;
+   line-height: 1.5;
+   font-weight: 500;
+}
+
+/* 텍스트 - 타이틀 */
+h1,
+h2,
+h3 {
+   font-family: var(--headings);
+   color: var(--maintext);
+}
+h1 {
+   font-size: 3rem;
+   line-height: 1.3;
+   font-weight: 700;
+   @media (max-width: 474px) {
+      font-size: 2rem;
+   }
+}
+h2 {
+   font-size: 2rem;
+   line-height: 1.4;
+   font-weight: 700;
+   @media (max-width: 474px) {
+      font-size: 1.5rem;
+   }
+}
+h3 {
+   font-size: 1.5rem;
+   line-height: 1.5;
+   font-weight: 500;
+   @media (max-width: 474px) {
+      font-size: 1.25rem;
+      line-height: 1.4;
+      font-weight: 500;
+   }
+}
+
+/* :root */
+:root {
+   /* 컬러차트 */
+   --maincolor: #d1e95d;
+   --subcolor-d: #72c63a;
+   --subcolor-m: #f2f6eb;
+   --maintext: #333333;
+   --subtext: #9e9e9e;
+   --point-b: #1d6ff2;
+   --point-r: #fb6e52;
+   --point-y: #ffce55;
+
+   /* 폰트 */
+   --headings: 'GmarketSans', sans-serif;
+}
+
+/* 배경색 (페이지 전체) */
+section#main1,
+section#main2 {
+   min-height: 100vh;
+   padding: 0;
+   margin: 0;
+   width: 100vw;
+}
+section#main1 {
+   background-color: var(--subcolor-m);
+}
+section#main2 {
+   background-color: #ffffff;
+}
+
+/* button태그 */
+.btn {
+   border: none;
+   border-radius: 20px;
+   display: inline-block;
+   text-align: center;
+   padding: 0;
+   color: var(--maintext);
+}
+
+.btn--inside {
+   width: 87.5%;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   margin: 10px 25px;
+   color: #333333;
+   font-size: 1rem;
+}
+.btn--inside img {
+   width: 8%;
+   height: 100%;
+}
+.btn--inside a {
+   width: 62.5%;
+   text-align: center;
+   font-family: var(--body);
+   @media (max-width: 768px) {
+      font-size: 0.75rem;
+   }
+}
+/* 디폴트 버튼: .btn.default */
+.btn.default {
+   min-width: 100px;
+   max-width: 200px;
+   max-height: 60px;
+   padding: 15px 20px;
+   font-weight: 700;
+}
+/* 컬러 지정 */
+.btn.main1 {
+   color: var(--maintext);
+   background-color: var(--maincolor);
+}
+.btn.main1:hover {
+   background-color: #b2d700;
+}
+.btn.main2 {
+   background-color: var(--subcolor-d);
+   color: var(--maintext);
+}
+.btn.main2:hover {
+   background-color: #5b9e2f;
+   color: #ffffff;
+}
+.btn.main3 {
+   background-color: var(--point-r);
+   color: var(--maintext);
+}
+.btn.main3:hover {
+   background-color: #de6148;
+   color: #ffffff;
+}
+.btn.main4 {
+   background-color: var(--point-y);
+   color: var(--maintext);
+}
+.btn.main4:hover {
+   background-color: #ffb706;
+   color: #ffffff;
+}
+
+/* input태그 */
+input {
+   border: none;
+   border-radius: 20px;
+   background-color: var(--subcolor-m);
+   width: 100%;
+   padding: 15px 40px;
+
+   &::placeholder {
+      color: var(--subtext);
+   }
+
+   @media (max-width: 768px) {
+      width: 80%;
+   }
+}
+/* input + button(중복확인 등) */
+form .with-btn {
+   display: flex;
+   width: 100%;
+   max-width: 400px;
+   gap: 10px;
+}
+.with-btn .btn {
+   max-width: 100px;
+   width: 25%;
+}
+
+/* 비밀번호 확인 */
+.password-check {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+.password-check input {
+   width: 100%;
+}
+
+/* 휴대폰번호 */
+.input-phone {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+.input-phone input {
+   box-sizing: border-box;
+   width: 30%;
+   &::placeholder {
+      text-align: center;
+   }
+}
+
+/* textarea */
+textarea {
+   border: none;
+   border-radius: 20px;
+   background-color: var(--subcolor-m);
+   padding: 40px;
+}
+
+/* select */
+select {
+   background-color: var(--subcolor-m);
+   border: none;
+   border-radius: 20px;
+   text-align: center;
+}
+
+/* img태그 */
+.profile img {
+   border: none;
+   border-radius: 100%;
+}
+
+/* form태그 */
+form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin: 0 auto;
+}
+
+.form--input {
+   width: 100%;
+}
+
+.form--input > input {
+   display: block;
+   width: 100%;
+}
+.form--input p {
+   margin-bottom: 10px;
+   padding-left: 20px;
+   color: var(--maintext);
+   text-align: left;
+}
+form .btn {
+   width: 50%;
+}
+
+/* 페이지별 구분 */
+form.login,
+form.register {
+   max-width: 400px;
+}
+form.inquire {
+   width: 100%;
+   max-width: 730px;
+}
+
+#area {
+   padding: 80px;
+   @media (min-width: 451px) and (max-width: 546px) {
+      padding: 20px;
+   }
+   @media (max-width: 450px) {
+      padding: 0;
+   }
+}
