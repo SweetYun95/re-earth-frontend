@@ -2,9 +2,16 @@
 
 import LoginPage from './pages/user/Login/LoginPage'
 import './assets/styles/commons.scss'
+import RegisterPage from './pages/user/Register/RegisterPage'
+import DonationInfoPage from './pages/user/Donate/DonationInfoPage'
+import DonationPage from './pages/user/Donate/DonationPage'
+import InquiryForm from './pages/user/Inquiry/Create/InquiryForm'
+import FAQPage from './pages/user/Inquiry/FAQPage'
+import LoadingPage from './pages_extra/Unloaded/LoadingPage'
+import ErrorPage from './pages_extra/Unloaded/ErrorPage'
 
 function App() {
-   return <LoginPage />
+   return <ErrorPage />
 }
 
 export default App
