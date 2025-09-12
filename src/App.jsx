@@ -7,9 +7,11 @@ import DonationInfoPage from './pages/user/Donate/DonationInfoPage'
 import DonationPage from './pages/user/Donate/DonationPage'
 import InquiryForm from './pages/user/Inquiry/Create/InquiryForm'
 import FAQPage from './pages/user/Inquiry/FAQPage'
+import LoadingPage from './pages_extra/Unloaded/LoadingPage'
+import ErrorPage from './pages_extra/Unloaded/ErrorPage'
 
 function App() {
-   return <FAQPage />
+   return <ErrorPage />
 }
 
 export default App

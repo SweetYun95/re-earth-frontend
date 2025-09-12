@@ -4,6 +4,7 @@ import answerIcon from '../../../assets/icons/answer.svg'
 import linkIcon from '../../../assets/icons/link.svg'
 import rightIcon from '../../../assets/icons/right-line.svg'
 import dropdownIcon from '../../../assets/icons/dropdown.svg'
+import Pagination from '../../../components/common/Pagination'
 
 function FAQPage() {
    return (
@@ -43,6 +44,7 @@ function FAQPage() {
                         </div>
                      </div>
                   </div>
+                  <Pagination />
                </div>
             </div>
          </div>
