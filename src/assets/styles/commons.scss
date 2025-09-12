@@ -337,14 +337,9 @@ form .btn {
    width: 50%;
 }
 
-/* 페이지별 구분 */
 form.login,
 form.register {
    max-width: 400px;
-}
-form.inquire {
-   width: 100%;
-   max-width: 730px;
 }
 
 #area {
