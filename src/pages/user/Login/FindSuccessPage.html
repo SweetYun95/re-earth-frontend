@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <style>
+         .user-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+         }
+
+         .user-avatar {
+            width: 40px;
+            height: 40px;
+         }
+
+         .user-info {
+            display: flex;
+            flex-direction: column;
+         }
+      </style>
+   </head>
+   <body>
+      <section>
+         <div class="container">
+            <form action="submit" class="id-find"> 
+                <p>회원님의 계정을 찾았어요</p>
+               <div class="user-card">
+                  <img src="" alt="user profile" class="user-avatar" />
+                  <div class="user-info">
+                     <div>example</div>
+                     <div>2025.01.01 가입</div> 
+                  </div>  
+               </div>
+               <button type="submit" class="btn default main1 mt-40">로그인하러 가기</button>
+                <a href="#" class="btn find ">비밀번호를 모르겠어요.</a>
+            </form>
+         </div>
+      </section>
+   </body>
+</html> 
