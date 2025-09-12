@@ -6,7 +6,7 @@ function LoginPage() {
    return (
       <>
          <section id="main1">
-            <div id="area container">
+            <div id="area" className="container">
                <div id="login">
                   <h2>로그인하기</h2>
                   <UserLoginForm />
