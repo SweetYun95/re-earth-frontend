@@ -17,32 +17,26 @@ html, body { height: 100%; }
   margin-top: 40px !important;
 }
 
+@import '../../assets/styles/commons.scss';
+
 /* ========== Theme (root vars) ========== */
 :root{
-  --color-red:#FB6E52; --color-blue:#1D6FF2; --color-yellow:#FFCE55; --color-green:#D1E95D;
-  --color-black:#333333; --color-gray:#9e9e9e; --color-dot:#062744;
-  --bg-lime:#F2F6EB; --bg-green:#72C63A;
-
-  /* 공통 타이포 변수(공통 CSS에서 참조) */
-  --headings:'GMarketSans','Pretendard',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  --maintext:#333333;
-
   /* 애니/지구 */
-  --s:300; --b:var(--color-blue); --g:var(--color-green); --c:rgba(255,255,255,.35);
-  --orbitScale:1.2; --bg-grad:linear-gradient(180deg, var(--color-green) 0%, #fff 50%, #fff 100%); --gradAlpha:1;
+  --s:300; --b:var(--point-b); --g:var(--maincolor); --c:rgba(255,255,255,.35);
+  --orbitScale:1.2; --bg-grad:linear-gradient(180deg, var(--maincolor) 0%, #fff 50%, #fff 100%); --gradAlpha:1;
 
   /* 레이아웃 */
   --wrap-min:360px; --wrap-fluid:86vmin; --wrap-max:1100px; --titleLift:0vh;
 
   /* split word */
-  --word-red:var(--color-red); --word-green:var(--color-green);
+  --word-red:var(--point-r); --word-green:var(--maincolor);
 
   /* 컴포넌트 공통 */
   --radius-xl:24px; --radius-lg:18px; --gap-lg:28px;
 }
 
 /* ========== Base ========== */
-body{ margin:0; background:#fff; font-family:'Pretendard',system-ui,-apple-system,Segoe UI,Roboto,sans-serif; overflow-x:hidden; }
+body{ margin:0; background:#fff; overflow-x:hidden; }
 body::before{ content:""; position:fixed; inset:0; pointer-events:none; background:var(--bg-grad); opacity:var(--gradAlpha); transition:opacity 180ms linear; z-index:0; }
 
 /* ========== Layout (scroll-snap) ========== */
@@ -105,17 +99,20 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 /* ========== Orbiting Text ========== */
 .earth-orbit{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; z-index:2; opacity:0; }
 .orbit-scale,.orbit-rotator{ transform-box:view-box; transform-origin:50% 50%; }
-.orbit-text{ fill:var(--color-red); font-weight:600; font-size:calc(var(--s)*0.024px); letter-spacing:.02em; word-spacing:.02em; }
+.orbit-text{ fill:var(--point-r); font-weight:600; font-size:calc(var(--s)*0.024px); letter-spacing:.02em; word-spacing:.02em; }
 
 /* ========== Hero Title ========== */
 .hero-title{ position:fixed; left:50%; top:calc(50% - var(--titleLift)); transform:translate(-50%,-50%); font-weight:800; font-size:clamp(24px,7vw,36px);
   line-height:1.2; text-align:center; color:#111; z-index:8; pointer-events:none; opacity:1; transition:opacity .25s linear; white-space:nowrap;
 }
-.hero-title .t-em1{ color:var(--color-red); }
-.hero-title .t-em2{ color:var(--color-yellow); }
+.hero-title .t-em1{ color:var(--point-r); }
+.hero-title .t-em2{ color:var(--point-y); }
+
+/* ========== Panel Full ========== */
+.panel--full{ height:100vh; min-height:100vh; scroll-snap-align:start; }
 
 /* ========== RE:EARTH 섹션 ========== */
-.panel--reearth{ background:linear-gradient(to bottom, #fff 0 50%, var(--bg-lime) 50% 100%); position:relative; margin-top: -40px; height:80vh; }
+.panel--reearth{ background:linear-gradient(to bottom, #fff 0 50%, var(--subcolor-m) 50% 100%); position:relative; margin-top: -40px; height:80vh; scroll-snap-align:start; }
 .panel--reearth .reearth-hero{ position:relative; height:100vh; }
 .panel--reearth .word{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:inline-block; font-family:var(--headings); font-weight:800;
   font-size:clamp(72px,18vw,240px); line-height:.9; letter-spacing:.02em; margin:0; text-align:center;
@@ -132,9 +129,9 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 }
 
 /* ========== Solution section title ========== */
-.contents--cards{ background-color:var(--bg-lime); padding-top: 120px; padding-bottom: 120px; }
+.contents--cards{ background-color:var(--subcolor-m); padding-top: 120px; padding-bottom: 120px; scroll-snap-align:start; }
 .randing--section__title{ width:100%; position:relative; z-index:10; }
-.randing--section__title>p{ color:var(--color-gray); font-size:14px; margin:0 0 8px; }
+.randing--section__title>p{ color:var(--subtext); font-size:14px; margin:0 0 8px; }
 .randing--section__title>h2{ color:var(--maintext); font-family:var(--headings); line-height:1.25; margin:0; }
 
 /* ========== Swiper Core (embedded 최소) ========== */
@@ -145,7 +142,7 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 
 /* ===== Solution Slider ===== */
 .cards-swiper{ width:100%; contain:layout paint style; }      /* 레이아웃 격리 */
-.blog-slider{ position:relative; background:var(--bg-lime); border-radius:var(--radius-xl); isolation:isolate; }
+.blog-slider{ position:relative; background:var(--subcolor-m); border-radius:var(--radius-xl); isolation:isolate; }
 
 /* 슬라이드 레이아웃 (기본: md 이상은 가로 배치) */
 .blog-slider__item{ display:flex; gap:var(--gap-lg); align-items:center; justify-content: flex-start; min-height:360px; }
@@ -155,17 +152,17 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 .q-card{ display:grid; grid-template-columns:400px 1fr; gap:var(--gap-lg); background:#fff; border-radius:var(--radius-lg); padding:28px; }
 .q-card__media{ border-radius:16px; overflow:hidden; }
 .q-card__media img{ width:100%; height:100%; object-fit:cover; display:block; }
-.q-card__body .eyebrow{ color:var(--color-red); display:block; margin-bottom:10px; }
+.q-card__body .eyebrow{ color:var(--point-r); display:block; margin-bottom:10px; }
 .q-title{ font-family:var(--headings); font-weight:600; font-size:1.25rem; line-height:1.35; color:var(--maintext); margin:0 0 12px; }
-.q-desc{ color:var(--color-gray); font:500 16px/1.5 "Pretendard",system-ui; margin:0; }
+.q-desc{ color:var(--subtext); font:500 16px/1.5; margin:0; }
 
 /* s-card */
-.s-card{ background:var(--color-blue); color:#fff; border-radius:var(--radius-lg); padding:22px; display:grid; grid-template-rows:auto auto 1fr auto;
+.s-card{ background:var(--point-b); color:#fff; border-radius:var(--radius-lg); padding:22px; display:grid; grid-template-rows:auto auto 1fr auto;
   align-items:center; justify-items:center; text-align:center;
 }
-.s-eyebrow{ letter-spacing:.2px; color: var(--color-yellow); font-weight:600; }
+.s-eyebrow{ letter-spacing:.2px; color: var(--point-y); font-weight:600; }
 .s-title{ font:700 20px/1.3 var(--headings); margin:8px 0 12px; color:#fff; }
-.s-visual{ width:120px; height:120px; display:grid; place-items:center; margin:0; color:var(--color-yellow); }
+.s-visual{ width:120px; height:120px; display:grid; place-items:center; margin:0; color:var(--point-y); }
 .s-visual svg{ width:100%; height:100%; }
 .s-cta{ margin:0; }
 .s-cta span{ display:block; font-weight:300; font-size:12px; }
@@ -200,7 +197,7 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
   width: 14px;
   height: 14px;
   border-radius: 12px;
-  background: var(--color-dot);
+  background: var(--maintext);
   opacity: .28;
   display: block;
   margin: 0;
@@ -209,10 +206,10 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 }
 .cards-swiper .blog-slider .swiper-pagination-bullet-active{
   opacity: 1;
-  background: var(--color-red);
+  background: var(--point-r);
   height: 36px;
   width: 14px;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--color-red) 40%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--point-r) 40%, transparent);
 }
 
 /* 제스처 */
@@ -280,8 +277,8 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 
 /* < md: 세로 스택 + 모바일 최적화 (iPhone SE 포함) */
 @media (max-width:767.98px){
-  /* 스냅 비활성화: 스와이프와 충돌 방지 */
-  .snap{ scroll-snap-type:none; scroll-behavior:auto; } /* smooth 해제 */
+  /* 모바일에서도 스크롤 스냅 유지 */
+  .snap{ scroll-snap-type:y mandatory; scroll-behavior:smooth; }
 
   /* 슬라이드가 내용 높이만큼 커지도록 */
   .swiper, .swiper-wrapper, .swiper-slide{ height:auto; } /* 컨테이너 계층도 auto로 */
@@ -312,4 +309,4 @@ body::before{ content:""; position:fixed; inset:0; pointer-events:none; backgrou
 @media (min-width:481px) and (max-width:767.98px){ :root{ --wrap-min:260px; --wrap-fluid:70vmin; --wrap-max:480px; } }
 @media (min-width:768px){ :root{ --wrap-min:340px; --wrap-fluid:72vmin; --wrap-max:760px; } .hero-title{ font-size:clamp(32px,4.5vw,56px); } .hero-title .hero-br{ display:none; } }
 @media (min-width:1024px){ :root{ --wrap-min:420px; --wrap-fluid:74vmin; --wrap-max:1024px; --titleLift:2vh; }} 
-@media (min-width:1440px){ :root{ --wrap-min:520px; --wrap-fluid:76vmin; --wrap-max:1200px; } .hero-title{ font-size:clamp(48px,2.4vw,96px); } }
+@media (min-width:1440px){ :root{ --wrap-min:520px; --wrap-fluid:76vmin; --wrap-max:1200px; } }

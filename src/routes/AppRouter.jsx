@@ -7,6 +7,7 @@ import UserOnly from './guards/UserOnly'
 import AdminOnly from './guards/AdminOnly'
 
 // Public / Guest pages
+import LandingPage from '../pages/public/Landing/LandingPage'
 import LoginPage from '../pages/user/Login/LoginPage'
 import RegisterPage from '../pages/user/Register/RegisterPage'
 import FAQPage from '../pages/user/Inquiry/FAQPage'
@@ -30,6 +31,7 @@ export default function AppRouter() {
       <Routes>
          {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
          <Route element={<GuestOnly />}>
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
