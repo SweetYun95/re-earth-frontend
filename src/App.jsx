@@ -1,17 +1,7 @@
-// import Button from './components/Button/Button'
-
-import LoginPage from './pages/user/Login/LoginPage'
+// re-earth-frontend/src/App.jsx
+import AppRouter from './routes/AppRouter'
 import './assets/styles/commons.scss'
-import RegisterPage from './pages/user/Register/RegisterPage'
-import DonationInfoPage from './pages/user/Donate/DonationInfoPage'
-import DonationPage from './pages/user/Donate/DonationPage'
-import InquiryForm from './pages/user/Inquiry/Create/InquiryForm'
-import FAQPage from './pages/user/Inquiry/FAQPage'
-import LoadingPage from './pages_extra/Unloaded/LoadingPage'
-import ErrorPage from './pages_extra/Unloaded/ErrorPage'
 
-function App() {
-   return <ErrorPage />
+export default function App() {
+   return <AppRouter />
 }
-
-export default App
