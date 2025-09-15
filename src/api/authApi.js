@@ -37,16 +37,16 @@ export const redirectToKakaoLogin = () => {
    window.location.href = `${BASE_API_URL}/auth/kakao`
 }
 
-// 콜백은 OAuth 제공자 → 백엔드로 직접 돌아옵니다.
-// 프런트에선 콜백 직후 사용자를 다시 앱으로 유도했다면,
-// 세션이 잡힌 상태이므로 /auth/status 로 로그인 상태만 재확인하면 됩니다.
+// 콜백 직후 세션만 재확인
 export const checkStatusAfterOAuth = async () => {
    return checkAuthStatus()
 }
 
-// (선택) 중복/보조 API 들은 백엔드 라우트가 준비되면 활성화하세요.
-// export const checkUsername = async (userId) => reEarth.post('/auth/check-username', { userId })
-// export const checkEmail = async (email) => reEarth.post('/auth/check-email', { email })
+// ✅ 중복확인 API
+export const checkUsername = async (userId) => reEarth.post('/auth/check-username', { userId })
+export const checkNickname = async (name) => reEarth.post('/auth/check-nickname', { name })
+export const checkEmail = async (email) => reEarth.post('/auth/check-email', { email })
+
 // export const findId = async (phoneNumber) => reEarth.post('/auth/findid', { phoneNumber })
 // export const updatePassword = async ({ userId, phoneNumber }) => reEarth.post('/auth/updatepw', { userId, phoneNumber })
 // export const updateMyInfo = async (data) => reEarth.put('/auth', data)
