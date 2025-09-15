@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>PasswordSearchPage</title>
-   </head>
-   <style>
-      @import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
       @font-face {
          font-family: 'GMarketSans';
          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -244,38 +236,3 @@
             text-align: center;
          }
       }
-      .usermenu {
-         display: flex;
-         flex-direction: column;
-         width: 100%;
-         gap: 10px;
-      }
-   </style>
-   <body>
-      <section>
-         <div class="container">
-            <form action="submit" class="login">
-               <div class="form--input">
-                  <p>아이디</p>
-                  <input type="text" name="id" placeholder="아이디를 입력하세요." require />
-               </div>
-               <div class="form--input mt-20">
-                  <p>이메일</p>
-                  <input type="password" name="password" placeholder="이메일을 입력하세요. 예 example@gamil.com " require />
-               </div>
-               <div className="form--input mt-20">
-                  <p className="text-body">휴대폰번호</p>
-                  <div className="input-phone">
-                     <input type="number" name="phone1" placeholder="010" />
-                     <span>-</span>
-                     <input type="number" name="phone2" placeholder="1234" />
-                     <span>-</span>
-                     <input type="number" name="phone2" placeholder="5678" />
-                  </div>
-               </div>
-               <button type="submit" class="btn default main1 mt-40">재발급받기</button>
-            </form>
-         </div>
-      </section>
-   </body>
-</html>
