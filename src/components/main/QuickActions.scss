@@ -1,0 +1,95 @@
+.quick-actions {
+  position: relative;
+  
+  .quick-action-card {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      padding: 24px;
+      
+      .action-content {
+        flex-grow: 1;
+        padding-right: 20px;
+        
+        .action-title {
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+        }
+        
+        .action-description {
+          font-size: 0.875rem;
+          color: #6c757d;
+          margin-bottom: 0;
+          line-height: 1.4;
+        }
+      }
+      
+      .action-icon {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border: 3px solid white;
+      }
+    }
+  }
+  
+  /* 각 액션별 색상 */
+  .action-certify {
+    .action-title {
+      color: var(--point-y); /* #ffce55 */
+    }
+    .action-icon {
+      background-color: var(--point-y);
+    }
+  }
+  
+  .action-donate {
+    .action-title {
+      color: var(--subcolor-d); /* #72c63a */
+    }
+    .action-icon {
+      background-color: var(--subcolor-d);
+    }
+  }
+  
+  .action-shop {
+    .action-title {
+      color: var(--point-b); /* #1d6ff2 */
+    }
+    .action-icon {
+      background-color: var(--point-b);
+    }
+  }
+  
+  .action-community {
+    .action-title {
+      color: var(--point-r); /* #fb6e52 */
+    }
+    .action-icon {
+      background-color: var(--point-r);
+    }
+  }
+}

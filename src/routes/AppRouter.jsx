@@ -13,16 +13,25 @@ import RegisterPage from '../pages/user/Register/RegisterPage'
 import FAQPage from '../pages/user/Inquiry/FAQPage'
 
 // User pages
+// 유저메인페이지
+import MainPage from '../pages/user/main/MainPage'
+//기부
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
+//인증
+
+// 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
+
+//마이페이지
+// import MyPage from '../pages/user/mypage/MyPage'
+
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
 import ErrorPage from '../pages_extra/Unloaded/ErrorPage'
 
 // TODO: 추후 유저 메인, 마켓, 관리자 페이지 등 추가
-// import MainPage from '../pages/user/MainPage'
 // import AdminLoginPage from '../pages/admin/AdminLoginPage'
 // import DashboardPage from '../pages/admin/DashboardPage'
 
@@ -35,11 +44,12 @@ export default function AppRouter() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/user" element={<MainPage />} />
          </Route>
 
          {/* 로그인 유저 전용 */}
          <Route element={<UserOnly />}>
-            {/* <Route path="/user" element={<MainPage />} /> */}
+            {/* <Route path="/user/my" element={<MyPage />} /> */}
             <Route path="/donate/info" element={<DonationInfoPage />} />
             <Route path="/donate" element={<DonationPage />} />
             <Route path="/inquiry/new" element={<InquiryForm />} />
