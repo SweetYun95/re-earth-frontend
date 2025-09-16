@@ -8,8 +8,8 @@ import store from './app/store.js'
 import App from './App.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css'
 import './assets/styles/commons.scss'
+import './index.css'
 
 createRoot(document.getElementById('root')).render(
    // <StrictMode>

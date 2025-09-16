@@ -1,14 +1,18 @@
+// re-earth-frontend/src/assets/styles/commons.scss
+/* commons.scss */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
 @font-face {
-    font-family: 'GMarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: 500;
-    font-display: swap;
+   font-family: 'GMarketSans';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+   font-weight: 500;
+   font-display: swap;
 }
 
 html,
 *,
-p h1,
+p,
+h1,
 h2,
 h3,
 h4,
@@ -169,7 +173,6 @@ h3 {
       font-weight: 500;
    }
 }
-
 
 /* :root */
 :root {
@@ -439,4 +442,3 @@ form.register {
       gap: 10px;
    }
 }
-
