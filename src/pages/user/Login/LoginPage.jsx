@@ -1,3 +1,4 @@
+// re-earth-frontend/src/pages/user/Login/LoginPage.jsx
 import AdminLoginForm from './AdminLoginForm'
 import UserLoginForm from './UserLoginForm'
 import './login.scss'
