@@ -1,0 +1,764 @@
+/* re-earth-frontend/src/styles/landing/landing.css */
+@import '../../assets/styles/commons.scss';
+/* ========== Reset ========== */
+* {
+   box-sizing: border-box;
+}
+html,
+body {
+   height: 100%;
+}
+
+/* ========== Bootstrap Override ========== */
+.row > * {
+   flex-shrink: 1;
+   width: auto;
+   max-width: none;
+   padding-right: 0;
+   padding-left: 0;
+   margin-top: 0;
+}
+
+/* mt-40 클래스가 제대로 작동하도록 더 구체적인 선택자 */
+.row .mt-40 {
+   margin-top: 40px !important;
+}
+
+/* ========== Theme (root vars) ========== */
+:root {
+   /* 애니/지구 */
+   --s: 300;
+   --b: var(--point-b);
+   --g: var(--maincolor);
+   --c: rgba(255, 255, 255, 0.35);
+   --orbitScale: 1.2;
+   --bg-grad: linear-gradient(180deg, var(--maincolor) 0%, #fff 50%, #fff 100%);
+   --gradAlpha: 1;
+
+   /* 레이아웃 */
+   --wrap-min: 360px;
+   --wrap-fluid: 86vmin;
+   --wrap-max: 1100px;
+   --titleLift: 0vh;
+
+   /* split word */
+   --word-red: var(--point-r);
+   --word-green: var(--maincolor);
+
+   /* 컴포넌트 공통 */
+   --radius-xl: 24px;
+   --radius-lg: 18px;
+   --gap-lg: 28px;
+}
+
+/* ========== Base ========== */
+.wrap {
+   margin: 0;
+   background: #fff;
+   overflow-x: hidden;
+}
+.wrap::before {
+   content: '';
+   position: fixed;
+   inset: 0;
+   pointer-events: none;
+   background: var(--bg-grad);
+   opacity: var(--gradAlpha);
+   transition: opacity 180ms linear;
+   z-index: 0;
+}
+
+/* ========== Layout (scroll-snap) ========== */
+.snap {
+   height: 100vh; /* fallback */
+   min-height: 100svh; /* iOS 주소창 변화 대응 */
+   height: 100dvh; /* 지원 브라우저에서 실제 뷰포트 */
+   overflow-y: auto;
+   overflow-x: hidden;
+   scroll-snap-type: y mandatory;
+   scroll-behavior: smooth;
+   overscroll-behavior: contain;
+}
+.panel {
+   height: 100vh; /* fallback */
+   min-height: 100svh;
+   height: 100dvh;
+   scroll-snap-align: start;
+   place-items: center;
+   background: transparent;
+}
+.snap.no-snap {
+   scroll-snap-type: none;
+}
+
+/* ========== Earth wrapper(필요한 것만) ========== */
+.earth-wrap {
+   position: relative;
+   width: clamp(var(--wrap-min), var(--wrap-fluid), var(--wrap-max));
+   aspect-ratio: 1/1;
+   overflow: visible;
+   z-index: 6;
+   will-change: width, height, top, left, transform;
+}
+.earth {
+   position: absolute;
+   inset: 0;
+   margin: auto;
+   width: calc(var(--s) * 1px);
+   height: calc(var(--s) * 1px);
+   border-radius: 50%;
+   overflow: hidden;
+   z-index: 1;
+   will-change: border-radius, transform;
+   background: radial-gradient(120% 120% at 30% 28%, #5bbeff 0%, #3d99eb 35%, var(--b) 58%, #205fae 78%, #0e4a93 100%);
+   box-shadow: inset -28px -32px 64px rgba(0, 0, 0, 0.35), inset 10px 12px 20px rgba(255, 255, 255, 0.15), 0 30px 60px rgba(0, 0, 0, 0.14);
+}
+.earth::before {
+   content: '';
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   background: radial-gradient(45% 45% at 32% 26%, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.18) 18%, rgba(255, 255, 255, 0) 36%);
+   mix-blend-mode: screen;
+}
+.earth::after {
+   content: '';
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   background: radial-gradient(100% 100% at 70% 75%, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.18) 72%, rgba(0, 0, 0, 0.35) 100%);
+   mix-blend-mode: multiply;
+}
+.earth__face {
+   --size: calc((var(--s) * 0.1) * 1px);
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   width: 45%;
+   height: 20%;
+   transform: translate(-50%, -75%) scale(var(--faceScale, 1));
+   transform-origin: 50% 60%;
+}
+.earth__eye {
+   position: absolute;
+   top: 0;
+   width: var(--size);
+   height: var(--size);
+   background: #000;
+   border-radius: 50%;
+}
+.earth__eye:nth-of-type(1) {
+   left: 0;
+}
+.earth__eye:nth-of-type(2) {
+   right: 0;
+}
+@keyframes blink {
+   0%,
+   73%,
+   75%,
+   100% {
+      transform: scaleY(1);
+   }
+   74% {
+      transform: scaleY(0.1);
+   }
+}
+.earth__eye--blinking {
+   animation: blink 10s linear infinite;
+}
+.earth__mouth {
+   position: absolute;
+   left: 40%;
+   bottom: 0;
+   width: var(--size);
+   height: var(--size);
+   background: #000;
+   clip-path: circle(50% at 50% 0);
+}
+.earth__map {
+   --starter: calc(var(--s) * 0.05);
+   position: absolute;
+   top: 30%;
+   left: 50%;
+   width: calc(var(--starter) * 1px);
+   height: calc(var(--starter) * 1px);
+   margin: calc(var(--starter) * -1px) 0 0 calc(var(--starter) * -1px);
+   background: linear-gradient(145deg, #e6f47a 0%, var(--g) 55%, #b5d84f 100%);
+   border-radius: calc(var(--starter) * 1px);
+   box-shadow: calc(var(--s) * -1px) 0 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 0.825) * -1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g), calc((var(--s) * 0.75) * -1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.15) * 1px) var(--g),
+      calc((var(--s) * 0.15) * 1px) 0 0 calc((var(--s) * 0.075) * 1px) var(--g), calc((var(--s) * 0.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc((var(--s) * 0.125) * 1px) var(--g), calc((var(--s) * 0.6) * 1px) calc((var(--s) * 0.15) * 1px) 0 calc((var(--s) * 0.25) * 1px) var(--g),
+      calc((var(--s) * 1.1) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 2) * 1px) 0 0 calc((var(--s) * 0.2) * 1px) var(--g), calc((var(--s) * 2.175) * 1px) 0 0 calc((var(--s) * 0.175) * 1px) var(--g),
+      calc((var(--s) * 2.25) * 1px) calc((var(--s) * 0.4) * 1px) 0 calc((var(--s) * 0.15) * 1px) var(--g), calc((var(--s) * 3) * 1px) 0 0 0 var(--g), calc((var(--s) * 3.15) * 1px) 0 0 calc((var(--s) * 0.075) * 1px) var(--g),
+      calc((var(--s) * 3.075) * 1px) calc((var(--s) * 0.3) * 1px) 0 calc((var(--s) * 0.125) * 1px) var(--g), calc((var(--s) * 3.6) * 1px) calc((var(--s) * 0.15) * 1px) 0 calc((var(--s) * 0.25) * 1px) var(--g);
+}
+.earth__clouds {
+   --starter: calc(var(--s) * 0.05);
+   position: absolute;
+   top: 60%;
+   left: 50%;
+   width: calc(var(--starter) * 4px);
+   height: calc(var(--starter) * 2px);
+   background: var(--c);
+   border-radius: 50%;
+   transform: translate(-50%, -50%);
+   animation: cloud-rotate 60s linear infinite;
+   mix-blend-mode: soft-light;
+   filter: blur(0.4px) drop-shadow(0 1px 1px rgba(255, 255, 255, 0.35));
+}
+@keyframes cloud-rotate {
+   to {
+      transform: translate(-50%, -50%) translate(calc(var(--s) * -3px), 0);
+   }
+}
+
+/* ========== Orbiting Text ========== */
+.earth-orbit {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+   overflow: visible;
+   z-index: 2;
+   opacity: 0;
+}
+.orbit-scale,
+.orbit-rotator {
+   transform-box: view-box;
+   transform-origin: 50% 50%;
+}
+.orbit-text {
+   fill: var(--point-r);
+   font-weight: 600;
+   font-size: calc(var(--s) * 0.024px);
+   letter-spacing: 0.02em;
+   word-spacing: 0.02em;
+}
+
+/* ========== Hero Title ========== */
+.hero-title {
+   position: fixed;
+   left: 50%;
+   top: calc(50% - var(--titleLift));
+   transform: translate(-50%, -50%);
+   font-weight: 800;
+   font-size: clamp(24px, 7vw, 36px);
+   line-height: 1.2;
+   text-align: center;
+   color: #111;
+   z-index: 8;
+   pointer-events: none;
+   opacity: 1;
+   transition: opacity 0.25s linear;
+   white-space: nowrap;
+}
+.hero-title .t-em1 {
+   color: var(--point-r);
+}
+.hero-title .t-em2 {
+   color: var(--point-y);
+}
+
+/* ========== Panel Full ========== */
+.panel--full {
+   height: 100vh;
+   min-height: 100vh;
+   scroll-snap-align: start;
+}
+
+/* ========== RE:EARTH 섹션 ========== */
+.panel--reearth {
+   background: linear-gradient(to bottom, #fff 0 50%, var(--subcolor-m) 50% 100%);
+   position: relative;
+   margin-top: -40px;
+   height: 80vh;
+   scroll-snap-align: start;
+}
+.panel--reearth .reearth-hero {
+   position: relative;
+   height: 100vh;
+}
+.panel--reearth .word {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: inline-block;
+   font-family: var(--headings);
+   font-weight: 800;
+   font-size: clamp(72px, 18vw, 240px);
+   line-height: 0.9;
+   letter-spacing: 0.02em;
+   margin: 0;
+   text-align: center;
+}
+.panel--reearth .word .top {
+   position: relative;
+   display: block;
+   color: var(--word-red);
+   -webkit-mask: linear-gradient(to bottom, #000 0 calc(50% - 0.5px), transparent 50% 100%);
+   mask: linear-gradient(to bottom, #000 0 calc(50% - 0.5px), transparent 50% 100%);
+}
+.panel--reearth .word .bottom {
+   position: absolute;
+   inset: 0;
+   color: var(--word-green);
+   -webkit-mask: linear-gradient(to bottom, transparent 0 50%, #000 calc(50% + 0.5px) 100%);
+   mask: linear-gradient(to bottom, transparent 0 50%, #000 calc(50% + 0.5px) 100%);
+}
+
+/* ========== Solution section========== */
+.panel:has(.cards-swiper) {
+   height: auto; /* 100dvh 오버라이드 → 내용 높이만큼 */
+   min-height: 0;
+   place-items: start center; /* 세로 가운데 정렬 → 위쪽 정렬로 변경 */
+   margin-top: -40px;
+}
+
+/* ========== Solution section title ========== */
+.contents--cards {
+   background-color: var(--subcolor-m);
+   padding-top: 120px;
+   padding-bottom: 120px;
+   scroll-snap-align: start;
+}
+.randing--section__title {
+   width: 100%;
+   position: relative;
+   z-index: 10;
+}
+.randing--section__title > p {
+   color: var(--subtext);
+   font-size: 14px;
+   margin: 0 0 8px;
+}
+.randing--section__title > h2 {
+   color: var(--maintext);
+   font-family: var(--headings);
+   line-height: 1.25;
+   margin: 0;
+}
+
+/* ========== Swiper Core (embedded 최소) ========== */
+.swiper {
+   position: relative;
+   overflow: hidden;
+} /* will-change 제거 */
+.swiper-wrapper {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   transition-property: transform;
+   box-sizing: content-box;
+} /* will-change 제거 */
+.swiper-slide {
+   flex-shrink: 0;
+   width: 100%;
+   height: 100%;
+   position: relative;
+}
+.swiper-pagination {
+   position: absolute;
+}
+
+/* ===== Solution Slider ===== */
+.cards-swiper {
+   width: 100%;
+   contain: layout paint style;
+} /* 레이아웃 격리 */
+.blog-slider {
+   position: relative;
+   background: var(--subcolor-m);
+   border-radius: var(--radius-xl);
+   isolation: isolate;
+}
+
+/* 슬라이드 레이아웃 (기본: md 이상은 가로 배치) */
+.blog-slider__item {
+   display: flex;
+   gap: var(--gap-lg);
+   align-items: center;
+   justify-content: flex-start;
+   min-height: 360px;
+}
+.blog-slider__item .s-card {
+   flex: 0 0 300px;
+   align-self: stretch;
+}
+
+/* q-card */
+.q-card {
+   display: grid;
+   grid-template-columns: 400px 1fr;
+   gap: var(--gap-lg);
+   background: #fff;
+   border-radius: var(--radius-lg);
+   padding: 28px;
+}
+.q-card__media {
+   border-radius: 16px;
+   overflow: hidden;
+}
+.q-card__media img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   display: block;
+}
+.q-card__body .eyebrow {
+   color: var(--point-r);
+   display: block;
+   margin-bottom: 10px;
+}
+.q-title {
+   font-family: var(--headings);
+   font-weight: 600;
+   font-size: 1.25rem;
+   line-height: 1.35;
+   color: var(--maintext);
+   margin: 0 0 12px;
+}
+.q-desc {
+   color: var(--subtext);
+   font: 500 16px/1.5;
+   margin: 0;
+}
+
+/* s-card */
+.s-card {
+   background: var(--point-b);
+   color: #fff;
+   border-radius: var(--radius-lg);
+   padding: 22px;
+   display: grid;
+   grid-template-rows: auto auto 1fr auto;
+   align-items: center;
+   justify-items: center;
+   text-align: center;
+}
+.s-eyebrow {
+   letter-spacing: 0.2px;
+   color: var(--point-y);
+   font-weight: 600;
+}
+.s-title {
+   font: 700 20px/1.3 var(--headings);
+   margin: 8px 0 12px;
+   color: #fff;
+}
+.s-visual {
+   width: 120px;
+   height: 120px;
+   display: grid;
+   place-items: center;
+   margin: 0;
+   color: var(--point-y);
+}
+.s-visual svg {
+   width: 100%;
+   height: 100%;
+}
+.s-cta {
+   margin: 0;
+}
+.s-cta span {
+   display: block;
+   font-weight: 300;
+   font-size: 12px;
+}
+
+/* 활성 슬라이드 페이드 인 */
+.blog-slider__item .q-card,
+.blog-slider__item .s-card {
+   opacity: 0;
+   transform: translateY(18px);
+   transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.swiper-slide-active .q-card {
+   transition-delay: 0.15s;
+   opacity: 1;
+   transform: none;
+}
+.swiper-slide-active .s-card {
+   transition-delay: 0.3s;
+   opacity: 1;
+   transform: none;
+}
+
+/* ===== Pagination — Desktop(>860px): Right vertical ===== */
+.cards-swiper .blog-slider .swiper-pagination {
+   position: absolute;
+   right: 16px;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 12px;
+   height: auto;
+   z-index: 5;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+}
+
+/* 더 구체적인 선택자로 오버라이드 */
+.cards-swiper .blog-slider .swiper-pagination.swiper-pagination-bullets {
+   right: 16px;
+   left: auto;
+}
+.cards-swiper .blog-slider .swiper-pagination-bullet {
+   width: 14px;
+   height: 14px;
+   border-radius: 12px;
+   background: var(--maintext);
+   opacity: 0.28;
+   display: block;
+   margin: 0;
+   padding: 4px;
+   transition: 0.25s;
+}
+.cards-swiper .blog-slider .swiper-pagination-bullet-active {
+   opacity: 1;
+   background: var(--point-r);
+   height: 36px;
+   width: 14px;
+   box-shadow: 0 0 12px color-mix(in srgb, var(--point-r) 40%, transparent);
+}
+
+/* 제스처 */
+.cards-swiper .blog-slider,
+.cards-swiper .blog-slider .swiper,
+.cards-swiper .blog-slider .swiper-wrapper {
+   touch-action: pan-y;
+}
+
+/* 슬라이드 겹침/잔상 방지 보강 */
+.blog-slider {
+   overflow: hidden;
+} /* 컨테이너 클립 보장 */
+
+.swiper-slide {
+   backface-visibility: hidden;
+   transform: translateZ(0); /* 합성 레이어 분리로 잔상 방지 */
+   isolation: isolate; /* 슬라이드마다 스태킹 컨텍스트 */
+}
+
+/* fade 효과일 때 이전 슬라이드 클릭 막기(겹침 시 터치 이슈 방지) */
+.swiper-fade .swiper-slide {
+   pointer-events: none;
+}
+.swiper-fade .swiper-slide-active {
+   pointer-events: auto;
+}
+
+/* ====== md 기준 반응형 ====== */
+@media (min-width: 991.98px) and (max-width: 1200px) {
+   .q-card {
+      grid-template-columns: 1fr;
+   }
+   .q-card__media {
+      aspect-ratio: 16 / 9;
+   }
+}
+@media (max-width: 991.98px) {
+   .panel:has(.cards-swiper) {
+      padding-block: clamp(16px, 4vh, 48px);
+   }
+   .q-card {
+      grid-template-columns: 260px 1fr;
+   }
+   .blog-slider__item {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+   }
+
+   /* ===== Pagination — Mobile: Bottom horizontal ===== */
+   .cards-swiper .blog-slider {
+      padding-bottom: 56px;
+   }
+   .cards-swiper .blog-slider .swiper-pagination {
+      position: absolute;
+      left: 50%;
+      right: auto;
+      top: auto;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: auto;
+      height: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+   }
+   .cards-swiper .blog-slider .swiper-pagination-bullet {
+      margin: 0;
+   }
+   .cards-swiper .blog-slider .swiper-pagination-bullet-active {
+      width: 28px;
+      height: 11px;
+   }
+
+   .cards-swiper .blog-slider.swiper-horizontal > .swiper-pagination-bullets,
+   .cards-swiper .blog-slider .swiper-pagination-bullets.swiper-pagination-horizontal {
+      left: 50%;
+      right: auto;
+      top: auto;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: auto;
+      height: 12px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+   }
+
+   /* 슬라이더 폭은: 부모/뷰포트/고정값 중 가장 작은 값으로 고정 */
+   .cards-swiper,
+   .cards-swiper .blog-slider,
+   .cards-swiper .blog-slider .swiper {
+      width: min(100%, 92vw, var(--slider-fixed-w, 100%));
+      max-width: min(100%, 92vw, var(--slider-fixed-w, 100%));
+      margin-inline: auto; /* 가운데 정렬 */
+   }
+
+   /* 모바일: 트랜지션 루프 방지 & will-change 완전 해제 */
+   .blog-slider__item .q-card,
+   .blog-slider__item .s-card {
+      transition: none;
+      transform: none;
+      opacity: 1;
+   }
+   .swiper,
+   .swiper-wrapper {
+      will-change: auto;
+   }
+}
+
+/* < md: 세로 스택 + 모바일 최적화 (iPhone SE 포함) */
+@media (max-width: 767.98px) {
+   /* 모바일에서도 스크롤 스냅 유지 */
+   .snap {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+   }
+
+   /* 슬라이드가 내용 높이만큼 커지도록 */
+   .swiper,
+   .swiper-wrapper,
+   .swiper-slide {
+      height: auto;
+   } /* 컨테이너 계층도 auto로 */
+   /* 화면에 맞춤 높이(안정 단위 사용) */
+   .cards-swiper {
+      height: auto;
+      min-height: calc(100svh - 96px);
+   }
+   @supports (height: 1dvh) {
+      .cards-swiper {
+         min-height: calc(100dvh - 96px);
+      }
+   }
+
+   .q-card {
+      min-height: 0;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      margin-bottom: 8px;
+   }
+   .q-card__media {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/10;
+      border-radius: 14px;
+   }
+   .q-card__body .eyebrow {
+      font-size: 12px;
+      margin-bottom: 6px;
+   }
+   .q-title {
+      font-size: 1.05rem;
+      line-height: 1.25;
+      margin: 0 0 6px;
+   }
+   .q-desc {
+      font-size: 0.85rem;
+      line-height: 1.45;
+   }
+
+   .s-card {
+      min-height: 0;
+      padding: 16px;
+      place-items: center;
+   }
+   .s-title {
+      font-size: 1.05rem;
+      margin: 6px 0 8px;
+   }
+   .s-visual {
+      width: 84px;
+      height: 84px;
+   }
+   .s-cta {
+      font-size: 0.9rem;
+   }
+   .s-cta span {
+      font-size: 11px;
+   }
+
+   .cards-swiper .blog-slider {
+      padding-bottom: 48px;
+   }
+}
+
+/* 기타 히어로 반응형 */
+@media (max-height: 700px) {
+   :root {
+      --titleLift: 6vh;
+   }
+}
+@media (max-width: 480px) {
+   :root {
+      --wrap-min: 220px;
+      --wrap-fluid: 66vmin;
+      --wrap-max: 360px;
+   }
+}
+@media (min-width: 481px) and (max-width: 767.98px) {
+   :root {
+      --wrap-min: 260px;
+      --wrap-fluid: 70vmin;
+      --wrap-max: 480px;
+   }
+}
+@media (min-width: 768px) {
+   :root {
+      --wrap-min: 340px;
+      --wrap-fluid: 72vmin;
+      --wrap-max: 760px;
+   }
+   .hero-title {
+      font-size: clamp(32px, 4.5vw, 56px);
+   }
+   .hero-title .hero-br {
+      display: none;
+   }
+}
+@media (min-width: 1024px) {
+   :root {
+      --wrap-min: 420px;
+      --wrap-fluid: 74vmin;
+      --wrap-max: 1024px;
+      --titleLift: 2vh;
+   }
+}
+@media (min-width: 1440px) {
+   :root {
+      --wrap-min: 520px;
+      --wrap-fluid: 76vmin;
+      --wrap-max: 1200px;
+   }
+}
