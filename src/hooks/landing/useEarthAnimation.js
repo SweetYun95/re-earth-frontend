@@ -1,3 +1,4 @@
+// re-earth-frontend/src/hooks/landing/useEarthAnimation.js
 import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 
