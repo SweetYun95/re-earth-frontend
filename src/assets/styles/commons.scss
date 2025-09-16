@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @font-face {
     font-family: 'GMarketSans';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -30,7 +30,44 @@ button {
 body {
    width: 100%;
    box-sizing: border-box;
-   font-family: 'Pretendard', sans-serif;
+   font-family: 'Pretendard', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+   color: #333;
+}
+
+/* 폰트 클래스 */
+.gmarket { 
+   font-family: 'Gmarket Sans', 'Gmarket Sans TTF', Pretendard, sans-serif; 
+}
+
+/* 섹션 폰트 스타일 */
+.section {
+   padding: 120px 0;
+}
+.section-title { 
+   font-size:32px; 
+   font-weight:700; 
+}
+.section-sub { 
+   font-size:14px; 
+}
+.banner-note { 
+   font-size:24px; 
+}
+
+/* 앱 CTA 폰트 */
+.app-cta .copy { 
+   font-size:32px; 
+   font-weight:500; 
+}
+
+/* 반응형 폰트 */
+@media (max-width: 991.98px) {
+  .section-title { 
+     font-size:26px; 
+  }
+  .banner-note { 
+     font-size:20px; 
+  }
 }
 a,
 a:hover {
@@ -57,6 +94,10 @@ h6 {
    font-family: var(--headings);
 }
 
+p {
+   color: var(--maintext);
+}
+
 /* margin top */
 .mt-10 {
    margin-top: 10px;
@@ -73,6 +114,7 @@ h6 {
 .mt-120 {
    margin-top: 120px;
 }
+
 
 /* 텍스트사이즈 - 본문 */
 .text-body {
@@ -141,6 +183,8 @@ h3 {
    --point-r: #fb6e52;
    --point-y: #ffce55;
 
+   --border-radius: 20px;
+
    /* 폰트 */
    --headings: 'GmarketSans', sans-serif;
 }
@@ -158,6 +202,38 @@ section#main1 {
 }
 section#main2 {
    background-color: #ffffff;
+}
+
+
+/* 이미지 공통 스타일 */
+img {
+   border-radius: var(--border-radius);
+}
+
+
+/* 텍스트 말줄임표 공통 클래스 */
+.text-ellipsis-1 {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   line-height: 1.4;
+}
+
+.text-ellipsis-3 {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   line-height: 1.4;
 }
 
 /* button태그 */
@@ -343,7 +419,7 @@ form.register {
 }
 
 #area {
-   padding: 80px;
+   padding: 120px;
    @media (min-width: 451px) and (max-width: 768px) {
       padding: 20px;
    }

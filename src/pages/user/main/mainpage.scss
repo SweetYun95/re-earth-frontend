@@ -1,0 +1,169 @@
+
+/* 섹션별 텍스트 색상 */
+body .section h2 {
+   color: #333333 !important;
+}
+body .section p {
+   color: #333333 !important;
+}
+
+/* 섹션 제목 클래스 */
+.section-title-green { 
+   color: #333333 !important; 
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(180deg, rgba(209,233,93,.80) 0%, rgba(209,233,93,.56) 80%, rgba(209,233,93,0) 100%);
+}
+
+
+/* StatsAndMapSection */
+body .section .custom-card {
+   background-color: #fff !important;
+   border-radius: var(--border-radius) !important;
+   display: flex !important;
+   flex-direction: column !important;
+   justify-content: center !important;
+   min-height: 230px !important;
+   padding: 20px !important;
+   margin: 0 !important;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+   position: relative !important;
+   z-index: 1 !important;
+}
+
+.custom-card-content {
+   padding: 1.5rem;
+}
+
+.custom-card-title {
+   margin-bottom: 0.5rem;
+}
+
+.custom-card-text {
+   margin-bottom: 1rem;
+}
+
+.custom-card-body {
+   flex: unset;
+   padding: 0;
+}
+
+
+.col-md-6 .custom-card .custom-card-content {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+/* 커스텀 카드 색상 클래스 */
+body .section .custom-card.custom-card-green-bg { 
+   background: var(--subcolor-d) !important; 
+   color: white !important;
+}
+body .section .custom-card.custom-card-green-border { 
+   border-color: var(--subcolor-d) !important; 
+}
+body .section .custom-card.custom-card-yellow-bg { 
+   background: #FFE4B5 !important; 
+}
+
+/* 텍스트 색상 클래스 */
+body .text-green { color: var(--subcolor-d) !important; }
+body .text-white { color: white !important; }
+
+/* 맵 커스텀 카드 내용 */
+.map-custom-card-content {
+   padding: 1.5rem;
+}
+
+/* 커뮤니티 화살표 버튼 */
+.community-arrow-btn {
+   background: transparent !important;
+   border: none !important;
+   font-size: 18px !important;
+   text-decoration: none !important;
+}
+
+/* 미션 버튼 */
+.mission-btn {
+   border-radius: var(--border-radius);
+}
+
+/* 나무 아이콘 */
+.tree-icon {
+   width: 20px;
+   height: 20px;
+   background: #72C63A;
+   border-radius: 50%;
+   margin-right: 4px;
+}
+
+/* 커뮤니티 */
+.community-title {
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
+.community-feed {
+   padding: 10px;
+   border-radius: var(--border-radius);
+   background-color: var(--point-y);
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+/* 뉴스 카드 */
+body .news-card img { 
+   border-radius: var(--border-radius) !important; 
+   height:235px !important; 
+   object-fit:cover !important; 
+}
+
+/* 뉴스 카드 호버 효과 */
+body .news-card {
+  background: #fff !important;
+  transition: all 0.3s ease !important;
+  
+  &:hover {
+    background: var(--maincolor) !important; /* 포인트 연두색 배경 */
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+/* Swiper 기본 네비게이션 스타일 조정 */
+.news-swiper {
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--subcolor-d);
+    width: 40px;
+    height: 40px;
+    
+    &:after {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    &:hover {
+      color: var(--maincolor);
+    }
+  }
+}
+
+/* 하단 앱 배너 */
+.app-cta { 
+  background:var( --maincolor) 
+}
+
+/* 아이콘 크기 */
+.icon-large { font-size: 48px; }
+
+/* 반응형 */
+@media (max-width: 991.98px) {
+  .section { padding:48px 0; }
+}
