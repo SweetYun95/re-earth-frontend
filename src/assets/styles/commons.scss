@@ -1,7 +1,11 @@
 // re-earth-frontend/src/assets/styles/commons.scss
 /* commons.scss */
+<<<<<<< HEAD
+// @import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
+=======
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
+>>>>>>> 1e42360bedc823bfafc3547c71c6cb1c64bceb73
 @font-face {
    font-family: 'GMarketSans';
    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -405,7 +409,11 @@ form {
 .form--input > input {
    display: block;
    width: 100%;
+   & ::placeholder {
+      color: var(--subtext);
+   }
 }
+
 .form--input p {
    margin-bottom: 10px;
    padding-left: 20px;

@@ -29,9 +29,19 @@ h2 {
 .loginform {
    width: 100%;
    max-width: 400px;
+   padding: 0;
    @media (max-width: 646px) {
       width: 100%;
    }
+}
+.form--input > input {
+   background-color: var(--subcolor-m);
+   color: var(--maintext);
+}
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px #f2f6eb inset; /* 배경색 강제로 덮기 */
+   box-shadow: 0 0 0 1000px #f2f6eb inset;
+   -webkit-text-fill-color: rgb(51, 51, 51); /* 글자색 재정의 */
 }
 /* 소셜로그인 */
 .socialLogin {
