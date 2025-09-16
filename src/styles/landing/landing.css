@@ -51,13 +51,14 @@ body {
    --gap-lg: 28px;
 }
 
+
 /* ========== Base ========== */
-body {
+.wrap {
    margin: 0;
    background: #fff;
    overflow-x: hidden;
 }
-body::before {
+.wrap::before {
    content: '';
    position: fixed;
    inset: 0;
