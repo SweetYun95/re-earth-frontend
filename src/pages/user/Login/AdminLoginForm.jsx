@@ -15,6 +15,19 @@ function AdminLoginForm() {
       password: '',
    })
 
+   // 🔎 auth 상태 변경 로깅
+   useEffect(() => {
+      console.log('[AdminLoginForm] auth state changed →', {
+         isAuthenticated,
+         localAuthenticated,
+         googleAuthenticated,
+         kakaoAuthenticated,
+         user,
+         loading,
+         error,
+      })
+   }, [isAuthenticated, localAuthenticated, googleAuthenticated, kakaoAuthenticated, user, loading, error])
+
    const onChange = (e) => {
       const { name, value } = e.target
       setForm((f) => ({ ...f, [name]: value }))

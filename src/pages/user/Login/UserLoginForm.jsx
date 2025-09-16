@@ -14,6 +14,19 @@ export default function UserLoginForm() {
 
    const [form, setForm] = useState({ id: '', password: '' })
 
+   // 🔎 auth 상태가 변할 때마다 콘솔에 스냅샷 남기기
+   useEffect(() => {
+      console.log('[UserLoginForm] auth state changed →', {
+         isAuthenticated,
+         localAuthenticated,
+         googleAuthenticated,
+         kakaoAuthenticated,
+         user,
+         loading,
+         error,
+      })
+   }, [isAuthenticated, localAuthenticated, googleAuthenticated, kakaoAuthenticated, user, loading, error])
+
    const onChange = (e) => {
       const { name, value } = e.target
       setForm((prev) => ({ ...prev, [name]: value }))
