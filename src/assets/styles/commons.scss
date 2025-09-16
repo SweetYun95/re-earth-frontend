@@ -328,7 +328,11 @@ form {
 .form--input > input {
    display: block;
    width: 100%;
+   & ::placeholder {
+      color: var(--subtext);
+   }
 }
+
 .form--input p {
    margin-bottom: 10px;
    padding-left: 20px;

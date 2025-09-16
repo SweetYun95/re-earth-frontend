@@ -30,12 +30,12 @@ export default function AppRouter() {
    return (
       <Routes>
          {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
-         {/* <Route element={<GuestOnly />}> */}
-         <Route path="/" element={<LandingPage />} />
-         <Route path="/login" element={<LoginPage />} />
-         <Route path="/register" element={<RegisterPage />} />
-         <Route path="/faq" element={<FAQPage />} />
-         {/* </Route> */}
+         <Route element={<GuestOnly />}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+         </Route>
 
          {/* 로그인 유저 전용 */}
          <Route element={<UserOnly />}>

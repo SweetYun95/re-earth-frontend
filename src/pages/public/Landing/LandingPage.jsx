@@ -8,7 +8,6 @@ import SolutionInActionSection from './sections/SolutionInActionSection'
 export default function LandingPage() {
    return (
       <div className="wrap">
-         {' '}
          <main className="snap">
             <IntroSection />
             <PanelFull />
