@@ -1,9 +1,10 @@
-import './ReissuePassword.scss'
+import './ReissuePasswordForm.scss'
 
-function ReissuePassword() {
+function ReissuePasswordForm() {
    return (
       <>
          <div class="container">
+            <h2>비밀번호 재발급</h2>
             <form action="submit" class="reissue">
                <div>
                   <div class="re-pwd mt-80">
@@ -32,4 +33,4 @@ function ReissuePassword() {
       </>
    )
 }
-export default ReissuePassword
+export default ReissuePasswordForm

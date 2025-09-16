@@ -16,6 +16,7 @@ import FAQPage from '../pages/user/Inquiry/FAQPage'
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
+import FindingPage from '../pages/user/Finding/FindingPage'
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
@@ -35,6 +36,7 @@ export default function AppRouter() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/finding" element={<FindingPage />} />
          </Route>
 
          {/* 로그인 유저 전용 */}

@@ -1,9 +1,10 @@
-import './FindSuccessPage.scss'
+import './Finding.scss'
 
-function FindSuccessPage() {
+function FindSuccessForm() {
    return (
       <>
          <div class="container">
+            <h2>ID찾기</h2>
             <form action="submit" class="id-find">
                <p class="mt-80">회원님의 계정을 찾았어요</p>
                <div class="user-card mt-20">
@@ -25,4 +26,4 @@ function FindSuccessPage() {
    )
 }
 
-export default FindSuccessPage
+export default FindSuccessForm
