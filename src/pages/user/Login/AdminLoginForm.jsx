@@ -1,19 +1,16 @@
 // re-earth-frontend/src/pages/user/Login/AdminLoginForm.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { loginUserThunk, logoutUserThunk } from '@/features/authSlice'
+import { loginUserThunk } from '../../../features/authSlice'
 
 function AdminLoginForm() {
    const dispatch = useDispatch()
    const navigate = useNavigate()
-   const loading = useSelector((s) => s.auth.loading)
+   const { loading, isAuthenticated, user, localAuthenticated, googleAuthenticated, kakaoAuthenticated, error } = useSelector((s) => s.auth)
 
-   const [form, setForm] = useState({
-      idOrEmail: '',
-      password: '',
-   })
+   const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
    // 🔎 auth 상태 변경 로깅
    useEffect(() => {
@@ -44,27 +41,26 @@ function AdminLoginForm() {
          return
       }
 
-      // 이메일 형식이면 email로, 아니면 userId로 보냄
       const isEmail = idOrEmail.includes('@')
       const payload = isEmail ? { email: idOrEmail, password } : { userId: idOrEmail, password }
 
+      console.log('[AdminLoginForm] submitting admin login payload:', payload)
+
       try {
-         const user = await dispatch(loginUserThunk(payload)).unwrap()
-         // 로그인은 성공했지만, 관리자가 아닐 수 있음
-         if (user?.role !== 'ADMIN') {
+         const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
+         console.log('[AdminLoginForm] loginUserThunk success →', loggedUser)
+
+         if (loggedUser?.role !== 'ADMIN') {
+            console.warn('[AdminLoginForm] Not an admin. role=', loggedUser?.role)
             alert('관리자 권한이 없습니다. 일반 사용자 로그인으로 이동합니다.')
-            // 관리자가 아니면 원하는 UX로 처리:
-            // 1) 그냥 사용자 홈으로 이동:
-            // navigate('/app', { replace: true })
-            // 2) 또는 세션 정리를 원하면 다음 라인 주석 해제:
-            // await dispatch(logoutUserThunk())
             navigate('/app', { replace: true })
             return
          }
 
-         // 관리자면 대시보드로
+         console.log('[AdminLoginForm] Admin verified. Navigating to /admin/dashboard')
          navigate('/admin/dashboard', { replace: true })
       } catch (err) {
+         console.error('[AdminLoginForm] loginUserThunk error →', err)
          const msg = err || '로그인에 실패했습니다.'
          alert(typeof msg === 'string' ? msg : '로그인에 실패했습니다.')
       }
@@ -75,12 +71,12 @@ function AdminLoginForm() {
          <form className="loginform" onSubmit={onSubmit}>
             <div className="form--input">
                <p>아이디</p>
-               <input type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." required value={form.idOrEmail} onChange={onChange} autoComplete="username" />
+               <input type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." required value={form.idOrEmail} onChange={onChange} autoComplete="username" disabled={loading} />
             </div>
 
             <div className="form--input mt-20">
                <p>비밀번호</p>
-               <input type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} onChange={onChange} autoComplete="current-password" />
+               <input type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} onChange={onChange} autoComplete="current-password" disabled={loading} />
             </div>
 
             <button type="submit" className="btn default main4 mt-40" disabled={loading}>

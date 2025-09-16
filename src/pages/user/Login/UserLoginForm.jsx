@@ -1,5 +1,5 @@
 // re-earth-frontend/src/pages/user/Login/UserLoginForm.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { loginUserThunk, checkUnifiedAuthThunk } from '../../../features/authSlice'
@@ -10,7 +10,7 @@ import kakaoIcon from '../../../assets/icons/kakao.svg'
 
 export default function UserLoginForm() {
    const dispatch = useDispatch()
-   const loading = useSelector((s) => s.auth.loading)
+   const { loading, isAuthenticated, user, googleAuthenticated, kakaoAuthenticated, localAuthenticated, error } = useSelector((s) => s.auth)
 
    const [form, setForm] = useState({ id: '', password: '' })
 
@@ -40,23 +40,32 @@ export default function UserLoginForm() {
       if (!userId) return alert('아이디를 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
+      const payload = { userId, password }
+      console.log('[UserLoginForm] submitting login payload:', payload)
+
       try {
-         await dispatch(loginUserThunk({ userId, password })).unwrap()
-         // (선택) 로컬/소셜 통합 상태도 갱신
+         const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
+         console.log('[UserLoginForm] loginUserThunk success →', loggedUser)
+
+         // (선택) 통합 상태 새로 고침
          dispatch(checkUnifiedAuthThunk())
+         console.log('[UserLoginForm] dispatched checkUnifiedAuthThunk()')
          alert('로그인 성공! 환영합니다 :)')
       } catch (err) {
+         console.error('[UserLoginForm] loginUserThunk error →', err)
          alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')
       }
    }
 
    const handleGoogle = () => {
       if (loading) return
+      console.log('[UserLoginForm] redirecting to Google OAuth')
       redirectToGoogleLogin()
    }
 
    const handleKakao = () => {
       if (loading) return
+      console.log('[UserLoginForm] redirecting to Kakao OAuth')
       redirectToKakaoLogin()
    }
 
