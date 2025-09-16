@@ -7,7 +7,7 @@ function FindFormPage() {
             <form action="submit" class="login">
                <div class="form--input">
                   <p>이메일</p>
-                  <input type="text" name="id" placeholder="이메일을 입력하세요. 예 example@gmail.com" require />
+                  <input type="text" name="id" placeholder="이메일을 입력하세요. 예 example@gmail.com" required />
                </div>
                <div className="form--input mt-20">
                   <p className="text-body">휴대폰번호</p>
