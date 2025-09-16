@@ -1,3 +1,5 @@
+import './ReissuePassword.scss'
+
 function ReissuePassword() {
    return (
       <>

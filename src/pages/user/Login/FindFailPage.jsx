@@ -1,3 +1,5 @@
+import './FindFailPage.scss'
+
 function findFailPage() {
    return (
       <>

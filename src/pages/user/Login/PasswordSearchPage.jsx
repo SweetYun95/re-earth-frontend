@@ -1,3 +1,5 @@
+import './PasswordSearchPage.scss'
+
 function passwordSearchPage() {
    return (
       <>

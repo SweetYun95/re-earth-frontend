@@ -1,3 +1,5 @@
+import './FindSuccessPage.scss'
+
 function FindSuccessPage() {
    return (
       <>
