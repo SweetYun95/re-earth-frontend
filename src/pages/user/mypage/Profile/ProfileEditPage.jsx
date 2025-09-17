@@ -212,7 +212,6 @@ const ProfileEditPage = () => {
                 value2={passwordData.confirmPassword}
                 inputChange={handlePasswordChange}
               />
-              <small className="error-text">비밀번호가 일치하지 않습니다.</small>
             </div>
             <div className="modal-buttons">
               <button 

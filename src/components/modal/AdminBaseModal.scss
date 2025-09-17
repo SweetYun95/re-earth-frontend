@@ -1,0 +1,86 @@
+@import '../../assets/styles/commons.scss';
+
+.admin-base-modal {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    padding: 20px;
+  }
+
+  &__content {
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+
+    &--sm {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    &--md {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    &--lg {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    &--xl {
+      max-width: 1000px;
+      width: 100%;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--maintext);
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--subtext);
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--bg-gray);
+      color: var(--maintext);
+    }
+  }
+
+  &__body {
+    padding: 25px;
+  }
+}

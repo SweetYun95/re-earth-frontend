@@ -8,8 +8,6 @@
   color: var(--point-b) ; 
 }
 
-
-
 /* Hero */
 .main-hero {
   background: linear-gradient(180deg, rgba(209,233,93,.80) 0%, rgba(255, 255, 255, 100%) 100%);
@@ -32,6 +30,17 @@
    padding: 20px;
    margin: 0;
    box-shadow: var( --box-shadow);
+   transition: all 0.3s ease;
+   cursor: pointer;
+   
+   &:hover {
+     transform: translateY(-4px);
+     box-shadow: var(--box-shadow);
+   }
+   
+   &:active {
+     transform: translateY(-2px);
+   }
 }
 
 .custom-card-content {
@@ -108,6 +117,8 @@ body .text-white { color: #fff; }
    gap: 10px;
    min-height: 230px;
    height: 100%;
+   cursor: pointer;
+
 }
 
 .community-title {
@@ -117,6 +128,17 @@ body .text-white { color: #fff; }
   height: 20%;
   padding: 10px;
   border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  
+
+     &:hover {
+     transform: translateY(-4px);
+     box-shadow: var(--box-shadow);
+   }
+   
+   &:active {
+     transform: translateY(-2px);
+   }
 }
 
 .community-feed {
@@ -127,6 +149,17 @@ body .text-white { color: #fff; }
    display: flex;
    flex-direction: column;
    justify-content: space-around;
+   transition: all 0.3s ease;
+
+      
+   &:hover {
+     transform: translateY(-4px);
+     box-shadow: var(--box-shadow);
+   }
+   
+   &:active {
+     transform: translateY(-2px);
+   }
 }
 /* ========== pointshop ========== */
 .main--pointshop {
