@@ -6,6 +6,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 // --- feature slices ---
 import authReducer from '../features/authSlice'
+import donationReducer from '../features/donationSlice'
 // import userReducer from '../features/userSlice'
 // import itemReducer from '../features/itemSlice'
 // import orderReducer from '../features/orderSlice'
@@ -16,6 +17,7 @@ import authReducer from '../features/authSlice'
 
 const rootReducer = combineReducers({
    auth: authReducer,
+   donation: donationReducer,
    //    user: userReducer,
    //    item: itemReducer,
    //    order: orderReducer,
