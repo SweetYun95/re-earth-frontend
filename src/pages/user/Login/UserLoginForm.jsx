@@ -1,5 +1,5 @@
 // re-earth-frontend/src/pages/user/Login/UserLoginForm.jsx
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,13 +16,14 @@ export default function UserLoginForm() {
    const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
+   const didRedirect = useRef(false)
    useEffect(() => {
       console.log('[UserLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
-      // ✅ 상태가 실제로 true가 된 시점에 /user로 이동 (가드와 타이밍 레이스 방지)
-      if (isAuthenticated) {
+      if (isAuthenticated && !didRedirect.current) {
+         didRedirect.current = true
          navigate('/user', { replace: true })
       }
-   }, [isAuthenticated, user, loading, error, navigate])
+   }, [isAuthenticated, navigate, user, loading, error])
 
    const onChange = (e) => {
       const { name, value } = e.target

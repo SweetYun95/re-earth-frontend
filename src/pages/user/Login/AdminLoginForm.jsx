@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 
 import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
-
 import InputField from '../../../components/common/InputField'
 
 export default function AdminLoginForm() {
-  const dispatch = useDispatch()
-  //  const navigate = useNavigate()
+   const dispatch = useDispatch()
+   // const navigate = useNavigate()
    const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
@@ -37,7 +36,7 @@ export default function AdminLoginForm() {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[AdminLoginForm] loginUserThunk success →', loggedUser)
          dispatch(hydrateAuthThunk())
-         // 라우팅 이동은 이후 추가예정
+         // 라우팅 이동은 이후 추가 예정
          alert('로그인 성공! 환영합니다 :)')
       } catch (err) {
          console.error('[AdminLoginForm] loginUserThunk error →', err)

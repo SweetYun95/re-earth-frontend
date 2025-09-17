@@ -9,7 +9,7 @@ export default function AppCtaSection() {
       <div className="container">
         <div className="row align-items-center d-flex">
               <div className='col-md-9'>
-                <h4 className="font-weight-bold mb-0">"Re:earth App으로 더 편리하게, 일상의 탄소중립을 실천하세요."</h4>
+                <h4 className="font-weight-bold mb-0 text-center">"Re:earth App으로 더 편리하게, 일상의 탄소중립을 실천하세요."</h4>
               </div>
               <div className='col-md-3 d-flex align-items-center'>
                  <img src={qrImage} alt="qr" className='qr-image' />
