@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../styles/landing/landing.css'
+import './landing.scss'
 import IntroSection from './sections/IntroSection'
 import PanelFull from './sections/PanelFull'
 import ReEarthSection from './sections/ReEarthSection'
