@@ -2,6 +2,12 @@
 import { useState } from 'react'
 
 import { registerUser, checkUsername, checkNickname, checkEmail } from '../../../api/authApi'
+
+import InputCheckPassword from '../../../components/common/InputCheckPassword'
+import InputPhoneNumber from '../../../components/common/InputPhoneNumber'
+import InputWithBtn from '../../../components/common/InputWithBtn'
+import InputAddress from '../../../components/common/InputAddress'
+
 import './register.scss'
 
 // 백엔드와 동일한 규칙
@@ -126,68 +132,21 @@ export default function RegisterPage() {
                   <h3>회원정보입력</h3>
                   {/* 기존 폼 구조 유지: action 제거하고 onSubmit 연결 */}
                   <form className="registerform mt-80" onSubmit={handleSubmit}>
-                     <div className="form--input">
-                        <p className="text-body">아이디</p>
-                        <div className="with-btn">
-                           <input type="text" name="id" placeholder="4-20자, 영문 대·소문자 및 숫자" value={form.id} onChange={onChange} />
-                           <button type="button" className="btn main1 check default" onClick={handleCheckId}>
-                              중복확인
-                           </button>
-                        </div>
-                     </div>
+                     {/* 아이디 */}
+                     <InputWithBtn label="아이디" type="text" name="id" placeholder="4-20자, 영문 대·소문자 및 숫자" value={form.id} inputChange={onchange} handleClick={handleCheckId} buttonText="중복확인" required={true} />
 
-                     <div className="form--input mt-20">
-                        <p className="text-body">닉네임</p>
-                        <div className="with-btn">
-                           <input type="text" name="nick" placeholder="아이디를 입력하세요." value={form.nick} onChange={onChange} />
-                           <button type="button" className="btn main1 check default" onClick={handleCheckNick}>
-                              중복확인
-                           </button>
-                        </div>
-                     </div>
+                     {/* 닉네임 */}
+                     <InputWithBtn marginTop="mt-20" label="닉네임" type="text" name="nick" placeholder="닉네임을 입력하세요." value={form.nick} inputChange={onChange} buttonText="중복확인" handleClick={handleCheckNick} required={true} />
 
-                     <div className="form--input mt-20">
-                        <p className="text-body">비밀번호</p>
-                        <div className="password-check">
-                           <input type="password" name="password" placeholder="8자 이상, 영문, 숫자, 특수문자 모두 포함" value={form.password} onChange={onChange} />
-                           {/* 기존 name="check-password"를 유지하면서 상태는 password2로 매핑 */}
-                           <input type="password" name="check-password" placeholder="비밀번호를 한 번 더 입력하세요." value={form.password2} onChange={onChange} />
-                        </div>
-                     </div>
+                     {/* 비밀번호 + 확인 */}
+                     <InputCheckPassword value1={form.password} value2={form.password2} inputChange={onchange} marginTop="mt-20" />
 
                      {/* 휴대폰번호 */}
-                     <div className="form--input mt-20">
-                        <p className="text-body">휴대폰번호</p>
-                        <div className="input-phone">
-                           <input type="tel" inputMode="numeric" pattern="\d*" maxLength={3} name="phone1" placeholder="010" value={form.phone1} onChange={handlePhoneChange} />
-                           <span>-</span>
-                           <input type="tel" inputMode="numeric" pattern="\d*" maxLength={4} name="phone2" placeholder="1234" value={form.phone2} onChange={handlePhoneChange} />
-                           <span>-</span>
-                           <input type="tel" inputMode="numeric" pattern="\d*" maxLength={4} name="phone3" placeholder="5678" value={form.phone3} onChange={handlePhoneChange} />
-                        </div>
-                     </div>
-
-                     <div className="form--input mt-20">
-                        <p className="text-body">이메일</p>
-                        <div className="with-btn">
-                           <input type="email" name="email" placeholder="예) example@gmail.com" value={form.email} onChange={onChange} />
-                           <button type="button" className="btn main1 check default" onClick={handleCheckEmail}>
-                              중복확인
-                           </button>
-                        </div>
-                     </div>
-
-                     <div className="form--input mt-20">
-                        <p className="text-body">주소/우편번호</p>
-                        <div className="with-btn">
-                           <input type="text" name="addr1" placeholder="기본 주소" value={form.addr1} onChange={onChange} />
-                           <button type="button" className="btn main1 default">
-                              {' '}
-                              검색
-                           </button>
-                        </div>
-                        <input type="text" name="addr2" placeholder="상세 주소를 입력하세요." className="mt-10" value={form.addr2} onChange={onChange} />
-                     </div>
+                     <InputPhoneNumber marginTop="mt-20" value1={form.phone1} value2={form.phone2} value3={form.phone3} inputChange={handlePhoneChange} />
+                     {/* 이메일 */}
+                     <InputWithBtn marginTop="mt-20" label="이메일" type="text" name="nick" placeholder="예) example@gmail.com" value={form.email} inputChange={onChange} buttonText="중복확인" handleClick={handleCheckEmail} required={true} />
+                     {/* 주소 */}
+                     <InputAddress marginTop="mt-20" value1={form.addr1} value2={form.addr2} inputChange={onChange} />
 
                      <button type="submit" className="btn default main1 mt-40">
                         회원가입
