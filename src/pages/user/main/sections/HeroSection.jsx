@@ -5,7 +5,7 @@ import QuickActions from '../../../../components/main/QuickActions';
 
 export default function HeroSection() {
   return (
-    <section id='hero' className='hero section'>
+    <section id='hero' className='main-hero section'>
       <div className='container'>
         <div className="row">
           <HeroBanner />

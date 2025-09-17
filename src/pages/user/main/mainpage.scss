@@ -1,44 +1,41 @@
-
-/* 섹션별 텍스트 색상 */
-body .section h2 {
-   color: #333333 !important;
-}
-body .section p {
-   color: #333333 !important;
+/* ========== Section Title Colors ========== */
+.main--section__title--pointshop,
+.main--section__title--news {
+  color: var(--point-r); 
 }
 
-/* 섹션 제목 클래스 */
-.section-title-green { 
-   color: #333333 !important; 
+.main--section__title--support {
+  color: var(--point-b) ; 
 }
+
+
 
 /* Hero */
-.hero {
-  background: linear-gradient(180deg, rgba(209,233,93,.80) 0%, rgba(209,233,93,.56) 80%, rgba(209,233,93,0) 100%);
+.main-hero {
+  background: linear-gradient(180deg, rgba(209,233,93,.80) 0%, rgba(255, 255, 255, 100%) 100%);
+  height: 100%;
 }
 
 
-/* StatsAndMapSection */
-body .section .custom-card {
-   background-color: #fff !important;
-   border-radius: var(--border-radius) !important;
-   display: flex !important;
-   flex-direction: column !important;
-   justify-content: center !important;
-   min-height: 230px !important;
-   padding: 20px !important;
-   margin: 0 !important;
-   box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-   position: relative !important;
-   z-index: 1 !important;
+/* ========== StatsAndMapSection ========== */
+.main--stats {
+   background-color: #ffffff;
+}
+
+.custom-card {
+   background-color: var(--subcolor-m);
+   border-radius: var(--border-radius);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   min-height: 230px;
+   padding: 20px;
+   margin: 0;
+   box-shadow: var( --box-shadow);
 }
 
 .custom-card-content {
    padding: 1.5rem;
-}
-
-.custom-card-title {
-   margin-bottom: 0.5rem;
 }
 
 .custom-card-text {
@@ -60,32 +57,25 @@ body .section .custom-card {
 
 /* 커스텀 카드 색상 클래스 */
 body .section .custom-card.custom-card-green-bg { 
-   background: var(--subcolor-d) !important; 
-   color: white !important;
+   background: var(--subcolor-d) ; 
+   color: #fff;
 }
 body .section .custom-card.custom-card-green-border { 
-   border-color: var(--subcolor-d) !important; 
+   border-color: var(--subcolor-d) ; 
 }
 body .section .custom-card.custom-card-yellow-bg { 
-   background: #FFE4B5 !important; 
+   background: #FFE4B5 ; 
+}
+
+body .section .custom-card.map-custom-card-green-bg { 
+background-color: var(--maincolor) ; 
+
 }
 
 /* 텍스트 색상 클래스 */
-body .text-green { color: var(--subcolor-d) !important; }
-body .text-white { color: white !important; }
+body .text-green { color: var(--subcolor-d) ; }
+body .text-white { color: #fff; }
 
-/* 맵 커스텀 카드 내용 */
-.map-custom-card-content {
-   padding: 1.5rem;
-}
-
-/* 커뮤니티 화살표 버튼 */
-.community-arrow-btn {
-   background: transparent !important;
-   border: none !important;
-   font-size: 18px !important;
-   text-decoration: none !important;
-}
 
 /* 미션 버튼 */
 .mission-btn {
@@ -94,46 +84,84 @@ body .text-white { color: white !important; }
 
 /* 나무 아이콘 */
 .tree-icon {
-   width: 20px;
-   height: 20px;
-   background: #72C63A;
-   border-radius: 50%;
+   width: 24px;
+   height: 24px;
    margin-right: 4px;
+   
+   svg {
+     width: 100%;
+     height: 100%;
+     
+     path {
+       fill: #fff; /* 기본 흰색 */
+       transition: fill 0.3s ease;
+     }
+   }
+   
+   &.active svg path {
+     fill: var(--subcolor-d); /* 활성화된 나무는 초록색 */
+   }
 }
 
 /* 커뮤니티 */
+.community-custom-card {
+   border-radius: var(--border-radius);
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   min-height: 230px;
+   height: 100%;
+}
+
 .community-title {
+  background-color: var(--point-y);
+  display: flex;
+  justify-content: space-between;
+  height: 20%;
   padding: 10px;
   border-radius: var(--border-radius);
 }
 
 .community-feed {
    padding: 10px;
+   height: 80%;
    border-radius: var(--border-radius);
-   background-color: var(--point-y);
-   flex: 1;
+   background-color: #FFE7AA; //연한 --point-y
    display: flex;
    flex-direction: column;
-   justify-content: space-between;
+   justify-content: space-around;
+}
+/* ========== pointshop ========== */
+.main--pointshop {
+  background-color: var(--subcolor-m);
 }
 
-/* 뉴스 카드 */
-body .news-card img { 
-   border-radius: var(--border-radius) !important; 
-   height:235px !important; 
-   object-fit:cover !important; 
+/* ========== news ========== */
+.main-news {
+   background-color: #ffffff;
 }
 
 /* 뉴스 카드 호버 효과 */
-body .news-card {
-  background: #fff !important;
-  transition: all 0.3s ease !important;
+.news--card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius); 
+  background: #fff;
+  padding: 1rem;
+  transition: all 0.3s ease;
   
   &:hover {
-    background: var(--maincolor) !important; /* 포인트 연두색 배경 */
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    background: var(--maincolor); /* 포인트 연두색 배경 */
+    transform: translateY(-2px);
+    box-shadow: var( --box-shadow);
   }
+}
+
+/* 뉴스 카드 */
+.news--card .news--card__img { 
+   border-radius: var(--border-radius); 
+   aspect-ratio: 1/1;
+   object-fit:cover; 
 }
 
 /* Swiper 기본 네비게이션 스타일 조정 */
@@ -155,13 +183,92 @@ body .news-card {
   }
 }
 
-/* 하단 앱 배너 */
-.app-cta { 
-  background:var( --maincolor) 
+/* ============ SupportSection ========= */
+.main-support {
+   background-color: var(--subcolor-m);
+   
+   .support-icon {
+     width: 100%;
+     height: 100px;
+     object-fit: contain;
+     display: flex;
+     justify-content: end;
+   }
+   
+  /* 카드 커스터마이징 */
+  .support-card {
+    border: none;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    background: #fff;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--box-shadow);
+    }
+    
+    &:active {
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow);
+    }
+     
+     .support-card-body {
+       padding: 2rem;
+       text-align: left;
+       
+       .support-card-title {
+         color: var(--maintext);
+         font-size: 1.1rem;
+         margin-bottom: 0.75rem;
+       }
+       
+       .support-card-text {
+         color: #666;
+         line-height: 1.5;
+         margin-bottom: 1rem;
+       }
+     }
+   }
 }
 
-/* 아이콘 크기 */
-.icon-large { font-size: 48px; }
+/* 하단 앱 배너 */
+.app-cta { 
+  background:var( --maincolor) ;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  h4 {
+    color: var(--maintext);
+  }
+
+  /* phone-image 흔들리는 애니메이션 */
+  .phone-image {
+    transform: rotate(20deg);
+    animation: phoneShake 1.5s ease-in-out infinite;
+  }
+}
+
+/* phone 살짝 흔들리는 애니메이션 키프레임 */
+@keyframes phoneShake {
+  0%, 100% {
+    transform: rotate(20deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  75% {
+    transform: rotate(22deg);
+  }
+}
+
 
 /* 반응형 */
 @media (max-width: 991.98px) {

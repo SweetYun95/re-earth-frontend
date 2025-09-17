@@ -1,0 +1,72 @@
+/* ArrowIcon 기본 스타일 */
+.arrow-icon {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+  
+  &:active {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  }
+}
+
+/* 방향별 기본 회전 */
+.arrow-icon--left {
+  transform: rotate(180deg);
+}
+
+.arrow-icon--up {
+  transform: rotate(-90deg);
+}
+
+.arrow-icon--down {
+  transform: rotate(90deg);
+}
+
+.arrow-icon--right {
+  transform: rotate(0deg);
+}
+
+/* QuickActions 내부의 ArrowIcon 호버 효과 (45도 회전 고려) */
+.quick-actions .action-icon .arrow-icon:hover {
+  transform: rotate(-45deg) scale(1.1) !important;
+}
+
+.quick-actions .action-icon .arrow-icon:active {
+  transform: rotate(-45deg) scale(1.05) !important;
+}
+
+/* 일반 ArrowIcon 호버 효과 */
+.arrow-icon--left:hover {
+  transform: rotate(180deg) scale(1.1);
+}
+
+.arrow-icon--left:active {
+  transform: rotate(180deg) scale(1.05);
+}
+
+.arrow-icon--up:hover {
+  transform: rotate(-90deg) scale(1.1);
+}
+
+.arrow-icon--up:active {
+  transform: rotate(-90deg) scale(1.05);
+}
+
+.arrow-icon--down:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+.arrow-icon--down:active {
+  transform: rotate(90deg) scale(1.05);
+}
+
+.arrow-icon--right:hover {
+  transform: rotate(0deg) scale(1.1);
+}
+
+.arrow-icon--right:active {
+  transform: rotate(0deg) scale(1.05);
+}
