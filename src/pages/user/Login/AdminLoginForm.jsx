@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { loginUserThunk } from '../../../features/authSlice'
 
+import InputField from '../../../components/common/InputField'
+
 function AdminLoginForm() {
    const dispatch = useDispatch()
    const navigate = useNavigate()
@@ -69,15 +71,11 @@ function AdminLoginForm() {
    return (
       <div className="admin-login mt-40">
          <form className="loginform" onSubmit={onSubmit}>
-            <div className="form--input">
-               <p>아이디</p>
-               <input type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." required value={form.idOrEmail} onChange={onChange} autoComplete="username" disabled={loading} />
-            </div>
+            {/* 아이디/이메일 */}
+            <InputField label={'아이디'} type={'text'} name={'idOrEmail'} placeholder={'아이디 또는 이메일을 입력하세요.'} required={true} value={form.idOrEmail} inputChange={onChange} autoComplete="username" disabled={loading} />
 
-            <div className="form--input mt-20">
-               <p>비밀번호</p>
-               <input type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} onChange={onChange} autoComplete="current-password" disabled={loading} />
-            </div>
+            {/* 비밀번호 */}
+            <InputField marginTop={'mt-20'} label={'비밀번호'} type={'password'} name={'password'} value={form.password} inputChange={onChange} disabled={loading} autoComplete={'current-password'} placeholder={'비밀번호를 입력하세요.'} required={true} />
 
             <button type="submit" className="btn default main4 mt-40" disabled={loading}>
                {loading ? '로그인 중...' : '로그인'}

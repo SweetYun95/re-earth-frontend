@@ -2,11 +2,13 @@
 import { useState } from 'react'
 
 import { registerUser, checkUsername, checkNickname, checkEmail } from '../../../api/authApi'
-import './register.scss'
+
 import InputCheckPassword from '../../../components/common/InputCheckPassword'
 import InputPhoneNumber from '../../../components/common/InputPhoneNumber'
 import InputWithBtn from '../../../components/common/InputWithBtn'
 import InputAddress from '../../../components/common/InputAddress'
+
+import './register.scss'
 
 // 백엔드와 동일한 규칙
 const USERID_REGEX = /^[A-Za-z0-9]{4,20}$/ // 4~20, 영문/숫자
