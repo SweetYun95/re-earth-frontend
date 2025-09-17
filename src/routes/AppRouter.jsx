@@ -26,6 +26,8 @@ import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
 
 //마이페이지
 import MyPage from '../pages/user/mypage/MyPage'
+//프로필 수정
+import ProfileEditPage from '../pages/user/mypage/Profile/ProfileEditPage'
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
@@ -51,6 +53,7 @@ export default function AppRouter() {
          {/* <Route element={<UserOnly />}> */}
             <Route path="/user" element={<MainPage />} />
             <Route path="/user/my" element={<MyPage />} />
+            <Route path="/user/my/edit" element={<ProfileEditPage />} />
             <Route path="/donate/info" element={<DonationInfoPage />} />
             <Route path="/donate" element={<DonationPage />} />
             <Route path="/inquiry/new" element={<InquiryForm />} />

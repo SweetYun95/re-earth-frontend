@@ -2,7 +2,7 @@ import React from 'react';
 import MapComponent from '../../../../components/map/MapComponent';
 import '../mainpage.scss';
 import ArrowIcon from '../../../../components/common/ArrowIcon';
-import CarbonReductionCard from '../../../../components/common/CarbonReductionCard';
+import CarbonReductionCard from '../../../../components/layout/CarbonReductionCard';
 
 const COMMUNITY = [
   '제인도가 방금 5kg의 옷을 기부했습니다.',
