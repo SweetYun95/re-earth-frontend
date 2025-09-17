@@ -129,8 +129,8 @@ function ItemCreateForm({ onCreateSubmit }) {
                <Box
                   key={index}
                   sx={{
-                     width: '120px',
-                     height: '120px',
+                     width: '200px',
+                     height: '300px',
                      border: '1px solid #ccc',
                      borderRadius: '8px',
                      overflow: 'hidden',
@@ -172,18 +172,17 @@ function ItemCreateForm({ onCreateSubmit }) {
                <MenuItem value="SOLD_OUT">품절</MenuItem>
             </Select>
          </FormControl>
+         {/* 업체명 입력 필드 */}
+         <TextField label="업체명" variant="outlined" fullWidth value={vendorName} onChange={(e) => setVendorName(e.target.value)} placeholder="업체명" sx={{ mt: 2 }} inputProps={{ maxLength: 15 }} />
+
+         {/* 브랜드명 입력 필드 */}
+         <TextField label="브랜드명" variant="outlined" fullWidth value={brandName} onChange={(e) => setBrandName(e.target.value)} placeholder="브랜드명" sx={{ mt: 2 }} inputProps={{ maxLength: 15 }} />
 
          {/* 상품설명 입력 필드 */}
          <TextField label="상품설명" variant="outlined" fullWidth multiline rows={4} value={itemDetail} onChange={(e) => setItemDetail(e.target.value)} sx={{ mt: 2 }} />
 
-         {/* 업체명 입력 필드 */}
-         <TextField label="업체명" variant="outlined" fullWidth multiline rows={4} value={vendorName} onChange={(e) => setVendorName(e.target.value)} sx={{ mt: 2 }} />
-
-         {/* 브랜드명 입력 필드 */}
-         <TextField label="브랜드명" variant="outlined" fullWidth multiline rows={4} value={brandName} onChange={(e) => setBrandName(e.target.value)} sx={{ mt: 2 }} />
-
          {/* 등록 버튼 */}
-         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+         <Button type="submit" class="btn default main1 mt-40">
             등록하기
          </Button>
       </Box>

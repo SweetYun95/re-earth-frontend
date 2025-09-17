@@ -2,9 +2,9 @@ import reEarth from './http'
 
 //상품등록
 // 상품 등록
-export const createItem = async (formData) => {
+export const createItem = async (itemData) => {
    try {
-      const response = await reEarth.post('/item', formData, {
+      const response = await reEarth.post('/item', itemData, {
          headers: { 'Content-Type': 'multipart/form-data' },
       })
       return response
@@ -14,9 +14,9 @@ export const createItem = async (formData) => {
    }
 }
 //상품수정
-export const updateItem = async (id, formData) => {
+export const updateItem = async (id, itemData) => {
    try {
-      const response = await reEarth.put(`/item/${id}`, formData, {
+      const response = await reEarth.put(`/item/${id}`, itemData, {
          headers: { 'Content-Type': 'multipart/form-data' },
       })
       return response

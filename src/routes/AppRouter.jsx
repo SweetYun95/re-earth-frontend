@@ -59,8 +59,10 @@ export default function AppRouter() {
          </Route>
 
          {/* 관리자 전용 (필요 시 해제) */}
+         {/* 임시 테스트 */}
+         <Route path="/items/create" element={<ItemCreatePage />} />
          {/* <Route element={<AdminOnly />}>
-            <Route path='/items/create' element={<ItemCreatePage/> } />
+            <Route path="/items/create" element={<ItemCreatePage />} />
          </Route> */}
          {/* 
       <Route element={<AdminOnly />}>
