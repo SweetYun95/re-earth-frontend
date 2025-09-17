@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginUserThunk, checkUnifiedAuthThunk } from '../../../features/authSlice'
 import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
 
+import InputField from '../../../components/common/InputField'
+
 import googleIcon from '../../../assets/icons/google.svg'
 import kakaoIcon from '../../../assets/icons/kakao.svg'
 
@@ -73,15 +75,8 @@ export default function UserLoginForm() {
       <div className="user-login mt-40">
          {/* NOTE: action 제거하고 onSubmit으로 제어 */}
          <form className="loginform" onSubmit={handleSubmit}>
-            <div className="form--input">
-               <p>아이디</p>
-               <input type="text" name="id" placeholder="아이디를 입력하세요." required autoComplete="username" value={form.id} onChange={onChange} disabled={loading} />
-            </div>
-
-            <div className="form--input mt-20">
-               <p>비밀번호</p>
-               <input type="password" name="password" placeholder="비밀번호를 입력하세요." required autoComplete="current-password" value={form.password} onChange={onChange} disabled={loading} />
-            </div>
+            <InputField label="아이디" type="text" name="id" placeholder="아이디를 입력하세요." value={form.id} inputChange={onChange} disabled={loading} required={true} />
+            <InputField label="비밀번호" type="password" name="password" placeholder="비밀번호를 입력하세요." required={true} value={form.password} inputChange={onChange} disabled={loading} marginTop="mt-20" />
 
             <a href="#" className="btn find" onClick={(e) => e.preventDefault()}>
                아이디 / 비밀번호 찾기
