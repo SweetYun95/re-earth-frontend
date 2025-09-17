@@ -20,6 +20,7 @@ import MainPage from '../pages/user/main/MainPage'
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
+import SavingMap from '../pages/user/saving/SavingMap'
 
 // 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
@@ -48,13 +49,14 @@ export default function AppRouter() {
          </Route>
 
          {/* 로그인 유저 전용 */}
-         <Route element={<UserOnly />}>
-            <Route path="/user" element={<MainPage />} />
-            <Route path="/user/my" element={<MyPage />} />
-            <Route path="/donate/info" element={<DonationInfoPage />} />
-            <Route path="/donate" element={<DonationPage />} />
-            <Route path="/inquiry/new" element={<InquiryForm />} />
-         </Route>
+         {/* <Route element={<UserOnly />}> */}
+         <Route path="/user" element={<MainPage />} />
+         <Route path="/user/my" element={<MyPage />} />
+         <Route path="/donate/info" element={<DonationInfoPage />} />
+         <Route path="/donate" element={<DonationPage />} />
+         <Route path="/inquiry/new" element={<InquiryForm />} />
+         <Route path="/saving/map" element={<SavingMap />} />
+         {/* </Route> */}
 
          {/* 관리자 전용 (필요 시 해제) */}
          {/* 

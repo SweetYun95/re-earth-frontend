@@ -1,0 +1,30 @@
+.finding {
+   width: 100%;
+}
+.finding--content {
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   & > :first-child {
+      width: 40%;
+   }
+   & > :last-child {
+      width: 60%;
+   }
+}
+
+.searchtap input {
+   background-color: #ffffff;
+}
+
+.searchtap--spot {
+   display: flex;
+   background-color: #ffffff;
+   border-radius: 20px;
+}
+.spot--address p {
+   margin: 0;
+   &.description {
+      font-size: 0.75rem;
+   }
+}
