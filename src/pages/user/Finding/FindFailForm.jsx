@@ -1,7 +1,10 @@
-function findFailPage() {
+import './Finding.scss'
+
+function FindFailForm() {
    return (
       <>
          <div class="container">
+            <h2>ID찾기</h2>
             <form action="submit" class="findfail">
                <div>
                   <h4>입력하신 정보와 일치하는 계정이 존재하지 않습니다.</h4>
@@ -25,4 +28,4 @@ function findFailPage() {
    )
 }
 
-export default findFailPage
+export default FindFailForm

@@ -1,0 +1,59 @@
+.user-card {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 12px 20px;
+   background: #fff;
+   border-radius: 20px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+   width: fit-content;
+}
+
+.user-avatar {
+   width: 40px;
+   height: 40px;
+}
+
+.user-info {
+   display: flex;
+   flex-direction: column;
+}
+
+.usermenu {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   gap: 10px;
+}
+#register {
+   padding: 80px;
+   @media (max-width: 646px) {
+      padding: 0px;
+      width: 100%;
+   }
+}
+.user-register {
+   background-color: white;
+   padding: 40px;
+   border-radius: 20px;
+   max-width: 920px;
+   margin: 0 auto;
+   @media (max-width: 646px) {
+      padding: 30px;
+      width: 100%;
+   }
+}
+#login {
+   background-color: #ffffff;
+   padding: 80px;
+   border-radius: 20px;
+   max-width: 920px;
+   margin: 0 auto;
+   @media (max-width: 646px) {
+      padding: 30px;
+      width: 100%;
+   }
+}
+h2 {
+   font-size: 1.25rem;
+}

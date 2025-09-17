@@ -1,7 +1,6 @@
 // re-earth-frontend/src/assets/styles/commons.scss
 /* commons.scss */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-
 @font-face {
    font-family: 'GMarketSans';
    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -39,39 +38,39 @@ body {
 }
 
 /* 폰트 클래스 */
-.gmarket { 
-   font-family: 'Gmarket Sans', 'Gmarket Sans TTF', Pretendard, sans-serif; 
+.gmarket {
+   font-family: 'Gmarket Sans', 'Gmarket Sans TTF', Pretendard, sans-serif;
 }
 
 /* 섹션 폰트 스타일 */
 .section {
    padding: 120px 0;
 }
-.section-title { 
-   font-size:32px; 
-   font-weight:700; 
+.section-title {
+   font-size: 32px;
+   font-weight: 700;
 }
-.section-sub { 
-   font-size:14px; 
+.section-sub {
+   font-size: 14px;
 }
-.banner-note { 
-   font-size:24px; 
+.banner-note {
+   font-size: 24px;
 }
 
 /* 앱 CTA 폰트 */
-.app-cta .copy { 
-   font-size:32px; 
-   font-weight:500; 
+.app-cta .copy {
+   font-size: 32px;
+   font-weight: 500;
 }
 
 /* 반응형 폰트 */
 @media (max-width: 991.98px) {
-  .section-title { 
-     font-size:26px; 
-  }
-  .banner-note { 
-     font-size:20px; 
-  }
+   .section-title {
+      font-size: 26px;
+   }
+   .banner-note {
+      font-size: 20px;
+   }
 }
 a,
 a:hover {
@@ -118,7 +117,6 @@ p {
 .mt-120 {
    margin-top: 120px;
 }
-
 
 /* 텍스트사이즈 - 본문 */
 .text-body {
@@ -207,12 +205,10 @@ section#main2 {
    background-color: #ffffff;
 }
 
-
 /* 이미지 공통 스타일 */
 img {
    border-radius: var(--border-radius);
 }
-
 
 /* 텍스트 말줄임표 공통 클래스 */
 .text-ellipsis-1 {
@@ -405,7 +401,11 @@ form {
 .form--input > input {
    display: block;
    width: 100%;
+   & ::placeholder {
+      color: var(--subtext);
+   }
 }
+
 .form--input p {
    margin-bottom: 10px;
    padding-left: 20px;
