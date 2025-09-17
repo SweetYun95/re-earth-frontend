@@ -3,14 +3,15 @@
   
   .quick-action-card {
     position: relative;
-    background: #fff;
+    height: 100%;
+    min-height: 150px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.12);
     transition: all 0.3s ease;
     
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--box-shadow);
     }
 
     .card-body {
@@ -41,17 +42,12 @@
         position: absolute;
         bottom: 8px;
         right: 8px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border: 3px solid white;
+        svg {
+          transform: rotate(-45deg) !important;
+        }
       }
     }
   }
@@ -61,17 +57,11 @@
     .action-title {
       color: var(--point-y); /* #ffce55 */
     }
-    .action-icon {
-      background-color: var(--point-y);
-    }
   }
   
   .action-donate {
     .action-title {
       color: var(--subcolor-d); /* #72c63a */
-    }
-    .action-icon {
-      background-color: var(--subcolor-d);
     }
   }
   
@@ -79,17 +69,11 @@
     .action-title {
       color: var(--point-b); /* #1d6ff2 */
     }
-    .action-icon {
-      background-color: var(--point-b);
-    }
   }
   
   .action-community {
     .action-title {
       color: var(--point-r); /* #fb6e52 */
-    }
-    .action-icon {
-      background-color: var(--point-r);
     }
   }
 }
