@@ -45,10 +45,10 @@ export default function AppRouter() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/finding" element={<FindingPage />} />
-         </Route>
+         {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
-         <Route element={<UserOnly />}>
+         {/* <Route element={<UserOnly />}> */}
             <Route path="/user" element={<MainPage />} />
             <Route path="/user/my" element={<MyPage />} />
             <Route path="/donate/info" element={<DonationInfoPage />} />
