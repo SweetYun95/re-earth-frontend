@@ -20,6 +20,7 @@ import MainPage from '../pages/user/main/MainPage'
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
+import SavingMap from '../pages/user/saving/SavingMap'
 
 // 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
@@ -41,23 +42,24 @@ export default function AppRouter() {
    return (
       <Routes>
          {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
-         <Route element={<GuestOnly />}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/finding" element={<FindingPage />} />
+         {/* <Route element={<GuestOnly />}> */}
+         <Route path="/" element={<LandingPage />} />
+         <Route path="/login" element={<LoginPage />} />
+         <Route path="/register" element={<RegisterPage />} />
+         <Route path="/faq" element={<FAQPage />} />
+         <Route path="/finding" element={<FindingPage />} />
          {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
          {/* <Route element={<UserOnly />}> */}
-            <Route path="/user" element={<MainPage />} />
-            <Route path="/user/my" element={<MyPage />} />
-            <Route path="/user/my/edit" element={<ProfileEditPage />} />
-            <Route path="/donate/info" element={<DonationInfoPage />} />
-            <Route path="/donate" element={<DonationPage />} />
-            <Route path="/inquiry/new" element={<InquiryForm />} />
-         </Route>
+         <Route path="/user" element={<MainPage />} />
+         <Route path="/user/my" element={<MyPage />} />
+         <Route path="/user/my/edit" element={<ProfileEditPage />} />
+         <Route path="/donate/info" element={<DonationInfoPage />} />
+         <Route path="/donate" element={<DonationPage />} />
+         <Route path="/inquiry/new" element={<InquiryForm />} />
+         <Route path="/saving/map" element={<SavingMap />} />
+         {/* </Route> */}
 
          {/* 관리자 전용 (필요 시 해제) */}
          {/* 
