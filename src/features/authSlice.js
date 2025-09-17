@@ -9,7 +9,8 @@ import { registerUser, loginUser, logoutUser, fetchMe } from '../api/authApi'
 // 앱 시작/새로고침 시: 세션 상태 재하이드
 export const hydrateAuthThunk = createAsyncThunk('auth/hydrate', async (_, { rejectWithValue }) => {
    try {
-      const res = await fetchMe() // 200 or 401 모두 들어옴
+      // fetchMe는 200/401 모두 resolve로 들어오게 해둠
+      const res = await fetchMe()
       if (res.status === 200 && res.data?.user) {
          return { user: res.data.user, isAuthenticated: true }
       }
@@ -55,7 +56,7 @@ const authSlice = createSlice({
    initialState: {
       user: null,
       isAuthenticated: false,
-      hydrated: false, // ★ 초기 세션 상태를 확인(하이드레이션)했는지
+      hydrated: false, // 초기 세션 상태 확인 완료 여부
       googleAuthenticated: false,
       kakaoAuthenticated: false,
       localAuthenticated: false,
@@ -74,11 +75,11 @@ const authSlice = createSlice({
             state.loading = false
             state.isAuthenticated = action.payload.isAuthenticated
             state.user = action.payload.user
-            // 세션 로그인은 일단 local로 취급(소셜은 필요 시 별도 표식)
+            // 세션 로그인은 일단 local로 표기
             state.localAuthenticated = !!action.payload.isAuthenticated
             state.googleAuthenticated = false
             state.kakaoAuthenticated = false
-            state.hydrated = true // ★ 하이드레이션 완료
+            state.hydrated = true
          })
          .addCase(hydrateAuthThunk.rejected, (state, action) => {
             state.loading = false
@@ -88,7 +89,7 @@ const authSlice = createSlice({
             state.localAuthenticated = false
             state.googleAuthenticated = false
             state.kakaoAuthenticated = false
-            state.hydrated = true // ★ 실패해도 완료로 간주
+            state.hydrated = true
          })
 
          // 회원가입
@@ -115,7 +116,7 @@ const authSlice = createSlice({
             state.isAuthenticated = true
             state.localAuthenticated = true
             state.user = action.payload
-            state.hydrated = true // ★ 이미 세션 확정
+            state.hydrated = true
          })
          .addCase(loginUserThunk.rejected, (state, action) => {
             state.loading = false
