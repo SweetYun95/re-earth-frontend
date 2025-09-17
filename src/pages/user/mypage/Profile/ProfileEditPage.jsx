@@ -191,7 +191,7 @@ const ProfileEditPage = () => {
             />
             <div className="modal-buttons">
               <button 
-                className="btn default main4"
+                className="btn default main1"
                 onClick={() => setShowPasswordModal(false)}
               >
                 입력
@@ -216,7 +216,7 @@ const ProfileEditPage = () => {
             </div>
             <div className="modal-buttons">
               <button 
-                className="btn default main4"
+                className="btn default main1"
                 onClick={handlePasswordSubmit}
               >
                 입력

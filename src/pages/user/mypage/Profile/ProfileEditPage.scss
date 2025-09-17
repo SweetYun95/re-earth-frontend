@@ -2,7 +2,7 @@
 
 .profile-edit {
   min-height: 100vh;
-  background-color: var(--bg-gray);
+  background-color: var(--subcolor-m);
 
   &__title {
     font-size: 1.5rem;
@@ -65,8 +65,8 @@
   }
 }
 
-// 모달 스타일
-.modal-overlay {
+// 커스텀 모달 스타일 (부트스트랩과 구분)
+.profile-edit .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -76,41 +76,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1050;
 }
 
-.modal-content {
-  background-color: #ffffff;
+.profile-edit .modal-content {
+  background-color: #ffffff !important;
   border-radius: var(--border-radius);
   padding: 40px;
   max-width: 500px;
   width: 90%;
   text-align: center;
-
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 2px solid #dee2e6;
+  
   h3 {
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--maintext);
     margin-bottom: 30px;
-  }
-
-  input {
-    width: 100%;
-    padding: 15px 20px;
-    border: 2px solid #e9ecef;
-    border-radius: 25px;
-    background-color: #f8f9fa;
-    font-size: 0.875rem;
-    margin-bottom: 20px;
-    
-    &:focus {
-      outline: none;
-      border-color: var(--maincolor);
-    }
-
-    &::placeholder {
-      color: var(--subtext);
-    }
   }
 }
 
@@ -118,35 +101,13 @@
   text-align: left;
   margin-bottom: 30px;
 
-  .form--input {
-    margin-bottom: 20px;
-
-    label {
-      display: block;
-      font-weight: 500;
-      color: var(--maintext);
-      margin-bottom: 8px;
-      font-size: 0.875rem;
-    }
-
-    input {
-      width: 100%;
-      margin-bottom: 5px;
-    }
-
-    .error-text {
-      color: #dc3545;
-      font-size: 0.75rem;
-      display: block;
-    }
-  }
 }
 
-.modal-buttons {
+.profile-edit .modal-buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
-
+  
   .btn {
     min-width: 120px;
     padding: 12px 25px;
