@@ -1,7 +1,6 @@
 // re-earth-frontend/src/assets/styles/commons.scss
 /* commons.scss */
-// @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-
+// @import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
 @font-face {
    font-family: 'GMarketSans';
    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -222,7 +221,7 @@ img {
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
-   -webkit-line-clamp: 2;
+   // -webkit-line-clamp: 2;
    -webkit-box-orient: vertical;
    line-height: 1.4;
 }
@@ -231,7 +230,7 @@ img {
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
-   -webkit-line-clamp: 3;
+   // -webkit-line-clamp: 3;
    -webkit-box-orient: vertical;
    line-height: 1.4;
 }

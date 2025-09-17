@@ -11,6 +11,7 @@ import LandingPage from '../pages/public/Landing/LandingPage'
 import LoginPage from '../pages/user/Login/LoginPage'
 import RegisterPage from '../pages/user/Register/RegisterPage'
 import FAQPage from '../pages/user/Inquiry/FAQPage'
+import FindingPage from '../pages/user/Finding/FindingPage'
 
 // User pages
 // 유저메인페이지
@@ -25,7 +26,6 @@ import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
 
 //마이페이지
 // import MyPage from '../pages/user/mypage/MyPage'
-
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
@@ -44,7 +44,7 @@ export default function AppRouter() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
-            <Route path="/user" element={<MainPage />} />
+            <Route path="/finding" element={<FindingPage />} />
          </Route>
 
          {/* 로그인 유저 전용 */}
