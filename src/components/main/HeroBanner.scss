@@ -1,0 +1,143 @@
+// HeroBannerSwiper.scss
+@import '../../assets/styles/commons.scss';
+
+.hero-banner-swiper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+
+  .hero-swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .hero-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+      }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: var(--box-shadow);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+    }
+
+      .hero-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: var(--headings);
+        
+        @media (max-width: 768px) {
+          font-size: 2.2rem;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+
+  // 커스텀 네비게이션 버튼
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    svg {
+      color: var(--maintext);
+      transition: color 0.3s ease;
+    }
+
+    &:hover svg path {
+      fill: var(--subcolor-d);
+    }
+  }
+
+  .swiper-button-prev-custom {
+    left: 10px;
+    bottom: 10px;
+    top: auto;
+    transform: none;
+    
+    @media (max-width: 768px) {
+      left: 3px;
+      bottom: 3px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .swiper-button-next-custom {
+    left: 50px;
+    bottom: 10px;
+    top: auto;
+    right: auto;
+    transform: none;
+    
+    @media (max-width: 768px) {
+      left: 40px;
+      bottom: 3px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+
+// Swiper 기본 스타일 오버라이드
+:global(.swiper) {
+  .swiper-button-disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+  }
+}

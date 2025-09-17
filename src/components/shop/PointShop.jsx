@@ -1,30 +1,33 @@
 import React from 'react';
 import './PointShop.scss';
+import cupImage from '../../assets/images/친환경컵.png';
+import towelImage from '../../assets/images/친환경수건.png';
+import chargerImage from '../../assets/images/태양광충전기.png';
+import lampImage from '../../assets/images/나무조명.png';
 
 const ITEMS = [
   { 
     name: '친환경 칫솔', 
     point: 100, 
-    img: '../../assets/images/친환경컵.png',
+    img: cupImage,
     description: '천연 재료로 만든 친환경 칫솔'
   },
   { 
     name: '친환경 수건', 
     point: 150, 
-    img: '../../assets/images/친환경수건.png',
-    description: '유기농 면으로 제작된 친환경수건.png'
+    img: towelImage,
+    description: '유기농 면으로 제작된 친환경수건'
   },
   { 
     name: '태양광 충전기', 
     point: 300, 
-    img: '../../assets/images/태양광충전기.png',
-
+    img: chargerImage,
     description: '태양광으로 충전하는 친환경 충전기'
   },
   { 
     name: '나무 조명', 
     point: 250, 
-    img: '../../assets/images/나무조명.png',
+    img: lampImage,
     description: '자연 나무로 만든 조명'
   }
 ];
@@ -36,7 +39,7 @@ export default function PointShop() {
             <div className="row">
               {ITEMS.map((item, idx) => (
                 <div className="col-md-3 col-sm-6 mb-4" key={idx}>
-                  <div className="card border-0 shadow-sm product-card">
+                  <div className="product-card">
                     <div className="card-body d-flex flex-column">
                       <div>
                         <img 
