@@ -1,19 +1,24 @@
+import { useEffect, useState } from 'react'
 import MapComponent from '../../../components/map/MapComponent'
 import './SavingMap.scss'
+import SearchTap from './SearchTap'
+import QrScanner from '../../../components/common/QrScanner'
 
 function SavingMap() {
-   const TestBox = () => {
-      return (
-         <div
-            style={{
-               width: '20px',
-               height: '20px',
-               borderRadius: '100%',
-               backgroundColor: 'blue',
-            }}
-         ></div>
-      )
-   }
+   const category = 'transit'
+   // category: nephron / transit
+   // 데이터 확인용 임시 코드, 배포 전 삭제
+
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+   const [position, setPosition] = useState({
+      lat: 37.5665,
+      lng: 126.978,
+   })
+   useEffect(() => {
+      const handleResize = () => setIsMobile(window.innerWidth < 768)
+      window.addEventListener('resize', handleResize)
+      return () => window.removeEventListener('resize', handleResize)
+   }, [])
 
    return (
       <>
@@ -21,25 +26,27 @@ function SavingMap() {
             <div className="container" id="area">
                {/* 영역 */}
                <div className="finding">
-                  <h2>내 주변 네프론</h2>
+                  <h2>{category === 'nephron' ? '내 주변 네프론' : '대중교통 / 따릉이'}</h2>
                   <div className="finding--content mt-40">
-                     <div className="searchtap">
-                        <input type="text" placeholder="장소, 주소, 버스 검색" />
-                        <span className="mt-20 text-right">검색 결과 12</span>
-                        <div className="searchtap--spot mt-10">
-                           <TestBox />
-                           <div className="spot--address">
-                              <p>지명</p>
-                              <p className="description">상세주소 (참고를 위한 임시 텍스트입니다.)</p>
-                           </div>
-                        </div>
-                     </div>
-                     <MapComponent />
+                     <SearchTap category={category} isMobile={isMobile} />
+                     <MapComponent category={category} setPosition={setPosition} position={position} />
                   </div>
                </div>
-               <div className="verify mt-80">
-                  <h3>인증하기</h3>
-               </div>
+
+               {isMobile ? (
+                  <div className="mobileOnly mt-40">
+                     {category === 'nephron' && <p>내가 찾는 네프론이 지도에 보이지 않나요?</p>}
+                     <QrScanner label={'QR코드 스캔하기'} />
+                  </div>
+               ) : (
+                  <div className="verify mt-80">
+                     <h3>인증하기</h3>
+                     <div className="mobileOnly mt-20">
+                        <a href="">어플리케이션 설치</a>
+                        <p className="mt-40">해당 기능은 모바일 또는 태블릿 환경(가로 768px 이하)에서만 실행 가능합니다. </p>
+                     </div>
+                  </div>
+               )}
             </div>
          </section>
       </>
