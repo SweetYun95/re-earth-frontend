@@ -39,7 +39,7 @@ export const deleteItem = async (id) => {
 export const getItems = async () => {
    try {
       const response = await reEarth.get(`/item`)
-      return response.data
+      return response.data.items
    } catch (error) {
       console.error(`API Request 오류:${error}`)
       throw error

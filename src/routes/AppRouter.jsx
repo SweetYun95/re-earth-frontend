@@ -31,6 +31,8 @@ import MyPage from '../pages/user/mypage/MyPage'
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
 import ErrorPage from '../pages_extra/Unloaded/ErrorPage'
 
+//관리자 페이지
+import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
 // TODO: 추후 유저 메인, 마켓, 관리자 페이지 등 추가
 // import AdminLoginPage from '../pages/admin/AdminLoginPage'
 // import DashboardPage from '../pages/admin/DashboardPage'
@@ -57,6 +59,9 @@ export default function AppRouter() {
          </Route>
 
          {/* 관리자 전용 (필요 시 해제) */}
+         <Route element={<AdminOnly />}>
+            <Route path='/items/create' element={<ItemCreatePage/> } />
+         </Route>
          {/* 
       <Route element={<AdminOnly />}>
         <Route path="/admin" element={<DashboardPage />} />
