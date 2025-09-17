@@ -12,7 +12,7 @@ function ItemCreatePage() {
       dispatch(createItemThunk(itemData))
          .unwrap()
          .then(() => {
-            navigate('/') //등록후 상품등록 리스트 페이지로 이동하게
+            navigate('') //등록후 상품등록 리스트 페이지로 이동하게
          })
          .catch((error) => {
             console.error('상품 등록 에러:', error)
