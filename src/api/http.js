@@ -24,7 +24,8 @@ reEarth.interceptors.request.use(
       const token = localStorage.getItem('token')
       if (token) {
          // 서버가 Bearer 토큰을 인식할 때만 사용하세요.
-         config.headers.Authorization = `Bearer ${token}`
+         config.headers.Authorization = `${token}`
+         // config.headers.Authorization = `Bearer ${token}`
       }
       return config
    },
