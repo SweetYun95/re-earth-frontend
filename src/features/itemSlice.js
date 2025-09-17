@@ -4,6 +4,7 @@ import { createItem, updateItem, deleteItem, getItems, getItemById } from '../ap
 //상품등록
 export const createItemThunk = createAsyncThunk('items/createItem', async (itemData, { rejectWithValue }) => {
    try {
+      console.log('itemData:', itemData)
       const response = await createItem(itemData)
       return response.data.item
    } catch (error) {

@@ -1,9 +1,10 @@
 import reEarth from './http'
 
-//상품등록
+
 // 상품 등록
 export const createItem = async (itemData) => {
    try {
+      
       const response = await reEarth.post('/item', itemData, {
          headers: { 'Content-Type': 'multipart/form-data' },
       })
