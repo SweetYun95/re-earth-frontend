@@ -1,6 +1,8 @@
 import React from 'react';
 import MapComponent from '../../../../components/map/MapComponent';
 import '../mainpage.scss';
+import ArrowIcon from '../../../../components/common/ArrowIcon';
+import CarbonReductionCard from '../../../../components/common/CarbonReductionCard';
 
 const COMMUNITY = [
   '제인도가 방금 5kg의 옷을 기부했습니다.',
@@ -11,7 +13,7 @@ const COMMUNITY = [
 
 export default function StatsAndMapSection() {
   return (
-    <section id="stats" className="section">
+    <section id="stats" className="main--stats section">
       <div className="container">
         <div className="row">
           {/* Left: stats(3) + community - 2열 2행 그리드 */}
@@ -26,7 +28,7 @@ export default function StatsAndMapSection() {
                       일회용 컵 대신 텀블러를 사용하세요!<br/>
                       달성시 <span className="text-warning">nn P</span> 적립
                     </p>
-                    <button className="btn btn-warning btn-sm px-3 mission-btn">
+                    <button className="btn-point">
                       미션 시작하기 →
                     </button>
                   </div>
@@ -49,39 +51,28 @@ export default function StatsAndMapSection() {
               <div className="col-md-6 mb-3">
                 <div className="custom-card">
                   <div className="text-center custom-custom-card-content">
-                    <h5 className="custom-card-title font-weight-bold mb-2 text-green">이달 탄소 절감량</h5>
-                    <p className="custom-custom-card-text mb-3">나무 n 그루 심은 것과 같은 효과</p>
-                    <div className="d-flex justify-content-center">
-                      {[1,2,3,4,5].map(i => (
-                        <div key={i} className="mr-1 tree-icon" style={{
-                          backgroundColor: i <= 3 ? '#72C63A' : 'transparent'
-                        }} />
-                      ))}
-                    </div>
+                    <CarbonReductionCard 
+                      className="carbon-reduction-card--centered"
+                      treeCount={3}
+                      totalTrees={10}
+                    />
                   </div>
                 </div>
               </div>
 
               {/* 커뮤니티 */}
               <div className="col-md-6 mb-3">
-                <div className="custom-card custom-card-yellow-bg">
+                <div className="community-custom-card custom-card-yellow-bg">
                     <div className="community-title d-flex align-items-center justify-content-between">
-                      <h5 className="custom-card-title font-weight-bold mb-0 text-dark">Community</h5>
-                      <a 
-                        href="#" 
-                        className="btn btn-sm text-dark p-0 community-arrow-btn"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          // TODO: 커뮤니티 페이지로 이동
-                          console.log('커뮤니티 페이지로 이동');
-                        }}
-                      >
-                        →
+                      <h5 className="custom-card-title font-weight-bold m-0">Community</h5>
+                      {/* 커뮤니티페이지이동 */}
+                      <a href="#">
+                        <ArrowIcon variant="section" size={32} />
                       </a>
                     </div>
                     <div className="community-feed">
                       {COMMUNITY.map((item, index) => (
-                        <div key={index} className="mb-2 small text-muted text-ellipsis-1">
+                        <div key={index} className="small text-muted text-ellipsis-1">
                           {item}
                         </div>
                       ))}
@@ -93,21 +84,13 @@ export default function StatsAndMapSection() {
 
           {/* Right: Map - 꽉차게 */}
           <div className="col-md-6 mb-3">
-            <div className="custom-card h-100 border ">
+            <div className="custom-card h-100 border map-custom-card-green-bg">
               <div className="custom-card-body map-custom-card-content">
                 <div className="d-flex align-items-center justify-content-between mb-3">
-                  <h5 className="custom-card-title font-weight-bold mb-0 mr-2 text-green">내 주변 수거함</h5>
-                  <a 
-                    href="#" 
-                    className="text-green section-arrow"
-                    style={{textDecoration: 'none'}}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      console.log('수거함 더보기');
-                    }}
-                  >
-                    →
-                  </a>
+                  <h5 className="custom-card-title font-weight-bold mb-0 mr-2">내 주변 수거함</h5>
+                    <a href="#">
+                      <ArrowIcon variant="section" size={32} />
+                    </a>
                 </div>
                 <p className="text-muted mb-3">간편하게 내 주변 수거함을 찾아보세요</p>
                 <MapComponent 

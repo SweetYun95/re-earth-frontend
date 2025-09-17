@@ -1,5 +1,6 @@
 import React from 'react';
 import './mainpage.scss';
+import ArrowIcon from '../../../components/common/ArrowIcon';
 
 import HeroSection from './sections/HeroSection';
 import StatsAndMapSection from './sections/StatsAndMapSection';
@@ -14,19 +15,20 @@ export default function MainPage() {
     <main>
       <HeroSection />
       <StatsAndMapSection />
-      <section id="pointshop" className="section pt-120 pb-120">
+      <section id="pointshop" className="main--pointshop section">
         <div className="container">
          <div className="row">
           {/* 제목 영역 - col-3 */}
-          <div className="col-md-3 mb-4 mb-md-0">
-            <div className="h-100 d-flex flex-column justify-content-center">
-              <h2 className="font-weight-bold mb-3 section-title-green">
+          <div className="col-md-3">
+            <div className="h-100 d-flex pb-5 p-2 flex-column justify-content-center">
+              <h2 className="mb-2 font-weight-bold main--section__title main--section__title--pointshop">
                 PointShop
               </h2>
               <p className="mb-4">Re:earth의 다양한 상품을 만나보세요</p>
               <div className="d-flex align-items-center">
-                <span className="mr-2">더보기</span>
-                <span className="section-arrow">→</span>
+                <a href="#">
+                  <ArrowIcon variant="section" size={32} />
+                </a>
               </div>
             </div>
           </div>
