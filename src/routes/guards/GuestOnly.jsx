@@ -6,10 +6,9 @@ export default function GuestOnly() {
    const { isAuthenticated, loading, hydrated } = useSelector((s) => s.auth || {})
    const location = useLocation()
 
-   // 보험: 초기 세션 확인 전에는 가만히 대기 (조기 리다이렉트 방지)
    if (!hydrated || loading) return null
 
-   if (isAuthenticated) {
+   if (isAuthenticated && location.pathname !== '/user') {
       return <Navigate to="/user" replace state={{ from: location }} />
    }
    return <Outlet />
