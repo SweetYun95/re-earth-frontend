@@ -8,7 +8,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
 // import userReducer from '../features/userSlice'
-// import itemReducer from '../features/itemSlice'
+import itemReducer from '../features/itemSlice'
 // import orderReducer from '../features/orderSlice'
 // import pointReducer from '../features/pointSlice'
 // import marketReducer from '../features/marketSlice'
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
    //    user: userReducer,
-   //    item: itemReducer,
+   item: itemReducer,
    //    order: orderReducer,
    //    point: pointReducer,
    //    market: marketReducer,
