@@ -4,33 +4,25 @@
   min-height: 100vh;
   background-color: var(--bg-gray);
 
-  &__header {
-    background-color: #f8f9fa;
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
-  }
-
-  &__back-btn {
-    background: none;
-    border: none;
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--maintext);
-    font-size: 0.875rem;
-    cursor: pointer;
     padding: 8px 15px;
   }
 
   &__content {
     min-height: calc(100vh - 60px);
-    background-color: #ffffff;
-    padding: 0;
   }
 
   &__left {
-    background-color: #f8f9fa;
+    background-color: #fff;
+    border-radius: var(--border-radius);
     padding: 40px 20px;
-    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
 
@@ -39,6 +31,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
   }
 
   &__avatar {
@@ -50,7 +43,6 @@
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    border: 3px solid #e9ecef;
 
     img {
       width: 100%;
@@ -59,60 +51,17 @@
     }
   }
 
-  &__photo-btn,
-  &__password-btn {
-    padding: 12px 20px;
-    font-size: 0.875rem;
-    border-radius: 25px;
-    max-width: 200px;
-  }
-
   &__right {
-    padding: 40px 30px;
     min-height: calc(100vh - 60px);
   }
 
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--maintext);
-  }
+
 
   &__form {
     max-width: 800px;
-  }
-
-  &__label {
-    display: block;
-    font-weight: 500;
-    color: var(--maintext);
-    margin-bottom: 8px;
-    font-size: 0.875rem;
-  }
-
-  &__input {
-    border: 2px solid #e9ecef !important;
-    border-radius: 25px !important;
-    background-color: #f8f9fa !important;
-    font-size: 0.875rem;
-    padding: 12px 20px !important;
-    
-    &:focus {
-      border-color: var(--maincolor) !important;
-      box-shadow: none !important;
-    }
-
-    &::placeholder {
-      color: var(--subtext);
-    }
-  }
-
-  &__submit-btn {
-    min-width: 200px;
-    padding: 15px 30px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
@@ -132,7 +81,7 @@
 
 .modal-content {
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   padding: 40px;
   max-width: 500px;
   width: 90%;
