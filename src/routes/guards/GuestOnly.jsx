@@ -6,7 +6,7 @@ export default function GuestOnly() {
    const { isAuthenticated, loading, hydrated } = useSelector((s) => s.auth || {})
    const location = useLocation()
 
-   // 보험: 초기 세션 확인 전에는 가만히 대기 (조기 리다이렉트 방지)
+   // 보험: 초기 세션 확인 전에는 가만히 대기
    if (!hydrated || loading) return null
 
    if (isAuthenticated) {
