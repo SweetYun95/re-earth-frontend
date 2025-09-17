@@ -57,7 +57,7 @@ const authSlice = createSlice({
    initialState: {
       user: null,
       isAuthenticated: false,
-      // 소셜 플래그는 현재 세션만으로 구분 불가 → 필요 시 나중에 채움
+      hydrated: false, // ★ 초기 세션 상태를 확인(하이드레이션)했는지
       googleAuthenticated: false,
       kakaoAuthenticated: false,
       localAuthenticated: false,
@@ -80,6 +80,7 @@ const authSlice = createSlice({
             state.localAuthenticated = !!action.payload.isAuthenticated
             state.googleAuthenticated = false
             state.kakaoAuthenticated = false
+            state.hydrated = true // ★ 하이드레이션 완료
          })
          .addCase(hydrateAuthThunk.rejected, (state, action) => {
             state.loading = false
@@ -89,6 +90,7 @@ const authSlice = createSlice({
             state.localAuthenticated = false
             state.googleAuthenticated = false
             state.kakaoAuthenticated = false
+            state.hydrated = true // ★ 실패해도 완료로 간주
          })
 
          // 회원가입
@@ -118,6 +120,7 @@ const authSlice = createSlice({
             state.isAuthenticated = true
             state.localAuthenticated = true
             state.user = action.payload
+            state.hydrated = true // ★ 이미 세션 확정
          })
          .addCase(loginUserThunk.rejected, (state, action) => {
             state.loading = false

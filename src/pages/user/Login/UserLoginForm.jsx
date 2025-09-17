@@ -2,8 +2,10 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
 import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
+
 import InputField from '../../../components/common/InputField'
 import googleIcon from '../../../assets/icons/google.svg'
 import kakaoIcon from '../../../assets/icons/kakao.svg'
@@ -15,13 +17,12 @@ export default function UserLoginForm() {
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
    useEffect(() => {
-      console.log('[UserLoginForm] auth state changed →', {
-         isAuthenticated,
-         user,
-         loading,
-         error,
-      })
-   }, [isAuthenticated, user, loading, error])
+      console.log('[UserLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
+      // ✅ 상태가 실제로 true가 된 시점에 /user로 이동 (가드와 타이밍 레이스 방지)
+      if (isAuthenticated) {
+         navigate('/user', { replace: true })
+      }
+   }, [isAuthenticated, user, loading, error, navigate])
 
    const onChange = (e) => {
       const { name, value } = e.target
@@ -41,10 +42,8 @@ export default function UserLoginForm() {
       try {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[UserLoginForm] loginUserThunk success →', loggedUser)
-         // 선택: 세션 쿠키 기준으로 다시 동기화
          dispatch(hydrateAuthThunk())
          alert('로그인 성공! 환영합니다 :)')
-         navigate('/user') // ✅ 로그인 성공 시 /user 로 이동
       } catch (err) {
          console.error('[UserLoginForm] loginUserThunk error →', err)
          alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')

@@ -1,22 +1,20 @@
 // re-earth-frontend/src/pages/user/Login/AdminLoginForm.jsx
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+// import { useNavigate } from 'react-router-dom'
+
 import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
+
 import InputField from '../../../components/common/InputField'
 
 export default function AdminLoginForm() {
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  //  const navigate = useNavigate()
    const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
-
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
    useEffect(() => {
-      console.log('[AdminLoginForm] auth state changed →', {
-         isAuthenticated,
-         user,
-         loading,
-         error,
-      })
+      console.log('[AdminLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
    }, [isAuthenticated, user, loading, error])
 
    const onChange = (e) => {
@@ -28,6 +26,7 @@ export default function AdminLoginForm() {
       e.preventDefault()
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
+
       if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
@@ -37,8 +36,9 @@ export default function AdminLoginForm() {
       try {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[AdminLoginForm] loginUserThunk success →', loggedUser)
-         // 선택: 세션 쿠키가 제대로 붙는지 한번 더 동기화
          dispatch(hydrateAuthThunk())
+         // 라우팅 이동은 이후 추가예정
+         alert('로그인 성공! 환영합니다 :)')
       } catch (err) {
          console.error('[AdminLoginForm] loginUserThunk error →', err)
          alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')
