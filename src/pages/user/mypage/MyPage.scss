@@ -1,0 +1,301 @@
+// MyPage.scss
+@import '../../../assets/styles/commons.scss';
+
+.mypage {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  
+  &__container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  // 사이드바
+  &__sidebar {
+    width: 300px;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  &__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--point-y);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 0;
+    }
+  }
+
+  &__user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__username {
+    font-weight: 600;
+    color: var(--maintext);
+  }
+
+  &__edit-profile {
+    background: none;
+    border: none;
+    color: var(--point-b);
+    font-size: 0.875rem;
+    cursor: pointer;
+    text-decoration: underline;
+    
+    &:hover {
+      color: #1a5dd9;
+    }
+  }
+
+  &__sprout {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--maintext);
+    }
+    
+    p {
+      font-size: 0.875rem;
+      color: var(--subtext);
+      margin-top: 5px;
+    }
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--subcolor-m);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    width: 60%;
+    height: 100%;
+    background-color: var(--subcolor-d);
+    border-radius: 4px;
+  }
+
+  &__practice-count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    
+    span {
+      font-size: 0.875rem;
+      color: var(--maintext);
+    }
+    
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: 0;
+    }
+  }
+
+  &__point-balance {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--maintext);
+    }
+  }
+
+  &__point-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--maintext);
+    margin-bottom: 15px;
+  }
+
+  &__collect-points {
+    width: 100%;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: 0;
+    }
+  }
+
+  &__carbon-reduction {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--maintext);
+    }
+    
+    p {
+      font-size: 0.875rem;
+      color: var(--subtext);
+      margin-bottom: 15px;
+    }
+  }
+
+  &__tree-icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__tree {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    opacity: 0.3;
+    
+    &--filled {
+      opacity: 1;
+    }
+  }
+
+  &__bottom-links {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__link {
+    color: var(--subtext);
+    font-size: 0.875rem;
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--maintext);
+      text-decoration: underline;
+    }
+  }
+
+  // 메인 컨텐츠
+  &__main {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 30px;
+  }
+
+  &__tabs {
+    display: flex;
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 30px;
+  }
+
+  &__tab {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--subtext);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      color: var(--maintext);
+    }
+    
+    &--active {
+      color: var(--subcolor-d);
+      border-bottom-color: var(--subcolor-d);
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    // 탭 컨텐츠 영역
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .mypage {
+    &__container {
+      flex-direction: column;
+    }
+    
+    &__sidebar {
+      width: 100%;
+      order: 2;
+    }
+    
+    &__main {
+      order: 1;
+      padding: 20px;
+    }
+    
+    &__tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+    
+    &__tab {
+      white-space: nowrap;
+      min-width: max-content;
+    }
+    
+  }
+}
+
+@media (max-width: 480px) {
+  .mypage {
+    &__sidebar {
+      padding: 20px 15px;
+    }
+    
+    &__main {
+      padding: 15px;
+    }
+    
+    &__profile {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    &__user-info {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+  }
+}
+

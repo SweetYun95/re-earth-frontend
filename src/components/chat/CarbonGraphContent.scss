@@ -1,0 +1,202 @@
+// CarbonGraphContent.scss
+@import '../../assets/styles/commons.scss';
+
+.carbon-graph-content {
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--maintext);
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  &__stat-card {
+    background: linear-gradient(135deg, var(--subcolor-m) 0%, #ffffff 100%);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--maintext);
+      margin-bottom: 10px;
+    }
+  }
+
+  &__stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--subcolor-d);
+    margin-bottom: 5px;
+  }
+
+  &__stat-desc {
+    font-size: 0.875rem;
+    color: var(--subtext);
+  }
+
+  &__chart {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--maintext);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+  }
+
+  &__bars {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 250px;
+    gap: 15px;
+  }
+
+  &__bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+
+  &__bar {
+    width: 100%;
+    min-height: 20px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__bar-value {
+    position: absolute;
+    top: -25px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--maintext);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  &__bar-label {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--maintext);
+    font-weight: 500;
+  }
+
+  &__achievements {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--maintext);
+      margin-bottom: 20px;
+    }
+  }
+
+  &__achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__achievement {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background-color: var(--subcolor-m);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: var(--maincolor);
+      transform: translateX(5px);
+    }
+  }
+
+  &__achievement-icon {
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+  }
+
+  &__achievement span:last-child {
+    font-weight: 500;
+    color: var(--maintext);
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .carbon-graph-content {
+    &__stats {
+      grid-template-columns: 1fr;
+    }
+    
+    &__bars {
+      height: 200px;
+      gap: 10px;
+    }
+    
+    &__bar-value {
+      font-size: 0.7rem;
+      top: -20px;
+    }
+    
+    &__achievement {
+      padding: 12px 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .carbon-graph-content {
+    &__chart,
+    &__achievements {
+      padding: 20px;
+    }
+    
+    &__bars {
+      height: 150px;
+      gap: 8px;
+    }
+    
+    &__bar-label {
+      font-size: 0.75rem;
+    }
+    
+    &__achievement-icon {
+      font-size: 1.25rem;
+      width: 25px;
+    }
+  }
+}
