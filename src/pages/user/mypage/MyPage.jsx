@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MyPage.scss';
-import CarbonReductionCard from '../../../components/common/CarbonReductionCard';
+import CarbonReductionCard from '../../../components/layout/CarbonReductionCard';
 
 // 탭 컨텐츠 컴포넌트들
 import PointInquiryContent from '../../../components/mypage/PointInquiryContent';
@@ -72,7 +72,12 @@ const MyPage = () => {
                   </div>
                   <div className="mypage__user-info">
                     <span className="mypage__username d-block">user name</span>
-                    <button className="mypage__edit-profile">프로필수정</button>
+                    <button 
+                      className="mypage__edit-profile"
+                      onClick={() => navigate('/user/my/edit')}
+                    >
+                      프로필수정
+                    </button>
                   </div>
                 </div>
               </div>
