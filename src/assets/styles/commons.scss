@@ -801,3 +801,236 @@ form.register {
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
    }
 }
+
+/* ========== 서브탭 공통 스타일 ========== */
+.sub-tabs {
+  .btn {
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 2px solid #e9ecef;
+    background: #ffffff;
+    color: var(--subtext);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: var(--maincolor);
+      color: var(--maintext);
+      background: rgba(209, 233, 93, 0.1);
+    }
+    
+    &.active {
+      background: var(--maincolor);
+      border-color: var(--maincolor);
+      color: var(--maintext);
+      font-weight: 600;
+    }
+    
+    span {
+      margin-right: 6px;
+    }
+  }
+}
+
+/* ========== 관리자 모달 공통 스타일 ========== */
+.admin-modal-content {
+  .section {
+    margin-bottom: 24px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h6 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--maintext);
+      margin-bottom: 12px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      
+      h6 {
+        margin: 0;
+      }
+      
+      .item-count {
+        background: var(--bg-gray);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: var(--subtext);
+      }
+    }
+  }
+  
+  .info-grid {
+    background: var(--subcolor-m);
+    border: 2px solid var(--maincolor);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: var(--maintext);
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: var(--maintext);
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: var(--subcolor-d);
+          font-weight: 600;
+        }
+        
+        &.editable {
+          background: #ffffff;
+          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          padding: 4px 8px;
+          min-width: 120px;
+        }
+      }
+    }
+  }
+  
+  .inspection-grid {
+    background: var(--subcolor-m);
+    border: 2px solid var(--maincolor);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    
+    .inspection-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: var(--maintext);
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: var(--maintext);
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: var(--subcolor-d);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+    
+    .btn-action {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &.btn-approve {
+        background: var(--maincolor);
+        color: var(--maintext);
+        
+        &:hover {
+          background: var(--subcolor-d);
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.btn-reject {
+        background: var(--point-r);
+        color: #ffffff;
+        
+        &:hover {
+          background: #e55a46;
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.btn-warn {
+        background: var(--point-y);
+        color: var(--maintext);
+        
+        &:hover {
+          background: #f0c14b;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+/* 관리자 테이블 액션 버튼 (우상단 배치) */
+.admin-table-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    
+    &.btn-edit {
+      background: var(--point-y);
+      color: var(--maintext);
+      border: none;
+      
+      &:hover {
+        background: #f0c14b;
+      }
+    }
+    
+    &.btn-delete {
+      background: var(--point-r);
+      color: #ffffff;
+      border: none;
+      
+      &:hover {
+        background: #e55a46;
+      }
+    }
+  }
+}

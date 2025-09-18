@@ -1,14 +1,12 @@
-@import '../../assets/styles/commons.scss';
-
 .admin-page {
   min-height: 100vh;
   background-color: var(--bg-gray);
 
   &__sidebar {
-    background-color: #ffffff;
-    min-height: 100vh;
-    padding: 20px 0;
-    border-right: 1px solid #e9ecef;
+    padding: 30px;
+  }
+
+  &__sidebar__contents {
     position: sticky;
     top: 0;
     overflow-y: auto;
@@ -18,28 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #e9ecef;
     margin-bottom: 20px;
   }
 
-  &__avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
-    background-color: var(--maincolor);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
 
   &__username {
     font-size: 0.875rem;
@@ -51,7 +30,6 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 0 15px;
   }
 
   &__nav-item {
@@ -62,7 +40,8 @@
     border: none;
     background: none;
     border-radius: var(--border-radius);
-    color: var(--subtext);
+    background-color: var(--subtext);
+    color: #fff;
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
@@ -71,12 +50,12 @@
     width: 100%;
 
     &:hover {
-      background-color: var(--subcolor-m);
+      background-color: #FFE7AA;
       color: var(--maintext);
     }
 
     &--active {
-      background-color: var(--maincolor);
+      background-color: var(--point-y);
       color: var(--maintext);
       font-weight: 600;
     }
@@ -113,7 +92,6 @@
       position: static;
       min-height: auto;
       border-right: none;
-      border-bottom: 1px solid #e9ecef;
     }
 
     &__nav {

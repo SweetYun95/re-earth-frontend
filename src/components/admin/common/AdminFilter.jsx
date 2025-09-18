@@ -34,7 +34,6 @@ const AdminFilter = ({ options, onFilterChange }) => {
   return (
     <div className="admin-filter">
       <div className="admin-filter__header">
-        <span className="admin-filter__title">필터</span>
         <div className="admin-filter__dropdown" ref={dropdownRef}>
           <button 
             className="admin-filter__toggle btn"

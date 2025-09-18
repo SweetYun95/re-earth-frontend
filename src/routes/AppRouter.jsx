@@ -28,6 +28,11 @@ import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
 import MyPage from '../pages/user/mypage/MyPage'
 //프로필 수정
 import ProfileEditPage from '../pages/user/mypage/Profile/ProfileEditPage'
+
+// 마켓 페이지
+import PointShopPage from '../pages/market/PointShopPage'
+import ProductDetailPage from '../pages/market/ProductDetailPage'
+
 //관리자 페이지
 import AdminPage from '../pages/Admin/AdminPage'
 
@@ -48,6 +53,10 @@ export default function AppRouter() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/finding" element={<FindingPage />} />
+            
+            {/* 포인트샵 - 공개 페이지 */}
+            <Route path="/pointshop" element={<PointShopPage />} />
+            <Route path="/pointshop/:id" element={<ProductDetailPage />} />
          {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
@@ -58,6 +67,9 @@ export default function AppRouter() {
             <Route path="/donate/info" element={<DonationInfoPage />} />
             <Route path="/donate" element={<DonationPage />} />
             <Route path="/inquiry/new" element={<InquiryForm />} />
+            
+            {/* 아나바다 - 유저 전용 페이지 (준비중) */}
+            {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
          </Route>
 
          {/* 관리자 전용 (임시 주석처리) */}

@@ -61,10 +61,11 @@ const AdminPage = () => {
 
   return (
     <div className="admin-page">
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container">
+        <div className="row d-flex">
           {/* 사이드바 */}
-          <aside className="col-lg-2 col-md-3 admin-page__sidebar">
+          <aside className="col-lg-3 col-md-4 admin-page__sidebar">
+            <div className='admin-page__sidebar__contents'>
             {/* 프로필 섹션 */}
             <div className="admin-page__profile">
               <div className="admin-page__avatar">
@@ -86,10 +87,11 @@ const AdminPage = () => {
                 </button>
               ))}
             </nav>
+            </div>
           </aside>
 
           {/* 메인 컨텐츠 */}
-          <main className="col-lg-10 col-md-9 admin-page__main">
+          <main className="col-lg-9 col-md-8 admin-page__main">
             <div className="admin-page__content">
               {renderTabContent()}
             </div>

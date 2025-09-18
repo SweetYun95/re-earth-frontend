@@ -1,21 +1,13 @@
-@import '../../../assets/styles/commons.scss';
-
 .admin-filter {
-  background-color: var(--point-r);
+  background-color: var(--subtext);
   border-radius: var(--border-radius);
-  padding: 15px;
+  padding: 8px;
   margin-bottom: 20px;
 
   &__header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-
-  &__title {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 1rem;
+    justify-content: end;
   }
 
   &__dropdown {
