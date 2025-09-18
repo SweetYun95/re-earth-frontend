@@ -1,0 +1,119 @@
+.admin-filter {
+  background-color: var(--subtext);
+  border-radius: var(--border-radius);
+  padding: 8px;
+  margin-bottom: 20px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &__dropdown {
+    position: relative;
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+    min-width: 300px;
+    margin-top: 8px;
+  }
+
+  &__menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+    color: var(--maintext);
+  }
+
+  &__clear {
+    background: none;
+    border: none;
+    color: var(--point-r);
+    cursor: pointer;
+    font-size: 0.875rem;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__options {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--maintext);
+  }
+
+  &__select,
+  &__input {
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--maincolor);
+    }
+  }
+
+  &__date-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    span {
+      color: var(--subtext);
+    }
+  }
+
+  &__date {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--maincolor);
+    }
+  }
+}

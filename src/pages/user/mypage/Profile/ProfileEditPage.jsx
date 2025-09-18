@@ -191,7 +191,7 @@ const ProfileEditPage = () => {
             />
             <div className="modal-buttons">
               <button 
-                className="btn default main4"
+                className="btn default main1"
                 onClick={() => setShowPasswordModal(false)}
               >
                 입력
@@ -212,11 +212,10 @@ const ProfileEditPage = () => {
                 value2={passwordData.confirmPassword}
                 inputChange={handlePasswordChange}
               />
-              <small className="error-text">비밀번호가 일치하지 않습니다.</small>
             </div>
             <div className="modal-buttons">
               <button 
-                className="btn default main4"
+                className="btn default main1"
                 onClick={handlePasswordSubmit}
               >
                 입력

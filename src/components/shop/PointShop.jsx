@@ -39,8 +39,8 @@ export default function PointShop() {
             <div className="row">
               {ITEMS.map((item, idx) => (
                 <div className="col-md-3 col-sm-6 mb-4" key={idx}>
-                  <div className="product-card">
-                    <div className="card-body d-flex flex-column">
+                  <div className="product__card">
+                    <div className="product__card__body d-flex flex-column">
                       <div>
                         <img 
                           src={item.img} 
@@ -49,9 +49,9 @@ export default function PointShop() {
                         />
                       </div>
                       <div className="d-flex flex-column">
-                        <h6 className="card-title font-weight-bold text-ellipsis-1 mb-0">{item.name}</h6>
+                        <h6 className="product__card__title font-weight-bold text-ellipsis-1 mb-0">{item.name}</h6>
                         <div className="mt-auto">
-                          <span className="product-point">
+                          <span className="product__card__point">
                             point: {item.point}p
                           </span>
                         </div>
