@@ -16,14 +16,13 @@ export default function UserLoginForm() {
    const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
+   // 중복 리다이렉트 방지
    const didRedirect = useRef(false)
+
    useEffect(() => {
       console.log('[UserLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
-      if (isAuthenticated && !didRedirect.current) {
-         didRedirect.current = true
-         navigate('/user', { replace: true })
-      }
-   }, [isAuthenticated, navigate, user, loading, error])
+      // 리다이렉트는 제출 시점에서만 처리 (레이스 컨디션 방지)
+   }, [isAuthenticated, user, loading, error])
 
    const onChange = (e) => {
       const { name, value } = e.target
@@ -32,6 +31,8 @@ export default function UserLoginForm() {
 
    const handleSubmit = async (e) => {
       e.preventDefault()
+      if (loading) return
+
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
       if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
@@ -43,11 +44,25 @@ export default function UserLoginForm() {
       try {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[UserLoginForm] loginUserThunk success →', loggedUser)
-         dispatch(hydrateAuthThunk())
-         alert('로그인 성공! 환영합니다 :)')
+
+         // 로그인 성공 후, 유저 계정일 때만 즉시 /user 이동
+         if (loggedUser?.role === 'USER' && !didRedirect.current) {
+            didRedirect.current = true
+            // 스토어 동기화(토큰/세션 기준 단일 진실원천을 따라감)
+            await dispatch(hydrateAuthThunk())
+            alert('로그인 성공! 환영합니다 :)')
+            navigate('/user', { replace: true })
+         } else {
+            // ADMIN 등 다른 권한으로 이 폼을 썼을 경우는 이동/알림 없이 대기
+            // (관리자 폼이 /admin으로 이동을 담당)
+            await dispatch(hydrateAuthThunk())
+         }
       } catch (err) {
          console.error('[UserLoginForm] loginUserThunk error →', err)
          alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')
+      } finally {
+         // 보안상 비밀번호 지우기
+         setForm((prev) => ({ ...prev, password: '' }))
       }
    }
 
@@ -73,7 +88,7 @@ export default function UserLoginForm() {
                아이디 / 비밀번호 찾기
             </a>
 
-            <button type="submit" className="btn default main1 mt-40" disabled={loading}>
+            <button type="submit" className="btn default main1 mt-40" disabled={loading || didRedirect.current}>
                {loading ? '로그인 중…' : '로그인'}
             </button>
          </form>
