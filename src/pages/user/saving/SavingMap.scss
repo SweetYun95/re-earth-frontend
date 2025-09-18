@@ -1,3 +1,8 @@
+section.savingmap #area {
+   @media (min-width: 769px) and (max-width: 1199px) {
+      padding: 20px;
+   }
+}
 .finding {
    width: 100%;
 }
@@ -6,30 +11,30 @@
    flex-direction: row;
    gap: 20px;
    width: 100%;
-   & > :first-child {
-      width: 55%;
-   }
-   @media (max-width: 768px) {
+
+   @media (max-width: 768px) and (max-width: 1000px) {
       flex-direction: column-reverse;
       max-height: fit-content;
-      & > :first-child {
-         width: 100%;
-      }
    }
 }
-
+p.none {
+   color: var(--point-r);
+   font-weight: 700;
+}
+p.active {
+   color: var(--point-b);
+   font-weight: 700;
+}
 .searchtap {
-   max-height: 300px;
+   width: 55%;
+   max-height: 400px;
    overflow-y: auto;
    overflow-x: hidden;
    & input {
       background-color: #ffffff;
    }
-   & span {
-      display: block;
-      color: var(--subtext);
-      font-size: 0.75rem;
-      text-align: right;
+   @media (min-width: 769px) and (max-width: 1000px) {
+      width: 100%;
    }
    @media (max-width: 768px) {
       & input {
@@ -40,6 +45,14 @@
    }
 }
 
+.searchtap .result {
+   display: flex;
+   gap: 5px;
+   & p {
+      margin: 0;
+   }
+}
+
 .searchtap--spot {
    display: flex;
    gap: 10px;
@@ -47,6 +60,9 @@
    background-color: #ffffff;
    border-radius: 10px;
    padding: 10px 15px;
+   & .spot--address {
+      width: 100%;
+   }
    & .btn {
       width: 100%;
       max-width: 100px;
@@ -56,26 +72,39 @@
    @media (max-width: 768px) {
       justify-content: space-between;
       & .spot--address {
-         width: 65%;
+         width: 70%;
       }
    }
 }
-
 .spot--address p {
    margin: 0;
    font-weight: 700;
 }
+.address--text {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   & .dist {
+      display: flex;
+      font-size: 0.75rem;
+   }
+}
+
 .spot--address .description {
    display: flex;
-   gap: 5px;
+   gap: 15px;
    font-size: 0.75rem;
    color: var(--subtext);
-   & p.spot-data {
-      color: var(--point-b);
-      font-weight: 700;
+
+   & > * {
+      display: flex;
+      gap: 5px;
    }
-   & p.spot-data.none {
-      color: var(--point-r);
+
+   @media (min-width: 769px) and (max-width: 1199px) {
+      flex-direction: column;
+      gap: 5px;
    }
 }
 
@@ -97,5 +126,17 @@
    & p {
       color: var(--subtext);
       text-align: center;
+   }
+}
+
+.no-result {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   padding: 20px;
+   & p {
+      color: var(--subtext);
+      font-weight: 700;
    }
 }

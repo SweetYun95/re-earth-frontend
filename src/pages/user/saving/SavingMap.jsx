@@ -11,33 +11,33 @@ function SavingMap() {
    // category: nephron / transit
    // 데이터 확인용 임시 코드, 배포 전 삭제
    const [data, setData] = useState(null)
-   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
    const [position, setPosition] = useState({
       lat: 37.5665,
       lng: 126.978,
    })
    useEffect(() => {
-      const handleResize = () => setIsMobile(window.innerWidth < 768)
+      const handleResize = () => setIsMobile(window.innerWidth <= 768)
       window.addEventListener('resize', handleResize)
       return () => window.removeEventListener('resize', handleResize)
    }, [])
 
    return (
       <>
-         <section id="main1">
+         <section id="main1" className="savingmap">
             <div className="container" id="area">
                {/* 영역 */}
                <div className="finding">
-                  <h2>{category === 'nephron' ? '내 주변 네프론' : '대중교통 / 따릉이'}</h2>
+                  <h2>내 주변 {category === 'nephron' ? '네프론' : '따릉이 대여소'}</h2>
                   <div className="finding--content mt-40">
-                     <SearchTap category={category} isMobile={isMobile} data={data} setData={setData} />
+                     <SearchTap category={category} isMobile={isMobile} data={data} setData={setData} position={position} />
                      <MapComponent category={category} setPosition={setPosition} position={position} data={data} />
                   </div>
                </div>
 
                {isMobile ? (
                   <div className="mobileOnly mt-40">
-                     {category === 'nephron' && <p>내가 찾는 네프론이 지도에 보이지 않나요?</p>}
+                     {category === 'nephron' ? <p>내가 찾는 네프론이 지도에 보이지 않나요?</p> : <p>내 주변 대여소가 지도에 보이지 않나요?</p>}
                      <QrScanner label={'QR코드 스캔하기'} />
                   </div>
                ) : (

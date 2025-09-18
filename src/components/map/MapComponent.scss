@@ -57,3 +57,14 @@
       opacity: 0;
    }
 }
+
+.spotmarker {
+   width: 25px;
+   height: 25px;
+   background-color: var(--subcolor-d);
+   color: var(--subcolor-m);
+   line-height: 1.5;
+   border: 1px solid #ffffff;
+   border-radius: 100%;
+   text-align: center;
+}

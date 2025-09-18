@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import QrScanner from '../../../components/common/QrScanner'
 import { getBicycles } from '../../../api/savingApi'
 
-function SearchTap({ category, isMobile, data, setData }) {
-   const [position] = useState({ lat: 37.5556488, lng: 126.91062927 })
+function SearchTap({ category, isMobile, data, setData, position }) {
    const [allStations, setAllStations] = useState([])
 
    function getDistance(lat1, lng1, lat2, lng2) {
@@ -43,7 +42,7 @@ function SearchTap({ category, isMobile, data, setData }) {
          const nearby = allStations
             .filter((station) => {
                const dist = getDistance(myLat, myLng, Number(station.stationLatitude), Number(station.stationLongitude))
-               return dist <= 1500
+               return dist <= 1000
             })
             .sort((a, b) => {
                const distA = getDistance(myLat, myLng, Number(a.stationLatitude), Number(a.stationLongitude))
@@ -70,25 +69,40 @@ function SearchTap({ category, isMobile, data, setData }) {
    if (data) {
       console.log('🎈data:', data)
    }
-   return (
-      data && (
-         <div className="searchtap">
-            <input type="text" placeholder="장소, 주소, 버스 검색" />
-            <span className="mt-20 text-right">검색 결과 {data.length > 0 ? data.length : '없음'}</span>
-            {data.map((spot) => (
-               <div className="searchtap--spot mt-10">
-                  <TestBox />
+   return data.length > 0 ? (
+      <div className="searchtap">
+         <div className="text-right result">
+            내 주변 반경 1km 이내의 대여소
+            <p className="active">{data.length}</p>&nbsp;곳
+         </div>
+         {data.map((spot, index) => {
+            const distMeter = getDistance(position.lat, position.lng, Number(spot.stationLatitude), Number(spot.stationLongitude)).toFixed(0)
+
+            return (
+               <div className="searchtap--spot mt-10" key={index}>
+                  <div className="spotmarker">{index + 1}</div>
                   <div className="spot--address">
-                     <p>{spot.stationName.replace(/^\d+\.\s*/, '')}</p>
+                     <div className="address--text">
+                        <p>{spot.stationName.replace(/^\d+\.\s*/, '')}</p>
+                        <div className="spot-data dist">
+                           {isMobile && <span>내 위치에서&nbsp;</span>}
+                           {distMeter} m
+                        </div>
+                     </div>
                      <div className="description">
-                        대여 가능 {spot.parkingBikeTotCnt > 0 ? <p className="spot-data">{spot.parkingBikeTotCnt}대</p> : <p className="spot-data none">없음</p>} 주차 가능 거치대 {spot.shared > 100 ? <p className="spot-data none">없음</p> : <p className="spot-data">있음</p>}
+                        <div className="description--parking">대여 가능 {spot.parkingBikeTotCnt > 0 ? <p className="active">{spot.parkingBikeTotCnt}대</p> : <p className="none">없음</p>}</div>
+                        <div className="description--shared">주차 가능 거치대 {spot.shared > 100 ? <p className="none ">없음</p> : <p className="active">있음</p>}</div>
                      </div>
                   </div>
                   {isMobile && category === 'transit' && <QrScanner label={'인증하기'} />}
                </div>
-            ))}
-         </div>
-      )
+            )
+         })}
+      </div>
+   ) : (
+      <div className="no-result">
+         <p>반경 1km 이내에 대여소가 없습니다.</p>
+      </div>
    )
 }
 
