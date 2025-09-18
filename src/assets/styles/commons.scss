@@ -184,7 +184,7 @@ h3 {
    --point-r: #fb6e52;
    --point-y: #ffce55;
 
-   --bg-gray: #F7F7F7;
+   --bg-gray: #f7f7f7;
 
    --border-radius: 20px;
    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -389,11 +389,11 @@ select {
    padding: 6px 12px;
    font-size: 0.875rem;
    color: var(--maintext);
-   
+
    &::placeholder {
       color: var(--subtext);
    }
-   
+
    &:focus {
       outline: none;
       border-color: var(--maincolor);
@@ -415,22 +415,22 @@ select {
    background-position: right 8px center;
    background-size: 16px;
    padding-right: 32px;
-   
+
    &:focus {
       outline: none;
       border-color: var(--maincolor);
    }
-   
+
    option {
       background-color: #ffffff;
       color: var(--maintext);
       padding: 8px 12px;
       font-size: 0.875rem;
-      
+
       &:hover {
          background-color: var(--subcolor-m);
       }
-      
+
       &:checked {
          background-color: var(--maincolor);
          color: #ffffff;
@@ -512,14 +512,14 @@ form.register {
    font-weight: 500;
    transition: all 0.3s ease;
    cursor: pointer;
-   
+
    &:hover {
       background-color: var(--point-y);
       opacity: 0.9;
       transform: translateY(-1px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
    }
-   
+
    &:active {
       transform: translateY(0);
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);

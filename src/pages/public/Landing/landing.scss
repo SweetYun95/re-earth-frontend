@@ -1,3 +1,4 @@
+// re-erearth-frontend/src/pages/public/Landing/landing.scss
 @import '../../../assets/styles/commons.scss';
 /* ========== Reset ========== */
 * {
@@ -49,7 +50,6 @@ body {
    --radius-lg: 18px;
    --gap-lg: 28px;
 }
-
 
 /* ========== Base ========== */
 .wrap {
@@ -552,6 +552,117 @@ body {
 .swiper-fade .swiper-slide-active {
    pointer-events: auto;
 }
+/* ========== CarbonPointSection 섹션 ========== */
+.panel.randing--carbon-point {
+   background: var(--subcolor-d);
+   padding-top: clamp(56px, 8vw, 120px);
+   padding-bottom: clamp(48px, 6vw, 96px);
+   scroll-snap-align: start;
+}
+
+/* mt-60 유틸(공통엔 없음) */
+.mt-60 {
+   margin-top: 60px;
+}
+
+/* 헤드라인 */
+.headline {
+   margin: 0 0 12px;
+   font-family: var(--headings);
+   font-weight: 800;
+   font-size: clamp(28px, 6vw, 48px);
+   color: var(--maintext);
+}
+
+/* 서브카피 */
+.title__sub {
+   font-size: clamp(14px, 3vw, 18px);
+   font-weight: 600;
+   color: var(--point-b);
+   margin: 0;
+}
+
+/* 포인트 타이틀 라인 */
+.point-title {
+   margin: 0;
+   font-family: var(--headings);
+   color: var(--maintext);
+   font-weight: 800;
+   font-size: clamp(24px, 5.6vw, 56px);
+   letter-spacing: -0.02em;
+}
+
+/* 값 박스: 공통 컴포넌트 */
+.value-box {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 8px 16px;
+   border-radius: 8px;
+   background: #fff;
+   color: var(--maintext);
+   font-weight: 900;
+   font-size: clamp(18px, 3.6vw, 28px);
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+   small {
+      margin-left: 6px;
+      font-size: 0.7em;
+      font-weight: 700;
+   }
+}
+
+/* CTA 룩 */
+.cta-box .lead-ask {
+   color: rgba(255, 255, 255, 0.92);
+}
+
+.carbon-point__cta .btn--register {
+   border-radius: 999px;
+   padding: 15px 95px; /* ← 15 / 95 */
+   border: 2px solid #fff; /* ← 외곽선 불투명 고정 */
+   background: rgba(255, 255, 255, 0.5); /* ← 기본 50% */
+   color: var(--point-b); /* ← 글자색 고정 */
+   font-weight: 800;
+   letter-spacing: 0.2px;
+   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+
+   &:hover {
+      background: rgba(255, 255, 255, 1); /* ← hover 100% */
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      color: var(--point-b); /* ← 글자색 변화 없음 보강 */
+      border-color: #fff; /* ← 보더도 고정 */
+   }
+   &:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+   }
+}
+
+.login-text {
+   color: rgba(0, 0, 0, 0.85);
+}
+.login-link {
+   color: #0b0b0b;
+   font-weight: 700;
+   text-decoration: underline;
+   text-underline-offset: 3px;
+   &:hover {
+      opacity: 0.85;
+   }
+}
+
+/* 이미지: 컬럼 밖으로 안 튀게 상한 설정 */
+.image-box img {
+   width: 100%;
+   max-width: 520px; /* 피그마 크기 상한 */
+   height: auto;
+   filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12));
+}
+
+/* ========== CarbonPointSection 섹션 끝 ========== */
 
 /* ====== md 기준 반응형 ====== */
 @media (min-width: 991.98px) and (max-width: 1200px) {
@@ -762,3 +873,15 @@ body {
       --wrap-max: 1200px;
    }
 }
+
+/* ========== CarbonPointSection 모바일 ========== */
+/* 모바일에서 중앙정렬 유지 */
+@media (max-width: 991.98px) {
+   .headline,
+   .point-title,
+   .cta-box {
+      text-align: center;
+   }
+}
+
+/* ========== CarbonPointSection 모바일 끝 ========== */
