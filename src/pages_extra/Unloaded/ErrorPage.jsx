@@ -1,7 +1,10 @@
 import './errorPage.scss'
 import errorIcon from '../../assets/icons/error.png'
+import { useSelector } from 'react-redux'
 function ErrorPage() {
    const error = 404
+   const { user } = useSelector((s) => s.auth || {})
+   console.log(user)
    return (
       <section id="main1">
          <div className="container">
@@ -29,7 +32,7 @@ function ErrorPage() {
                      </>
                   )}
 
-                  <a href="" className="btn default main1 mt-40">
+                  <a href="/" className="btn default main1 mt-40">
                      메인으로 돌아가기
                   </a>
                </div>

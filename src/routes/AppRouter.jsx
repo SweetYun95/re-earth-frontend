@@ -20,6 +20,7 @@ import MainPage from '../pages/user/main/MainPage'
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
+import SavingMap from '../pages/user/saving/SavingMap'
 
 // 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
@@ -47,30 +48,31 @@ export default function AppRouter() {
    return (
       <Routes>
          {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
-         <Route element={<GuestOnly />}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/finding" element={<FindingPage />} />
-            
-            {/* 포인트샵 - 공개 페이지 */}
-            <Route path="/pointshop" element={<PointShopPage />} />
-            <Route path="/pointshop/:id" element={<ProductDetailPage />} />
+         {/* <Route element={<GuestOnly />}> */}
+         <Route path="/" element={<LandingPage />} />
+         <Route path="/login" element={<LoginPage />} />
+         <Route path="/register" element={<RegisterPage />} />
+         <Route path="/faq" element={<FAQPage />} />
+         <Route path="/finding" element={<FindingPage />} />
+         
+         {/* 포인트샵 - 공개 페이지 */}
+         <Route path="/pointshop" element={<PointShopPage />} />
+         <Route path="/pointshop/:id" element={<ProductDetailPage />} />
          {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
          {/* <Route element={<UserOnly />}> */}
-            <Route path="/user" element={<MainPage />} />
-            <Route path="/user/my" element={<MyPage />} />
-            <Route path="/user/my/edit" element={<ProfileEditPage />} />
-            <Route path="/donate/info" element={<DonationInfoPage />} />
-            <Route path="/donate" element={<DonationPage />} />
-            <Route path="/inquiry/new" element={<InquiryForm />} />
-            
-            {/* 아나바다 - 유저 전용 페이지 (준비중) */}
-            {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
-         </Route>
+         <Route path="/user" element={<MainPage />} />
+         <Route path="/user/my" element={<MyPage />} />
+         <Route path="/user/my/edit" element={<ProfileEditPage />} />
+         <Route path="/donate/info" element={<DonationInfoPage />} />
+         <Route path="/donate" element={<DonationPage />} />
+         <Route path="/inquiry/new" element={<InquiryForm />} />
+         <Route path="/saving/map" element={<SavingMap />} />
+         
+         {/* 아나바다 - 유저 전용 페이지 (준비중) */}
+         {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
+         {/* </Route> */}
 
          {/* 관리자 전용 (임시 주석처리) */}
          {/* <Route element={<AdminOnly />}> */}

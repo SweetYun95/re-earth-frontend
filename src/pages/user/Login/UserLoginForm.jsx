@@ -1,31 +1,29 @@
 // re-earth-frontend/src/pages/user/Login/UserLoginForm.jsx
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { loginUserThunk, checkUnifiedAuthThunk } from '../../../features/authSlice'
+import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
 import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
 
+import InputField from '../../../components/common/InputField'
 import googleIcon from '../../../assets/icons/google.svg'
 import kakaoIcon from '../../../assets/icons/kakao.svg'
 
 export default function UserLoginForm() {
    const dispatch = useDispatch()
-   const { loading, isAuthenticated, user, googleAuthenticated, kakaoAuthenticated, localAuthenticated, error } = useSelector((s) => s.auth)
+   const navigate = useNavigate()
+   const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
+   const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
-   const [form, setForm] = useState({ id: '', password: '' })
-
-   // 🔎 auth 상태가 변할 때마다 콘솔에 스냅샷 남기기
+   const didRedirect = useRef(false)
    useEffect(() => {
-      console.log('[UserLoginForm] auth state changed →', {
-         isAuthenticated,
-         localAuthenticated,
-         googleAuthenticated,
-         kakaoAuthenticated,
-         user,
-         loading,
-         error,
-      })
-   }, [isAuthenticated, localAuthenticated, googleAuthenticated, kakaoAuthenticated, user, loading, error])
+      console.log('[UserLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
+      if (isAuthenticated && !didRedirect.current) {
+         didRedirect.current = true
+         navigate('/user', { replace: true })
+      }
+   }, [isAuthenticated, navigate, user, loading, error])
 
    const onChange = (e) => {
       const { name, value } = e.target
@@ -34,22 +32,18 @@ export default function UserLoginForm() {
 
    const handleSubmit = async (e) => {
       e.preventDefault()
-      const userId = form.id.trim()
+      const idOrEmail = form.idOrEmail.trim()
       const password = form.password
-
-      if (!userId) return alert('아이디를 입력하세요.')
+      if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
-      const payload = { userId, password }
+      const payload = { idOrEmail, userId: idOrEmail, password }
       console.log('[UserLoginForm] submitting login payload:', payload)
 
       try {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[UserLoginForm] loginUserThunk success →', loggedUser)
-
-         // (선택) 통합 상태 새로 고침
-         dispatch(checkUnifiedAuthThunk())
-         console.log('[UserLoginForm] dispatched checkUnifiedAuthThunk()')
+         dispatch(hydrateAuthThunk())
          alert('로그인 성공! 환영합니다 :)')
       } catch (err) {
          console.error('[UserLoginForm] loginUserThunk error →', err)
@@ -71,17 +65,9 @@ export default function UserLoginForm() {
 
    return (
       <div className="user-login mt-40">
-         {/* NOTE: action 제거하고 onSubmit으로 제어 */}
          <form className="loginform" onSubmit={handleSubmit}>
-            <div className="form--input">
-               <p>아이디</p>
-               <input type="text" name="id" placeholder="아이디를 입력하세요." required autoComplete="username" value={form.id} onChange={onChange} disabled={loading} />
-            </div>
-
-            <div className="form--input mt-20">
-               <p>비밀번호</p>
-               <input type="password" name="password" placeholder="비밀번호를 입력하세요." required autoComplete="current-password" value={form.password} onChange={onChange} disabled={loading} />
-            </div>
+            <InputField label="아이디" type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." value={form.idOrEmail} inputChange={onChange} disabled={loading} required autoComplete="username" />
+            <InputField label="비밀번호" type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} inputChange={onChange} disabled={loading} marginTop="mt-20" autoComplete="current-password" />
 
             <a href="#" className="btn find" onClick={(e) => e.preventDefault()}>
                아이디 / 비밀번호 찾기
@@ -92,7 +78,6 @@ export default function UserLoginForm() {
             </button>
          </form>
 
-         {/* Social Login */}
          <div className="socialLogin mt-40">
             <button type="button" className="btn google" onClick={handleGoogle} disabled={loading}>
                <div className="btn--inside">
