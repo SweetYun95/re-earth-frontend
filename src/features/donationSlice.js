@@ -3,6 +3,35 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { requestOtp, verifyOtp, createDonation, getMyDonations, getDonationById, cancelDonation } from '../api/donationApi'
 
 // ────────────────────────────────────────────────
+// Initial State
+const initialState = {
+   // Step 1
+   consent: false,
+
+   // Step 2
+   phone: { p1: '', p2: '', p3: '' },
+   otp: { sent: false, verified: false, ttl: 0 },
+
+   // Step 3
+   items: [], // [{ itemName, amount }]
+   count: 0,
+   method: 'VISIT', // VISIT | COURIER
+   pickupDate: '',
+   returnAddress: '',
+
+   // Step 4
+   created: null,
+
+   // Common
+   list: [],
+   page: 1,
+   size: 10,
+   total: 0,
+   loading: false,
+   error: null,
+}
+
+// ────────────────────────────────────────────────
 // Thunks
 export const sendOtpThunk = createAsyncThunk('donation/sendOtp', async (phone, { rejectWithValue }) => {
    try {
@@ -59,34 +88,6 @@ export const cancelDonationThunk = createAsyncThunk('donation/cancel', async (id
 })
 
 // ────────────────────────────────────────────────
-// Slice
-const initialState = {
-   // Step 1
-   consent: false,
-
-   // Step 2
-   phone: { p1: '', p2: '', p3: '' },
-   otp: { sent: false, verified: false, ttl: 0 },
-
-   // Step 3
-   items: [], // [{ itemName, amount }]
-   count: 0,
-   method: 'VISIT', // VISIT(방문수거) | COURIER(택배수거)
-   pickupDate: '',
-   returnAddress: '',
-
-   // Step 4
-   created: null,
-
-   // Common
-   list: [],
-   page: 1,
-   size: 10,
-   total: 0,
-   loading: false,
-   error: null,
-}
-
 const donationSlice = createSlice({
    name: 'donation',
    initialState,
@@ -97,9 +98,21 @@ const donationSlice = createSlice({
       setPhone(state, action) {
          const { p1 = '', p2 = '', p3 = '' } = action.payload || {}
          state.phone = { p1, p2, p3 }
+         // 번호 전체가 한번에 바뀌면 OTP 상태 초기화(안전장치)
+         state.otp = { sent: false, verified: false, ttl: 0 }
+      },
+      // ✅ 부분 업데이트 전용: 입력 필드에서 사용
+      setPhonePart(state, action) {
+         const { part, value } = action.payload || {}
+         if (!['p1', 'p2', 'p3'].includes(part)) return
+         const sanitized = String(value ?? '').replace(/\D/g, '')
+         const prev = state.phone || { p1: '', p2: '', p3: '' }
+         const next = { ...prev, [part]: sanitized }
+         state.phone = next
+         // 번호 일부라도 바뀌면 OTP 상태 초기화
+         state.otp = { sent: false, verified: false, ttl: 0 }
       },
       setItems(state, action) {
-         // payload: [{ itemName, amount }]
          state.items = Array.isArray(action.payload) ? action.payload : []
          state.count = state.items.reduce((acc, it) => acc + Number(it.amount || 0), 0)
       },
@@ -161,7 +174,7 @@ const donationSlice = createSlice({
             state.error = action.payload || action.error
          })
 
-         // 목록
+         // 내 목록
          .addCase(fetchMyDonationsThunk.fulfilled, (state, action) => {
             state.list = action.payload?.list || []
             state.page = action.payload?.page || 1
@@ -169,14 +182,13 @@ const donationSlice = createSlice({
             state.total = action.payload?.total || 0
          })
 
-         // 단건
+         // 단건 상세
          .addCase(fetchDonationThunk.fulfilled, (state, action) => {
             state.created = action.payload || null
          })
 
          // 취소
          .addCase(cancelDonationThunk.fulfilled, (state, action) => {
-            // 낙관적 업데이트
             const d = action.payload?.donation
             if (d) {
                state.list = state.list.map((x) => (x.id === d.id ? d : x))
@@ -186,6 +198,6 @@ const donationSlice = createSlice({
    },
 })
 
-export const { setConsent, setPhone, setItems, setMethod, setPickupDate, setReturnAddress, resetDonationFlow } = donationSlice.actions
+export const { setConsent, setPhone, setPhonePart, setItems, setMethod, setPickupDate, setReturnAddress, resetDonationFlow } = donationSlice.actions
 
 export default donationSlice.reducer

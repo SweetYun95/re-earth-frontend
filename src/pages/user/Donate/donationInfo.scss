@@ -1,0 +1,82 @@
+/* re-earth-frontend/src/pages/user/Donate/scss/donationInfo.scss */
+
+/* Hero 섹션 */
+.donation-info {
+  .jumbotron {
+    background: url('../../../assets/images/re-earth_donation_BG.png' ) no-repeat center center;
+    background-size: cover;
+    color: var(--maintext, #333);
+    border-radius: 0 0 24px 24px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    h2 {
+      font-size: clamp(24px, 4vw, 40px);
+    }
+
+    .lead {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .hashtags {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .arrow-down {
+      font-size: 20px;
+      animation: bounce 1.5s infinite;
+      color: var(--point-b, #568265);
+    }
+  }
+}
+
+/* bounce 애니메이션 */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* 기부안내 카드 */
+.donation-info {
+  .row {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  img {
+    border-radius: 12px;
+  }
+
+  blockquote {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--maintext, #333);
+    border-left: 4px solid var(--maincolor, #92c3a4);
+    padding-left: 12px;
+    margin: 20px 0;
+  }
+
+  button.btn-success {
+    background: var(--subcolor-d, #92c3a4);
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 30px;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+
+    &:hover {
+      background: darken(#92c3a4, 5%);
+    }
+  }
+}

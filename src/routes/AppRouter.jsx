@@ -56,7 +56,7 @@ export default function AppRouter() {
          <Route path="/register" element={<RegisterPage />} />
          <Route path="/faq" element={<FAQPage />} />
          <Route path="/finding" element={<FindingPage />} />
-         
+
          {/* 포인트샵 - 공개 페이지 */}
          <Route path="/pointshop" element={<PointShopPage />} />
          <Route path="/pointshop/:id" element={<ProductDetailPage />} />
@@ -71,17 +71,16 @@ export default function AppRouter() {
          <Route path="/donate" element={<DonationPage />} />
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
-         
+
          {/* 아나바다 - 유저 전용 페이지 (준비중) */}
          {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
          {/* </Route> */}
 
          {/* 관리자 전용 (임시 주석처리) */}
          {/* <Route element={<AdminOnly />}> */}
-           <Route path="/admin" element={<AdminPage />} />
-           <Route path="/items/create" element={<ItemCreatePage />} />
+         <Route path="/admin" element={<AdminPage />} />
+         <Route path="/items/create" element={<ItemCreatePage />} />
          {/* </Route> */}
-
 
          {/* 유틸 페이지 */}
          <Route path="/loading" element={<LoadingPage />} />

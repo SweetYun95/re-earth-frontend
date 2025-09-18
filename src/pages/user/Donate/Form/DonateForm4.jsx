@@ -1,3 +1,5 @@
+// re-earth-frontend/src/pages/user/Donate/Form/DonateForm4.jsx
+// 4단계: 기부 물품 신청 내역
 import './scss/donateform4.scss'
 function DonateForm4() {
    return (
