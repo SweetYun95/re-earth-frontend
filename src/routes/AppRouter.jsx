@@ -31,6 +31,13 @@ import MyPage from '../pages/user/mypage/MyPage'
 //프로필 수정
 import ProfileEditPage from '../pages/user/mypage/Profile/ProfileEditPage'
 
+// 마켓 페이지
+import PointShopPage from '../pages/market/PointShopPage'
+import ProductDetailPage from '../pages/market/ProductDetailPage'
+
+//관리자 페이지
+import AdminPage from '../pages/Admin/AdminPage'
+
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
 import ErrorPage from '../pages_extra/Unloaded/ErrorPage'
@@ -39,7 +46,6 @@ import ErrorPage from '../pages_extra/Unloaded/ErrorPage'
 import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
 // TODO: 추후 유저 메인, 마켓, 관리자 페이지 등 추가
 // import AdminLoginPage from '../pages/admin/AdminLoginPage'
-// import DashboardPage from '../pages/admin/DashboardPage'
 
 export default function AppRouter() {
    return (
@@ -51,6 +57,10 @@ export default function AppRouter() {
          <Route path="/register" element={<RegisterPage />} />
          <Route path="/faq" element={<FAQPage />} />
          <Route path="/finding" element={<FindingPage />} />
+
+         {/* 포인트샵 - 공개 페이지 */}
+         <Route path="/pointshop" element={<PointShopPage />} />
+         <Route path="/pointshop/:id" element={<ProductDetailPage />} />
          {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
@@ -63,19 +73,16 @@ export default function AppRouter() {
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
          <Route path="/saving/bicycle" element={<SavingBicycle />} />
+
+         {/* 아나바다 - 유저 전용 페이지 (준비중) */}
+         {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
          {/* </Route> */}
 
-         {/* 관리자 전용 (필요 시 해제) */}
-         {/* 임시 테스트 */}
-         {/* <Route path="/items/create" element={<ItemCreatePage />} /> */}
-         <Route element={<AdminOnly />}>
-            <Route path="/items/create" element={<ItemCreatePage />} />
-         </Route>
-         {/* 
-      <Route element={<AdminOnly />}>
-        <Route path="/admin" element={<DashboardPage />} />
-      </Route>
-      */}
+         {/* 관리자 전용 (임시 주석처리) */}
+         {/* <Route element={<AdminOnly />}> */}
+         <Route path="/admin" element={<AdminPage />} />
+         <Route path="/items/create" element={<ItemCreatePage />} />
+         {/* </Route> */}
 
          {/* 유틸 페이지 */}
          <Route path="/loading" element={<LoadingPage />} />

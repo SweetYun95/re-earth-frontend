@@ -7,24 +7,14 @@ import { combineReducers } from '@reduxjs/toolkit'
 // --- feature slices ---
 import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
-// import userReducer from '../features/userSlice'
 import itemReducer from '../features/itemSlice'
-// import orderReducer from '../features/orderSlice'
-// import pointReducer from '../features/pointSlice'
-// import marketReducer from '../features/marketSlice'
-// import chatReducer from '../features/chatSlice'
-// import adminReducer from '../features/adminSlice'
+import adminMemberReducer from '../features/adminMemberSlice' // 새로 추가
 
 const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
-   //    user: userReducer,
    item: itemReducer,
-   //    order: orderReducer,
-   //    point: pointReducer,
-   //    market: marketReducer,
-   //    chat: chatReducer,
-   //    admin: adminReducer,
+   adminMembers: adminMemberReducer, // 새로 추가
 })
 
 export default rootReducer
