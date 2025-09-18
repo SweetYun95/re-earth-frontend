@@ -2,21 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { createItem, updateItem, deleteItem, getItems, getItemById } from '../api/itemApi'
 
 //상품등록
-export const createItemThunk = createAsyncThunk('items/createItem', async (formData, { rejectWithValue }) => {
+export const createItemThunk = createAsyncThunk('items/createItem', async (itemData, { rejectWithValue }) => {
    try {
-      const response = await createItem(formData)
-      return {
-         item: response.data.item,
-         images: response.data.images || [],
-      }
+      console.log('itemData:', itemData)
+      const response = await createItem(itemData)
+      return response.data.item
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '상품 등록 실패')
    }
 })
 // 상품 수정
-export const updateItemThunk = createAsyncThunk('items/updateItem', async ({ id, formData }, { rejectWithValue }) => {
+export const updateItemThunk = createAsyncThunk('items/updateItem', async (data, { rejectWithValue }) => {
    try {
-      await updateItem(id, formData)
+      const { id, itemData } = data
+      await updateItem(id, itemData)
       return id
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '상품 수정 실패')
@@ -35,7 +34,7 @@ export const deleteItemThunk = createAsyncThunk('items/deleteItem', async (id, {
 export const fetchItemsThunk = createAsyncThunk('items/getItems', async (data, { rejectWithValue }) => {
    try {
       const response = await getItems(data)
-      return response.data.items
+      return response.data
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '전체 상품 리스트 가져오기 실패')
    }
