@@ -21,7 +21,9 @@ import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
 import SavingMap from '../pages/user/saving/SavingMap'
-
+//상품리스트
+import ItemSellListPage from '../pages/user/Item/ItemSellListPage'
+import ItemSellDetailPage from '../pages/user/Item/ItemSellDetailPage'
 // 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
 
@@ -61,6 +63,8 @@ export default function AppRouter() {
          <Route path="/donate" element={<DonationPage />} />
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
+         <Route path="/items/list" element={<ItemSellListPage />} />
+         <Route path="/items/detail:id" element={<ItemSellDetailPage />} />
          {/* </Route> */}
 
          {/* 관리자 전용 (필요 시 해제) */}

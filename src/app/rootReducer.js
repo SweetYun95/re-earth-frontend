@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
    //    user: userReducer,
-   item: itemReducer,
+   items: itemReducer,
    //    order: orderReducer,
    //    point: pointReducer,
    //    market: marketReducer,
