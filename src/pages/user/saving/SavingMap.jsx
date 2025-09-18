@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
+
 import MapComponent from '../../../components/map/MapComponent'
-import './SavingMap.scss'
 import SearchTap from './SearchTap'
 import QrScanner from '../../../components/common/QrScanner'
+
+import './SavingMap.scss'
 
 function SavingMap() {
    const category = 'transit'
    // category: nephron / transit
    // 데이터 확인용 임시 코드, 배포 전 삭제
-
+   const [data, setData] = useState(null)
    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
    const [position, setPosition] = useState({
       lat: 37.5665,
@@ -28,8 +30,8 @@ function SavingMap() {
                <div className="finding">
                   <h2>{category === 'nephron' ? '내 주변 네프론' : '대중교통 / 따릉이'}</h2>
                   <div className="finding--content mt-40">
-                     <SearchTap category={category} isMobile={isMobile} />
-                     <MapComponent category={category} setPosition={setPosition} position={position} />
+                     <SearchTap category={category} isMobile={isMobile} data={data} setData={setData} />
+                     <MapComponent category={category} setPosition={setPosition} position={position} data={data} />
                   </div>
                </div>
 

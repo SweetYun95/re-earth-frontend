@@ -63,10 +63,22 @@
 
 .spot--address p {
    margin: 0;
-   &.description {
-      font-size: 0.75rem;
+   font-weight: 700;
+}
+.spot--address .description {
+   display: flex;
+   gap: 5px;
+   font-size: 0.75rem;
+   color: var(--subtext);
+   & p.spot-data {
+      color: var(--point-b);
+      font-weight: 700;
+   }
+   & p.spot-data.none {
+      color: var(--point-r);
    }
 }
+
 .mobileOnly {
    display: flex;
    flex-direction: column;

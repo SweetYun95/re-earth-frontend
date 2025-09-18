@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Map, MapMarker } from 'react-kakao-maps-sdk'
+import { useEffect, useState } from 'react'
+import { Map, CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk'
 
-export default function MapComponent({ position, setPosition }) {
+import './MapComponent.scss'
+
+export default function MapComponent({ position, setPosition, data }) {
    useEffect(() => {
       navigator.geolocation.getCurrentPosition((pos) => {
          const coords = {
@@ -13,10 +15,14 @@ export default function MapComponent({ position, setPosition }) {
    }, [])
 
    return (
-      <Map center={position} style={{ width: '100%', height: '400px' }} level={3}>
-         <MapMarker position={position}>
-            <div className="map--myLoaction">내 위치</div>
-         </MapMarker>
-      </Map>
+      data && (
+         <Map center={position} style={{ width: '100%', height: '400px' }} level={3}>
+            <CustomOverlayMap position={position}>
+               <div className="marker" />
+               <div className="marker-shadow" />
+               <div className="spot"></div>
+            </CustomOverlayMap>
+         </Map>
+      )
    )
 }
