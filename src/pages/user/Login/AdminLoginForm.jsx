@@ -1,9 +1,8 @@
-// re-earth-frontend/src/pages/user/Login/AdminLoginForm.jsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
+import { hydrateAuthThunk, adminLoginThunk } from '../../../features/authSlice'
 import InputField from '../../../components/common/InputField'
 
 export default function AdminLoginForm() {
@@ -12,10 +11,12 @@ export default function AdminLoginForm() {
    const { loading, isAuthenticated, user, error } = useSelector((s) => s.auth)
    const [form, setForm] = useState({ idOrEmail: '', password: '' })
 
+   const didAutoNavigate = useRef(false)
+
    useEffect(() => {
       console.log('[AdminLoginForm] auth state changed →', { isAuthenticated, user, loading, error })
-      // 로그인 후 role 체크 → ADMIN일 때만 /admin 이동
-      if (isAuthenticated && user?.role === 'ADMIN') {
+      if (!didAutoNavigate.current && isAuthenticated && user?.role === 'ADMIN') {
+         didAutoNavigate.current = true
          navigate('/admin', { replace: true })
       }
    }, [isAuthenticated, user, loading, error, navigate])
@@ -27,30 +28,31 @@ export default function AdminLoginForm() {
 
    const handleSubmit = async (e) => {
       e.preventDefault()
+      if (loading) return
+
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
-
       if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
       const payload = { idOrEmail, userId: idOrEmail, password }
-      console.log('[AdminLoginForm] submitting login payload:', payload)
+      console.log('[AdminLoginForm] submitting admin login payload:', payload)
 
       try {
-         const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
-         console.log('[AdminLoginForm] loginUserThunk success →', loggedUser)
+         const loggedAdmin = await dispatch(adminLoginThunk(payload)).unwrap()
+         console.log('[AdminLoginForm] adminLoginThunk success →', loggedAdmin)
 
-         dispatch(hydrateAuthThunk())
-
-         if (loggedUser.role === 'ADMIN') {
-            alert('관리자 로그인 성공! 환영합니다 :)')
-            navigate('/admin', { replace: true })
-         } else {
-            alert('관리자 권한이 없습니다.')
-         }
+         // 여기 도달 = ADMIN 보장
+         await dispatch(hydrateAuthThunk())
+         alert('관리자 로그인 성공! 환영합니다 :)')
+         navigate('/admin', { replace: true })
       } catch (err) {
-         console.error('[AdminLoginForm] loginUserThunk error →', err)
-         alert(typeof err === 'string' ? err : '로그인에 실패했습니다.')
+         console.error('[AdminLoginForm] adminLoginThunk error →', err)
+         alert(typeof err === 'string' ? err : '관리자 로그인에 실패했습니다.')
+         // stay on /login
+      } finally {
+         // 보안: 비번 초기화
+         setForm((prev) => ({ ...prev, password: '' }))
       }
    }
 
