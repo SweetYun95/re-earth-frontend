@@ -1,11 +1,11 @@
 // re-earth-frontend/src/features/pointorderSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { createOrder, getOrderList, cancelOrder, deleteOrder, } from '../api/pointOrderApi'
+import { createOrder, getOrderList, cancelOrder, deleteOrder } from '../api/pointOrderApi'
 
 // 주문 생성
 export const createOrderThunk = createAsyncThunk('pointOrders/createOrder', async (orderData, { rejectWithValue }) => {
    try {
-      const data = await createOrder(orderData)
+      const data = await createOrder(orderData) // { success, message, orderId, totalPrice }
       return { orderId: data.orderId, totalPrice: data.totalPrice }
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '주문 생성 실패')
@@ -15,8 +15,10 @@ export const createOrderThunk = createAsyncThunk('pointOrders/createOrder', asyn
 // 주문 목록 조회 (페이지/기간)
 export const getOrderListThunk = createAsyncThunk('pointOrders/getOrderList', async (params = {}, { rejectWithValue }) => {
    try {
-      const res = await getOrderList(params)
-      return res.data
+      // getOrderList는 res.data를 반환하도록 구현되어 있음 → 그대로 data 사용
+      const data = await getOrderList(params)
+      // data = { success, message, page, size, total, orders }
+      return data
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '주문 목록 조회 실패')
    }
@@ -42,14 +44,14 @@ export const deleteOrderThunk = createAsyncThunk('pointOrders/deleteOrder', asyn
    }
 })
 
-
-
 const pointorderSlice = createSlice({
    name: 'pointOrder',
    initialState: {
       orders: [],
       loading: false,
       error: null,
+      latestOrder: null, // ← 사용하므로 초기화
+      pagination: { page: 1, size: 10, total: 0 }, // ← 백엔드 구조에 맞춰 기본값
    },
    reducers: {},
    extraReducers: (builder) => {
@@ -75,15 +77,16 @@ const pointorderSlice = createSlice({
          })
          .addCase(getOrderListThunk.fulfilled, (state, action) => {
             state.loading = false
-            state.orders = action.payload.orders || []
-            state.pagination = action.payload.pagination || state.pagination
+            const { orders = [], page = 1, size = 10, total = 0 } = action.payload || {}
+            state.orders = orders
+            state.pagination = { page, size, total } // ← 루트 필드에서 재구성
          })
          .addCase(getOrderListThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
          })
 
-         // 주문 취소
+         // 주문 취소 → 상태만 CANCEL로
          .addCase(cancelOrderThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -91,7 +94,6 @@ const pointorderSlice = createSlice({
          .addCase(cancelOrderThunk.fulfilled, (state, action) => {
             state.loading = false
             const id = action.payload
-            // orders: PointOrder[] 라 가정. orderStatus만 바꿔줌.
             state.orders = state.orders.map((o) => (o.id === id ? { ...o, orderStatus: 'CANCEL' } : o))
          })
          .addCase(cancelOrderThunk.rejected, (state, action) => {

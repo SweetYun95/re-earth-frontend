@@ -21,6 +21,8 @@ import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
 import SavingMap from '../pages/user/saving/SavingMap'
+import SavingBicycle from '../pages/user/saving/SavingBicycle'
+
 //상품리스트
 import ItemSellListPage from '../pages/user/Item/ItemSellListPage'
 import ItemSellDetailPage from '../pages/user/Item/ItemSellDetailPage'
@@ -61,9 +63,9 @@ export default function AppRouter() {
 
          {/* 포인트샵 - 공개 페이지 */}
          <Route path="/pointshop" element={<PointShopPage />} />
-         <Route path="/items/detail/:id" element={<ProductDetailPage />} />
+         {/* <Route path="/items/detail/:id" element={<ProductDetailPage />} /> */}
          <Route path="/items/list" element={<ItemSellListPage />} />
-         {/* <Route path="/items/detail:id" element={<ItemSellDetailPage />} /> */}
+         <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
          {/* </Route> */}
 
          {/* 로그인 유저 전용 */}
@@ -75,6 +77,7 @@ export default function AppRouter() {
          <Route path="/donate" element={<DonationPage />} />
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
+         <Route path="/saving/bicycle" element={<SavingBicycle />} />
 
          {/* 아나바다 - 유저 전용 페이지 (준비중) */}
          {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}

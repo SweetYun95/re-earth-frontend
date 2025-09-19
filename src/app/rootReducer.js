@@ -7,8 +7,8 @@ import { combineReducers } from '@reduxjs/toolkit'
 // --- feature slices ---
 import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
-// import userReducer from '../features/userSlice'
 import itemReducer from '../features/itemSlice'
+import adminMemberReducer from '../features/adminMemberSlice' // 새로 추가
 import pointOrderReducer from '../features/pointOrderSlice'
 // import pointReducer from '../features/pointSlice'
 // import marketReducer from '../features/marketSlice'
@@ -18,8 +18,9 @@ import pointOrderReducer from '../features/pointOrderSlice'
 const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
-   //    user: userReducer,
    items: itemReducer,
+   adminMembers: adminMemberReducer, // 새로 추가
+   //    user: userReducer,
    pointOrder: pointOrderReducer,
    //    point: pointReducer,
    //    market: marketReducer,
