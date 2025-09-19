@@ -8,13 +8,19 @@ import { combineReducers } from '@reduxjs/toolkit'
 import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
 import itemReducer from '../features/itemSlice'
+
+// ✅ 관리자 관련 리듀서 추가
 import adminMemberReducer from '../features/adminMemberSlice'
+import adminDonationReducer from '../features/adminDonationSlice'
 
 const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
    item: itemReducer,
+
+   // ✅ 관리자 관련 리듀서 추가
    adminMembers: adminMemberReducer,
+   adminDonation: adminDonationReducer,
 })
 
 export default rootReducer

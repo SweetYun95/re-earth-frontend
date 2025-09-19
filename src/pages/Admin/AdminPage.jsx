@@ -1,4 +1,4 @@
-// re-erearth-frontend/src/pages/Admin/AdminPage.jsx
+// re-erearth-frontend/src/pages/admin/AdminPage.jsx
 import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 
