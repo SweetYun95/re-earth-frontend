@@ -1,3 +1,4 @@
+// re-earth-frontend/src/pages/user/main/sections/StatsAndMapSection.jsx
 import React, { useState } from "react";
 import MapComponent from "../../../../components/map/MapComponent";
 import "../mainpage.scss";

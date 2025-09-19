@@ -16,11 +16,11 @@ import FindingPage from "../pages/user/Finding/FindingPage";
 // User pages
 // 유저메인페이지
 import MainPage from "../pages/user/main/MainPage";
-//기부
+// 기부
 import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
 import DonationPage from "../pages/user/Donate/DonationPage";
 import DonationCompletePage from "../pages/user/Donate/DonationCompletePage";
-//인증
+// 인증/적립
 import SavingMap from "../pages/user/saving/SavingMap";
 import SavingBicycle from "../pages/user/saving/SavingBicycle";
 import CalcPointPage from "../pages_extra/Point/CalcPointPage";
@@ -28,26 +28,21 @@ import CalcPointPage from "../pages_extra/Point/CalcPointPage";
 // 고객센터
 import InquiryForm from "../pages/user/Inquiry/Create/InquiryForm";
 
-//마이페이지
+// 마이페이지
 import MyPage from "../pages/user/mypage/MyPage";
-//프로필 수정
 import ProfileEditPage from "../pages/user/mypage/Profile/ProfileEditPage";
 
 // 마켓 페이지
 import PointShopPage from "../pages/market/PointShopPage";
 import ProductDetailPage from "../pages/market/ProductDetailPage";
 
-//관리자 페이지
-import AdminPage from "../pages/Admin/AdminPage";
+// 관리자 페이지
+import AdminPage from "../pages/admin/AdminPage";
+import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
 
 // Extra
 import LoadingPage from "../pages_extra/Unloaded/LoadingPage";
 import ErrorPage from "../pages_extra/Unloaded/ErrorPage";
-
-//관리자 페이지
-import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
-// TODO: 추후 유저 메인, 마켓, 관리자 페이지 등 추가
-// import AdminLoginPage from '../pages/admin/AdminLoginPage'
 
 export default function AppRouter() {
   return (
@@ -71,14 +66,12 @@ export default function AppRouter() {
       <Route path="/user/my" element={<MyPage />} />
       <Route path="/user/my/edit" element={<ProfileEditPage />} />
       <Route path="/donate/info" element={<DonationInfoPage />} />
+      <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
       <Route path="/donate" element={<DonationPage />} />
       <Route path="/inquiry/new" element={<InquiryForm />} />
       <Route path="/saving/map" element={<SavingMap />} />
       <Route path="/saving/bicycle" element={<SavingBicycle />} />
       <Route path="/saving/point" element={<CalcPointPage />} />
-
-      {/* 아나바다 - 유저 전용 페이지 (준비중) */}
-      {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
       {/* </Route> */}
 
       {/* 관리자 전용 (임시 주석처리) */}

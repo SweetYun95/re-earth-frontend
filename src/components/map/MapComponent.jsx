@@ -3,7 +3,7 @@ import { Map, CustomOverlayMap, Polyline } from "react-kakao-maps-sdk";
 
 import "./MapComponent.scss";
 
-export default function MapComponent({
+export default function   MapComponent({
   position,
   setPosition,
   data,
