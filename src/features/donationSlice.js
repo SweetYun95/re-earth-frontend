@@ -1,6 +1,48 @@
+// ===============================
 // re-earth-frontend/src/features/donationSlice.js
+// 설명: 기부(Donation) 관련 상태/비동기처리 Slice
+// ===============================
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { requestOtp, verifyOtp, createDonation, getMyDonations, getDonationById, cancelDonation } from '../api/donationApi'
+
+// ────────────────────────────────────────────────
+// Backend 스키마와 1:1 매칭되는 초기 상태
+// items: [{ category, condition, quantity, note }]
+const initialState = {
+   // Step 1: 신청자
+   donorName: '',
+   donorPhone: '',
+   donorEmail: '',
+
+   // Step 2: 물품
+   items: [{ category: 'TOP', condition: 'NORMAL', quantity: 1, note: '' }],
+
+   // Step 3: 주소/일정/메모
+   zipcode: '',
+   address1: '',
+   address2: '',
+   pickupDate: '',
+   memo: '',
+
+   // Step 4: 동의
+   agreePolicy: false,
+
+   // OTP(선택 기능)
+   otp: { sent: false, verified: false, ttl: 0, devCode: '' },
+
+   // ✅ 휴대폰 파츠(OTP 입력용)
+   phone: { p1: '', p2: '', p3: '' },
+
+   // 공통
+   created: null,
+   createdId: null,
+   list: [],
+   page: 1,
+   size: 10,
+   total: 0,
+   loading: false,
+   error: null,
+}
 
 // ────────────────────────────────────────────────
 // Thunks
@@ -24,8 +66,8 @@ export const verifyOtpThunk = createAsyncThunk('donation/verifyOtp', async ({ ph
 
 export const submitDonationThunk = createAsyncThunk('donation/submit', async (payload, { rejectWithValue }) => {
    try {
-      const data = await createDonation(payload)
-      return data
+      const data = await createDonation(payload) // { donation:{...} }
+      return data?.donation
    } catch (err) {
       return rejectWithValue(err.response?.data || { message: '신청 실패' })
    }
@@ -33,7 +75,7 @@ export const submitDonationThunk = createAsyncThunk('donation/submit', async (pa
 
 export const fetchMyDonationsThunk = createAsyncThunk('donation/fetchMine', async (params, { rejectWithValue }) => {
    try {
-      const data = await getMyDonations(params || {})
+      const data = await getMyDonations(params || {}) // { list, page, size, total }
       return data
    } catch (err) {
       return rejectWithValue(err.response?.data || { message: '목록 조회 실패' })
@@ -42,8 +84,8 @@ export const fetchMyDonationsThunk = createAsyncThunk('donation/fetchMine', asyn
 
 export const fetchDonationThunk = createAsyncThunk('donation/fetchOne', async (id, { rejectWithValue }) => {
    try {
-      const data = await getDonationById(id)
-      return data
+      const data = await getDonationById(id) // { donation }
+      return data?.donation
    } catch (err) {
       return rejectWithValue(err.response?.data || { message: '상세 조회 실패' })
    }
@@ -51,8 +93,8 @@ export const fetchDonationThunk = createAsyncThunk('donation/fetchOne', async (i
 
 export const cancelDonationThunk = createAsyncThunk('donation/cancel', async (id, { rejectWithValue }) => {
    try {
-      const data = await cancelDonation(id)
-      return data
+      const data = await cancelDonation(id) // { donation }
+      return data?.donation
    } catch (err) {
       return rejectWithValue(err.response?.data || { message: '취소 실패' })
    }
@@ -60,65 +102,51 @@ export const cancelDonationThunk = createAsyncThunk('donation/cancel', async (id
 
 // ────────────────────────────────────────────────
 // Slice
-const initialState = {
-   // Step 1
-   consent: false,
-
-   // Step 2
-   phone: { p1: '', p2: '', p3: '' },
-   otp: { sent: false, verified: false, ttl: 0 },
-
-   // Step 3
-   items: [], // [{ itemName, amount }]
-   count: 0,
-   method: 'VISIT', // VISIT(방문수거) | COURIER(택배수거)
-   pickupDate: '',
-   returnAddress: '',
-
-   // Step 4
-   created: null,
-
-   // Common
-   list: [],
-   page: 1,
-   size: 10,
-   total: 0,
-   loading: false,
-   error: null,
-}
-
 const donationSlice = createSlice({
    name: 'donation',
    initialState,
    reducers: {
-      setConsent(state, action) {
-         state.consent = !!action.payload
+      // 단일 필드 세터
+      setField(state, action) {
+         const { key, value } = action.payload || {}
+         if (key in state) state[key] = value
       },
-      setPhone(state, action) {
-         const { p1 = '', p2 = '', p3 = '' } = action.payload || {}
-         state.phone = { p1, p2, p3 }
+
+      // ✅ 휴대폰 파츠 입력 + OTP 리셋
+      setPhonePart(state, action) {
+         const { part, value } = action.payload || {}
+         if (!['p1', 'p2', 'p3'].includes(part)) return
+         const sanitized = String(value ?? '').replace(/\D/g, '')
+         state.phone[part] = sanitized
+         state.otp = { sent: false, verified: false, ttl: 0, devCode: '' }
       },
-      setItems(state, action) {
-         // payload: [{ itemName, amount }]
-         state.items = Array.isArray(action.payload) ? action.payload : []
-         state.count = state.items.reduce((acc, it) => acc + Number(it.amount || 0), 0)
+
+      // items 조작
+      addItem(state) {
+         state.items.push({ category: 'TOP', condition: 'NORMAL', quantity: 1, note: '' })
       },
-      setMethod(state, action) {
-         state.method = action.payload || 'VISIT'
+      updateItem(state, action) {
+         const { index, patch } = action.payload || {}
+         if (state.items[index]) {
+            state.items[index] = { ...state.items[index], ...patch }
+         }
       },
-      setPickupDate(state, action) {
-         state.pickupDate = action.payload || ''
+      removeItem(state, action) {
+         const { index } = action.payload || {}
+         state.items = state.items.filter((_, i) => i !== index)
+         if (state.items.length === 0) {
+            state.items.push({ category: 'TOP', condition: 'NORMAL', quantity: 1, note: '' })
+         }
       },
-      setReturnAddress(state, action) {
-         state.returnAddress = action.payload || ''
-      },
+
+      // 전체 리셋
       resetDonationFlow() {
          return { ...initialState }
       },
    },
    extraReducers: (builder) => {
       builder
-         // OTP 요청
+         // OTP
          .addCase(sendOtpThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -127,13 +155,13 @@ const donationSlice = createSlice({
             state.loading = false
             state.otp.sent = true
             state.otp.ttl = action.payload?.ttl || 0
+            state.otp.devCode = action.payload?.code || ''
          })
          .addCase(sendOtpThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload || action.error
          })
 
-         // OTP 검증
          .addCase(verifyOtpThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -147,21 +175,22 @@ const donationSlice = createSlice({
             state.error = action.payload || action.error
          })
 
-         // 신청 생성
+         // CREATE
          .addCase(submitDonationThunk.pending, (state) => {
             state.loading = true
             state.error = null
          })
          .addCase(submitDonationThunk.fulfilled, (state, action) => {
             state.loading = false
-            state.created = action.payload?.donation || null
+            state.created = action.payload || null
+            state.createdId = action.payload?.id || null
          })
          .addCase(submitDonationThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload || action.error
          })
 
-         // 목록
+         // LIST
          .addCase(fetchMyDonationsThunk.fulfilled, (state, action) => {
             state.list = action.payload?.list || []
             state.page = action.payload?.page || 1
@@ -169,23 +198,29 @@ const donationSlice = createSlice({
             state.total = action.payload?.total || 0
          })
 
-         // 단건
+         // READ
          .addCase(fetchDonationThunk.fulfilled, (state, action) => {
             state.created = action.payload || null
+            state.createdId = action.payload?.id || null
          })
 
-         // 취소
+         // CANCEL
          .addCase(cancelDonationThunk.fulfilled, (state, action) => {
-            // 낙관적 업데이트
-            const d = action.payload?.donation
+            const d = action.payload
             if (d) {
                state.list = state.list.map((x) => (x.id === d.id ? d : x))
-               if (state.created && state.created.id === d.id) state.created = d
+               if (state.created?.id === d.id) state.created = d
             }
          })
    },
 })
 
-export const { setConsent, setPhone, setItems, setMethod, setPickupDate, setReturnAddress, resetDonationFlow } = donationSlice.actions
-
+export const {
+   setField,
+   setPhonePart, // ✅
+   addItem,
+   updateItem,
+   removeItem,
+   resetDonationFlow,
+} = donationSlice.actions
 export default donationSlice.reducer
