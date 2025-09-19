@@ -19,6 +19,7 @@ import MainPage from '../pages/user/main/MainPage'
 //기부
 import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
+import DonationCompletePage from '../pages/user/Donate/DonationCompletePage'
 //인증
 import SavingMap from '../pages/user/saving/SavingMap'
 import SavingBicycle from '../pages/user/saving/SavingBicycle'
@@ -69,6 +70,7 @@ export default function AppRouter() {
          <Route path="/user/my" element={<MyPage />} />
          <Route path="/user/my/edit" element={<ProfileEditPage />} />
          <Route path="/donate/info" element={<DonationInfoPage />} />
+         <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
          <Route path="/donate" element={<DonationPage />} />
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
