@@ -1,0 +1,31 @@
+.calcpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calcpoint#area {
+  padding: 0;
+}
+
+.calcpoint p {
+  font-family: var(--headings);
+}
+.calcpoint .group {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 80px;
+  & .btn {
+    width: 100%;
+  }
+  @media (max-width: 337px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+p.text-bold {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+p.point-description {
+  color: var(--subtext);
+}
