@@ -21,6 +21,7 @@ import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
 import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
 import SavingMap from '../pages/user/saving/SavingMap'
+import SavingBicycle from '../pages/user/saving/SavingBicycle'
 
 // 고객센터
 import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
@@ -71,6 +72,7 @@ export default function AppRouter() {
          <Route path="/donate" element={<DonationPage />} />
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
+         <Route path="/saving/bicycle" element={<SavingBicycle />} />
 
          {/* 아나바다 - 유저 전용 페이지 (준비중) */}
          {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
