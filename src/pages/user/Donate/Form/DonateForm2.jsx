@@ -82,6 +82,7 @@ export default function DonateForm2({ onNext }) {
                      </button>
                   </div>
                   {otp?.ttl > 0 && <p className="mt-10 text-muted">인증번호 유효시간: {otp.ttl}초</p>}
+                  {otp?.devCode && <p className="mt-10 text-info">[테스트용 코드: {otp.devCode}]</p>}
                </div>
 
                {/* OTP */}

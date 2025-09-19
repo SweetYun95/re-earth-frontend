@@ -10,12 +10,12 @@ const initialState = {
 
    // Step 2
    phone: { p1: '', p2: '', p3: '' },
-   otp: { sent: false, verified: false, ttl: 0 },
+   otp: { sent: false, verified: false, ttl: 0, devCode: '' },
 
    // Step 3
    items: [], // [{ itemName, amount }]
    count: 0,
-   method: 'VISIT', // VISIT | COURIER
+   method: 'VISIT',
    pickupDate: '',
    returnAddress: '',
 
@@ -88,6 +88,7 @@ export const cancelDonationThunk = createAsyncThunk('donation/cancel', async (id
 })
 
 // ────────────────────────────────────────────────
+// Slice
 const donationSlice = createSlice({
    name: 'donation',
    initialState,
@@ -98,19 +99,14 @@ const donationSlice = createSlice({
       setPhone(state, action) {
          const { p1 = '', p2 = '', p3 = '' } = action.payload || {}
          state.phone = { p1, p2, p3 }
-         // 번호 전체가 한번에 바뀌면 OTP 상태 초기화(안전장치)
-         state.otp = { sent: false, verified: false, ttl: 0 }
+         state.otp = { sent: false, verified: false, ttl: 0, devCode: '' }
       },
-      // ✅ 부분 업데이트 전용: 입력 필드에서 사용
       setPhonePart(state, action) {
          const { part, value } = action.payload || {}
          if (!['p1', 'p2', 'p3'].includes(part)) return
          const sanitized = String(value ?? '').replace(/\D/g, '')
-         const prev = state.phone || { p1: '', p2: '', p3: '' }
-         const next = { ...prev, [part]: sanitized }
-         state.phone = next
-         // 번호 일부라도 바뀌면 OTP 상태 초기화
-         state.otp = { sent: false, verified: false, ttl: 0 }
+         state.phone[part] = sanitized
+         state.otp = { sent: false, verified: false, ttl: 0, devCode: '' }
       },
       setItems(state, action) {
          state.items = Array.isArray(action.payload) ? action.payload : []
@@ -131,7 +127,6 @@ const donationSlice = createSlice({
    },
    extraReducers: (builder) => {
       builder
-         // OTP 요청
          .addCase(sendOtpThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -140,13 +135,13 @@ const donationSlice = createSlice({
             state.loading = false
             state.otp.sent = true
             state.otp.ttl = action.payload?.ttl || 0
+            state.otp.devCode = action.payload?.code || ''
          })
          .addCase(sendOtpThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload || action.error
          })
 
-         // OTP 검증
          .addCase(verifyOtpThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -160,7 +155,6 @@ const donationSlice = createSlice({
             state.error = action.payload || action.error
          })
 
-         // 신청 생성
          .addCase(submitDonationThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -174,7 +168,6 @@ const donationSlice = createSlice({
             state.error = action.payload || action.error
          })
 
-         // 내 목록
          .addCase(fetchMyDonationsThunk.fulfilled, (state, action) => {
             state.list = action.payload?.list || []
             state.page = action.payload?.page || 1
@@ -182,12 +175,10 @@ const donationSlice = createSlice({
             state.total = action.payload?.total || 0
          })
 
-         // 단건 상세
          .addCase(fetchDonationThunk.fulfilled, (state, action) => {
             state.created = action.payload || null
          })
 
-         // 취소
          .addCase(cancelDonationThunk.fulfilled, (state, action) => {
             const d = action.payload?.donation
             if (d) {
