@@ -43,6 +43,7 @@ import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
 // Extra
 import LoadingPage from "../pages_extra/Unloaded/LoadingPage";
 import ErrorPage from "../pages_extra/Unloaded/ErrorPage";
+import UnderConstruction from "../pages_extra/Unloaded/UnderConstruction";
 
 export default function AppRouter() {
   return (
@@ -83,6 +84,7 @@ export default function AppRouter() {
       {/* 유틸 페이지 */}
       <Route path="/loading" element={<LoadingPage />} />
       <Route path="*" element={<ErrorPage />} />
+      <Route path="readysoon" element={<UnderConstruction />} />
     </Routes>
   );
 }

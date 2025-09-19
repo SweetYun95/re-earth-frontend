@@ -5,9 +5,11 @@ import SearchTap from "./SearchTap";
 import QrScanner from "../../../components/common/QrScanner";
 
 import "./SavingMap.scss";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function SavingMap() {
-  const category = "transit";
+  const category = "nephron";
   // category: nephron / transit
   // 데이터 확인용 임시 코드, 배포 전 삭제
   const [data, setData] = useState(null);
@@ -16,6 +18,7 @@ function SavingMap() {
     lat: 37.5665,
     lng: 126.978,
   });
+  const navigate = useNavigate();
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -55,7 +58,14 @@ function SavingMap() {
               ) : (
                 <p>내 주변 대여소가 지도에 보이지 않나요?</p>
               )}
-              <QrScanner label={"QR코드 스캔하기"} />
+              <button
+                className="btn main1 default"
+                onClick={() => {
+                  navigate("/readysoon");
+                }}
+              >
+                QR코드 스캔하기
+              </button>
             </div>
           ) : (
             <div className="verify mt-80">
