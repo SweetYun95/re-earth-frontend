@@ -71,7 +71,7 @@ const MyPage = () => {
                     <img src="/src/assets/icons/profile.png" alt="프로필" className="img-fluid rounded-circle" />
                   </div>
                   <div className="mypage__user-info">
-                    <span className="mypage__username d-block">user name</span>
+                    <span className="mypage__username">user name</span>
                     <button 
                       className="mypage__edit-profile"
                       onClick={() => navigate('/user/my/edit')}
@@ -85,11 +85,11 @@ const MyPage = () => {
 
             <div className="mypage__sprout mypage__card mb-3">
               <div className="card-body">
-                <h4 className="card-title">새싹</h4>
-                <div className="progress mb-2">
-                  <div className="mypage__progress-fill" role="progressbar" style={{width: '60%'}}></div>
+                <h6 className="card-title">새싹</h6>
+                <div className="progress mt-10">
+                  <div className="mypage__progress-fill" role="progressbar"></div>
                 </div>
-                <p className="card-text">나무가 되기까지 nnn점</p>
+                <span className="mt-10">나무가 되기까지 nnn점</span>
               </div>
             </div>
 

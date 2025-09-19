@@ -6,7 +6,7 @@ import { formatWithComma } from '../../utils/priceSet'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchItemByIdThunk } from '../../features/itemSlice'
-// import { createOrderThunk } from '../../features/orderSlice'
+import { createOrderThunk } from '../../features/pointOrderSlice'
 import { useState, useEffect } from 'react'
 
 function ItemDetail() {
@@ -23,27 +23,27 @@ function ItemDetail() {
       }
    }, [item, count])
 
-   //    const handleBuy = () => {
-   //       dispatch(
-   //          createOrderThunk({
-   //             items: [
-   //                {
-   //                   itemId: id,
-   //                   count,
-   //                },
-   //             ],
-   //          })
-   //       )
-   //          .unwrap()
-   //          .then(() => {
-   //             alert('주문이 완료되었습니다.')
-   //             setOrderComplete((prev) => !prev)
-   //          })
-   //          .catch((error) => {
-   //             console.error('주문 에러:', error)
-   //             alert('주문에 실패했습니다.' + error)
-   //          })
-   //    }
+      const handleBuy = () => {
+         dispatch(
+            createOrderThunk({
+               items: [
+                  {
+                     itemId: id,
+                     count,
+                  },
+               ],
+            })
+         )
+            .unwrap()
+            .then(() => {
+               alert('주문이 완료되었습니다.')
+               setOrderComplete((prev) => !prev)
+            })
+            .catch((error) => {
+               console.error('주문 에러:', error)
+               alert('주문에 실패했습니다.' + error)
+            })
+      }
    useEffect(() => {
       dispatch(fetchItemByIdThunk(id))
    }, [dispatch, id, orderComplete])
@@ -95,9 +95,9 @@ function ItemDetail() {
                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
                               <input value={count} onChange={(e) => setCount(Number(e.target.value))} min={1} max={item.stockNumber} step={1} />
                               <Typography variant="h6">총 가격: {formatWithComma(String(orderPrice))}원</Typography>
-                              {/* <Button variant="contained" color="primary" onClick={handleBuy}>
+                              <Button variant="contained" color="primary" onClick={handleBuy}>
                                  구매하기
-                              </Button> */}
+                              </Button>
                            </Box>
                         )}
                      </Grid>

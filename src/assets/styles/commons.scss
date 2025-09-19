@@ -184,7 +184,7 @@ h3 {
    --point-r: #fb6e52;
    --point-y: #ffce55;
 
-   --bg-gray: #F7F7F7;
+   --bg-gray: #f7f7f7;
 
    --border-radius: 20px;
    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -303,14 +303,6 @@ div.btn {
    background-color: #de6148;
    color: #ffffff;
 }
-.btn.main4 {
-   background-color: var(--point-y);
-   color: var(--maintext);
-}
-.btn.main4:hover {
-   background-color: #ffb706;
-   color: #ffffff;
-}
 
 /* input태그 */
 input {
@@ -389,11 +381,11 @@ select {
    padding: 6px 12px;
    font-size: 0.875rem;
    color: var(--maintext);
-   
+
    &::placeholder {
       color: var(--subtext);
    }
-   
+
    &:focus {
       outline: none;
       border-color: var(--maincolor);
@@ -415,22 +407,22 @@ select {
    background-position: right 8px center;
    background-size: 16px;
    padding-right: 32px;
-   
+
    &:focus {
       outline: none;
       border-color: var(--maincolor);
    }
-   
+
    option {
       background-color: #ffffff;
       color: var(--maintext);
       padding: 8px 12px;
       font-size: 0.875rem;
-      
+
       &:hover {
          background-color: var(--subcolor-m);
       }
-      
+
       &:checked {
          background-color: var(--maincolor);
          color: #ffffff;
@@ -442,6 +434,290 @@ select {
 .profile img {
    border: none;
    border-radius: 100%;
+}
+
+/* ========== 관리자 페이지 공통 스타일 ========== */
+/* 관리자 드롭다운 버튼 */
+.admin-dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__toggle {
+    background: var(--maincolor);
+    border: none;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--subcolor-d);
+    }
+
+    &::after {
+      content: '▼';
+      font-size: 0.75rem;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+    min-width: 150px;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    color: var(--maintext);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--bg-gray);
+    }
+
+    &--danger {
+      color: var(--point-r);
+
+      &:hover {
+        background-color: rgba(244, 67, 54, 0.1);
+      }
+    }
+  }
+}
+
+/* 관리자 상태 배지 */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &--active {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--maincolor);
+  }
+
+  &--inactive {
+    background-color: rgba(158, 158, 158, 0.1);
+    color: var(--subtext);
+  }
+
+  &--suspended {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--point-r);
+  }
+
+  &--pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--point-y);
+  }
+}
+
+/* 관리자 통계 카드 */
+.admin-stat-card {
+  background: linear-gradient(135deg, var(--maincolor) 0%, var(--subcolor-d) 100%);
+  color: #ffffff;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  &__value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  &__change {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    
+    &--positive {
+      color: #c8e6c9;
+    }
+    
+    &--negative {
+      color: #ffcdd2;
+    }
+  }
+}
+
+/* 관리자 모달 스타일 */
+.member-detail {
+  &__section {
+    margin-bottom: 25px;
+  }
+
+  &__section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--maintext);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--maincolor);
+  }
+
+  &__info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  &__info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--bg-gray);
+    border-radius: var(--border-radius);
+  }
+
+  &__info-label {
+    font-weight: 500;
+    color: var(--subtext);
+    font-size: 0.875rem;
+  }
+
+  &__info-value {
+    font-weight: 600;
+    color: var(--maintext);
+    font-size: 0.875rem;
+  }
+
+  &__stat-card {
+    background-color: var(--bg-gray);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+
+    h6 {
+      font-size: 0.875rem;
+      color: var(--subtext);
+      margin-bottom: 8px;
+    }
+  }
+
+  &__stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+}
+
+/* 설정 페이지 스타일 */
+.settings-content {
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--maintext);
+  }
+}
+
+.settings-section {
+  background-color: var(--bg-gray);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--maintext);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+  }
+}
+
+.settings-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &-input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+
+    &-label {
+      font-size: 0.875rem;
+      color: var(--maintext);
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+.settings-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+  }
+
+  &__label {
+    font-weight: 500;
+    color: var(--subtext);
+    font-size: 0.875rem;
+  }
+
+  &__value {
+    font-weight: 600;
+    color: var(--maintext);
+    font-size: 0.875rem;
+  }
 }
 
 /* form태그 */
@@ -512,16 +788,249 @@ form.register {
    font-weight: 500;
    transition: all 0.3s ease;
    cursor: pointer;
-   
+
    &:hover {
       background-color: var(--point-y);
       opacity: 0.9;
       transform: translateY(-1px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
    }
-   
+
    &:active {
       transform: translateY(0);
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
    }
+}
+
+/* ========== 서브탭 공통 스타일 ========== */
+.sub-tabs {
+  .btn {
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 2px solid #e9ecef;
+    background: #ffffff;
+    color: var(--subtext);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: var(--maincolor);
+      color: var(--maintext);
+      background: rgba(209, 233, 93, 0.1);
+    }
+    
+    &.active {
+      background: var(--maincolor);
+      border-color: var(--maincolor);
+      color: var(--maintext);
+      font-weight: 600;
+    }
+    
+    span {
+      margin-right: 6px;
+    }
+  }
+}
+
+/* ========== 관리자 모달 공통 스타일 ========== */
+.admin-modal-content {
+  .section {
+    margin-bottom: 24px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h6 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--maintext);
+      margin-bottom: 12px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      
+      h6 {
+        margin: 0;
+      }
+      
+      .item-count {
+        background: var(--bg-gray);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: var(--subtext);
+      }
+    }
+  }
+  
+  .info-grid {
+    background: var(--subcolor-m);
+    border: 2px solid var(--maincolor);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: var(--maintext);
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: var(--maintext);
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: var(--subcolor-d);
+          font-weight: 600;
+        }
+        
+        &.editable {
+          background: #ffffff;
+          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          padding: 4px 8px;
+          min-width: 120px;
+        }
+      }
+    }
+  }
+  
+  .inspection-grid {
+    background: var(--subcolor-m);
+    border: 2px solid var(--maincolor);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    
+    .inspection-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .label {
+        font-weight: 500;
+        color: var(--maintext);
+        font-size: 0.9rem;
+      }
+      
+      .value {
+        font-weight: 400;
+        color: var(--maintext);
+        font-size: 0.9rem;
+        text-align: right;
+        
+        &.status-good {
+          color: var(--subcolor-d);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+    
+    .btn-action {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &.btn-approve {
+        background: var(--maincolor);
+        color: var(--maintext);
+        
+        &:hover {
+          background: var(--subcolor-d);
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.btn-reject {
+        background: var(--point-r);
+        color: #ffffff;
+        
+        &:hover {
+          background: #e55a46;
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.btn-warn {
+        background: var(--point-y);
+        color: var(--maintext);
+        
+        &:hover {
+          background: #f0c14b;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+/* 관리자 테이블 액션 버튼 (우상단 배치) */
+.admin-table-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    
+    &.btn-edit {
+      background: var(--point-y);
+      color: var(--maintext);
+      border: none;
+      
+      &:hover {
+        background: #f0c14b;
+      }
+    }
+    
+    &.btn-delete {
+      background: var(--point-r);
+      color: #ffffff;
+      border: none;
+      
+      &:hover {
+        background: #e55a46;
+      }
+    }
+  }
 }

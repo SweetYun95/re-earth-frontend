@@ -9,7 +9,7 @@ import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
 // import userReducer from '../features/userSlice'
 import itemReducer from '../features/itemSlice'
-// import orderReducer from '../features/orderSlice'
+import pointOrderReducer from '../features/pointOrderSlice'
 // import pointReducer from '../features/pointSlice'
 // import marketReducer from '../features/marketSlice'
 // import chatReducer from '../features/chatSlice'
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
    donation: donationReducer,
    //    user: userReducer,
    items: itemReducer,
-   //    order: orderReducer,
+   pointOrder: pointOrderReducer,
    //    point: pointReducer,
    //    market: marketReducer,
    //    chat: chatReducer,
