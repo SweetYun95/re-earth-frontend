@@ -1,92 +1,94 @@
 // re-earth-frontend/src/routes/AppRouter.jsx
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from "react-router-dom";
 
 // Guards
-import GuestOnly from './guards/GuestOnly'
-import UserOnly from './guards/UserOnly'
-import AdminOnly from './guards/AdminOnly'
+import GuestOnly from "./guards/GuestOnly";
+import UserOnly from "./guards/UserOnly";
+import AdminOnly from "./guards/AdminOnly";
 
 // Public / Guest pages
-import LandingPage from '../pages/public/Landing/LandingPage'
-import LoginPage from '../pages/user/Login/LoginPage'
-import RegisterPage from '../pages/user/Register/RegisterPage'
-import FAQPage from '../pages/user/Inquiry/FAQPage'
-import FindingPage from '../pages/user/Finding/FindingPage'
+import LandingPage from "../pages/public/Landing/LandingPage";
+import LoginPage from "../pages/user/Login/LoginPage";
+import RegisterPage from "../pages/user/Register/RegisterPage";
+import FAQPage from "../pages/user/Inquiry/FAQPage";
+import FindingPage from "../pages/user/Finding/FindingPage";
 
 // User pages
 // 유저메인페이지
-import MainPage from '../pages/user/main/MainPage'
+import MainPage from "../pages/user/main/MainPage";
 //기부
-import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
-import DonationPage from '../pages/user/Donate/DonationPage'
+import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
+import DonationPage from "../pages/user/Donate/DonationPage";
 //인증
-import SavingMap from '../pages/user/saving/SavingMap'
-import SavingBicycle from '../pages/user/saving/SavingBicycle'
+import SavingMap from "../pages/user/saving/SavingMap";
+import SavingBicycle from "../pages/user/saving/SavingBicycle";
+import CalcPointPage from "../pages_extra/Point/CalcPointPage";
 
 // 고객센터
-import InquiryForm from '../pages/user/Inquiry/Create/InquiryForm'
+import InquiryForm from "../pages/user/Inquiry/Create/InquiryForm";
 
 //마이페이지
-import MyPage from '../pages/user/mypage/MyPage'
+import MyPage from "../pages/user/mypage/MyPage";
 //프로필 수정
-import ProfileEditPage from '../pages/user/mypage/Profile/ProfileEditPage'
+import ProfileEditPage from "../pages/user/mypage/Profile/ProfileEditPage";
 
 // 마켓 페이지
-import PointShopPage from '../pages/market/PointShopPage'
-import ProductDetailPage from '../pages/market/ProductDetailPage'
+import PointShopPage from "../pages/market/PointShopPage";
+import ProductDetailPage from "../pages/market/ProductDetailPage";
 
 //관리자 페이지
-import AdminPage from '../pages/Admin/AdminPage'
+import AdminPage from "../pages/Admin/AdminPage";
 
 // Extra
-import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
-import ErrorPage from '../pages_extra/Unloaded/ErrorPage'
+import LoadingPage from "../pages_extra/Unloaded/LoadingPage";
+import ErrorPage from "../pages_extra/Unloaded/ErrorPage";
 
 //관리자 페이지
-import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
+import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
 // TODO: 추후 유저 메인, 마켓, 관리자 페이지 등 추가
 // import AdminLoginPage from '../pages/admin/AdminLoginPage'
 
 export default function AppRouter() {
-   return (
-      <Routes>
-         {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
-         {/* <Route element={<GuestOnly />}> */}
-         <Route path="/" element={<LandingPage />} />
-         <Route path="/login" element={<LoginPage />} />
-         <Route path="/register" element={<RegisterPage />} />
-         <Route path="/faq" element={<FAQPage />} />
-         <Route path="/finding" element={<FindingPage />} />
+  return (
+    <Routes>
+      {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
+      {/* <Route element={<GuestOnly />}> */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/faq" element={<FAQPage />} />
+      <Route path="/finding" element={<FindingPage />} />
 
-         {/* 포인트샵 - 공개 페이지 */}
-         <Route path="/pointshop" element={<PointShopPage />} />
-         <Route path="/pointshop/:id" element={<ProductDetailPage />} />
-         {/* </Route> */}
+      {/* 포인트샵 - 공개 페이지 */}
+      <Route path="/pointshop" element={<PointShopPage />} />
+      <Route path="/pointshop/:id" element={<ProductDetailPage />} />
+      {/* </Route> */}
 
-         {/* 로그인 유저 전용 */}
-         {/* <Route element={<UserOnly />}> */}
-         <Route path="/user" element={<MainPage />} />
-         <Route path="/user/my" element={<MyPage />} />
-         <Route path="/user/my/edit" element={<ProfileEditPage />} />
-         <Route path="/donate/info" element={<DonationInfoPage />} />
-         <Route path="/donate" element={<DonationPage />} />
-         <Route path="/inquiry/new" element={<InquiryForm />} />
-         <Route path="/saving/map" element={<SavingMap />} />
-         <Route path="/saving/bicycle" element={<SavingBicycle />} />
+      {/* 로그인 유저 전용 */}
+      {/* <Route element={<UserOnly />}> */}
+      <Route path="/user" element={<MainPage />} />
+      <Route path="/user/my" element={<MyPage />} />
+      <Route path="/user/my/edit" element={<ProfileEditPage />} />
+      <Route path="/donate/info" element={<DonationInfoPage />} />
+      <Route path="/donate" element={<DonationPage />} />
+      <Route path="/inquiry/new" element={<InquiryForm />} />
+      <Route path="/saving/map" element={<SavingMap />} />
+      <Route path="/saving/bicycle" element={<SavingBicycle />} />
+      <Route path="/saving/point" element={<CalcPointPage />} />
 
-         {/* 아나바다 - 유저 전용 페이지 (준비중) */}
-         {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
-         {/* </Route> */}
+      {/* 아나바다 - 유저 전용 페이지 (준비중) */}
+      {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
+      {/* </Route> */}
 
-         {/* 관리자 전용 (임시 주석처리) */}
-         {/* <Route element={<AdminOnly />}> */}
-         <Route path="/admin" element={<AdminPage />} />
-         <Route path="/items/create" element={<ItemCreatePage />} />
-         {/* </Route> */}
+      {/* 관리자 전용 (임시 주석처리) */}
+      {/* <Route element={<AdminOnly />}> */}
+      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/items/create" element={<ItemCreatePage />} />
+      {/* </Route> */}
 
-         {/* 유틸 페이지 */}
-         <Route path="/loading" element={<LoadingPage />} />
-         <Route path="*" element={<ErrorPage />} />
-      </Routes>
-   )
+      {/* 유틸 페이지 */}
+      <Route path="/loading" element={<LoadingPage />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+  );
 }
