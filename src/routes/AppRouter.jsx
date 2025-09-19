@@ -17,14 +17,9 @@ import FindingPage from "../pages/user/Finding/FindingPage";
 // 유저메인페이지
 import MainPage from "../pages/user/main/MainPage";
 //기부
-<<<<<<< HEAD
 import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
 import DonationPage from "../pages/user/Donate/DonationPage";
-=======
-import DonationInfoPage from '../pages/user/Donate/DonationInfoPage'
-import DonationPage from '../pages/user/Donate/DonationPage'
-import DonationCompletePage from '../pages/user/Donate/DonationCompletePage'
->>>>>>> 8de344e2d56b7b3214ea29b11dada498afa607a2
+import DonationCompletePage from "../pages/user/Donate/DonationCompletePage";
 //인증
 import SavingMap from "../pages/user/saving/SavingMap";
 import SavingBicycle from "../pages/user/saving/SavingBicycle";
@@ -70,7 +65,6 @@ export default function AppRouter() {
       <Route path="/pointshop/:id" element={<ProductDetailPage />} />
       {/* </Route> */}
 
-<<<<<<< HEAD
       {/* 로그인 유저 전용 */}
       {/* <Route element={<UserOnly />}> */}
       <Route path="/user" element={<MainPage />} />
@@ -82,19 +76,6 @@ export default function AppRouter() {
       <Route path="/saving/map" element={<SavingMap />} />
       <Route path="/saving/bicycle" element={<SavingBicycle />} />
       <Route path="/saving/point" element={<CalcPointPage />} />
-=======
-         {/* 로그인 유저 전용 */}
-         {/* <Route element={<UserOnly />}> */}
-         <Route path="/user" element={<MainPage />} />
-         <Route path="/user/my" element={<MyPage />} />
-         <Route path="/user/my/edit" element={<ProfileEditPage />} />
-         <Route path="/donate/info" element={<DonationInfoPage />} />
-         <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
-         <Route path="/donate" element={<DonationPage />} />
-         <Route path="/inquiry/new" element={<InquiryForm />} />
-         <Route path="/saving/map" element={<SavingMap />} />
-         <Route path="/saving/bicycle" element={<SavingBicycle />} />
->>>>>>> 8de344e2d56b7b3214ea29b11dada498afa607a2
 
       {/* 아나바다 - 유저 전용 페이지 (준비중) */}
       {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}
