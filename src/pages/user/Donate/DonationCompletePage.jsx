@@ -63,7 +63,7 @@ export default function DonationCompletePage() {
             <Link to="/user/my" className="btn btn-outline-secondary">
                마이페이지
             </Link>
-            <Link to="/donate" className="btn btn-dark">
+            <Link to="/donate/info" className="btn btn-dark">
                새 기부 신청
             </Link>
          </div>
