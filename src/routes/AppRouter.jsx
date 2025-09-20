@@ -22,6 +22,7 @@ import DonationPage from '../pages/user/Donate/DonationPage'
 //인증
 import SavingMap from '../pages/user/saving/SavingMap'
 import SavingBicycle from '../pages/user/saving/SavingBicycle'
+import CalcPointPage from '../pages_extra/Point/CalcPointPage'
 
 //상품리스트
 import ItemSellListPage from '../pages/user/Item/ItemSellListPage'
@@ -63,7 +64,7 @@ export default function AppRouter() {
 
          {/* 포인트샵 - 공개 페이지 */}
          <Route path="/pointshop" element={<PointShopPage />} />
-         {/* <Route path="/items/detail/:id" element={<ProductDetailPage />} /> */}
+         <Route path="/pointshop/:id" element={<ProductDetailPage />} />
          <Route path="/items/list" element={<ItemSellListPage />} />
          <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
          {/* </Route> */}
@@ -78,6 +79,7 @@ export default function AppRouter() {
          <Route path="/inquiry/new" element={<InquiryForm />} />
          <Route path="/saving/map" element={<SavingMap />} />
          <Route path="/saving/bicycle" element={<SavingBicycle />} />
+         <Route path="/saving/point" element={<CalcPointPage />} />
 
          {/* 아나바다 - 유저 전용 페이지 (준비중) */}
          {/* <Route path="/user/anabada" element={<AnabadaPage />} /> */}

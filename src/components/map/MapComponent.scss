@@ -1,70 +1,73 @@
+#__react-kakao-maps-sdk___Map {
+  border-radius: 20px;
+}
 .marker {
-   width: 20px;
-   height: 20px;
-   border-radius: 100%;
-   background-color: var(--point-b);
-   border: 3px solid rgba($color: #ffffff, $alpha: 0.8);
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   position: relative;
-   animation: move 1.5s infinite ease-out;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: var(--point-b);
+  border: 3px solid rgba($color: #ffffff, $alpha: 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: move 1.5s infinite ease-out;
 }
 @keyframes move {
-   0% {
-      transform: translateY(0);
-   }
-   70% {
-      transform: translateY(20%);
-   }
-   100% {
-      transform: translateY(0);
-   }
+  0% {
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .marker-shadow {
-   position: absolute;
-   left: 20%;
-   width: 15px;
-   height: 8px;
-   border-radius: 100%;
-   background-color: rgba($color: #000000, $alpha: 0.8);
-   transform: translateY(50%);
-   filter: blur(5px);
+  position: absolute;
+  left: 20%;
+  width: 15px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  transform: translateY(50%);
+  filter: blur(5px);
 }
 .marker::before {
-   content: '';
-   width: 30px;
-   height: 30px;
-   background-color: var(--point-b);
-   border-radius: 100%;
-   position: absolute;
-   filter: blur(5px);
-   animation: pulse2 1.5s infinite ease-out;
-   z-index: -1;
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-color: var(--point-b);
+  border-radius: 100%;
+  position: absolute;
+  filter: blur(5px);
+  animation: pulse2 1.5s infinite ease-out;
+  z-index: -1;
 }
 @keyframes pulse2 {
-   0% {
-      transform: scale(0.2);
-      opacity: 1;
-   }
-   70% {
-      transform: scale(1.5);
-      opacity: 0;
-   }
-   100% {
-      transform: scale(2);
-      opacity: 0;
-   }
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
 .spotmarker {
-   width: 25px;
-   height: 25px;
-   background-color: var(--subcolor-d);
-   color: var(--subcolor-m);
-   line-height: 1.5;
-   border: 1px solid #ffffff;
-   border-radius: 100%;
-   text-align: center;
+  width: 25px;
+  height: 25px;
+  background-color: var(--subcolor-d);
+  color: var(--subcolor-m);
+  line-height: 1.5;
+  border: 1px solid #ffffff;
+  border-radius: 100%;
+  text-align: center;
 }

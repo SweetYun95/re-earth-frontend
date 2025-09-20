@@ -9,7 +9,7 @@ export default function ProductDetailPage() {
    const [product, setProduct] = useState(null)
    const [loading, setLoading] = useState(true)
    const [quantity, setQuantity] = useState(1)
-   const [userPoints, setUserPoints] = useState(7000) // 임시 사용자 포인트
+   const [userPoints, setUserPoints] = useState(150000) // 임시 사용자 포인트
 
    useEffect(() => {
       // 실제로는 API 호출
