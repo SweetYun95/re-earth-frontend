@@ -1,6 +1,5 @@
 // re-earth-frontend/src/pages/user/Login/LoginPage.jsx
-import AdminLoginForm from './AdminLoginForm'
-import UserLoginForm from './UserLoginForm'
+import LoginForm from './LoginForm'
 import './login.scss'
 
 function LoginPage() {
@@ -10,8 +9,7 @@ function LoginPage() {
             <div id="area" className="container">
                <div id="login">
                   <h2>로그인하기</h2>
-                  <UserLoginForm />
-                  <AdminLoginForm />
+                  <LoginForm />
                </div>
             </div>
          </section>
