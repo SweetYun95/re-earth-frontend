@@ -57,12 +57,6 @@ export default function AppRouter() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/finding" element={<FindingPage />} />
-
-            {/* 포인트샵 - 공개 페이지 */}
-            <Route path="/pointshop" element={<PointShopPage />} />
-            {/* <Route path="/pointshop/:id" element={<ProductDetailPage />} /> */}
-            <Route path="/items/list" element={<ItemSellListPage />} />
-            <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
          </Route>
 
          {/* 로그인 유저 전용 */}
@@ -70,10 +64,21 @@ export default function AppRouter() {
             <Route path="/user" element={<MainPage />} />
             <Route path="/user/my" element={<MyPage />} />
             <Route path="/user/my/edit" element={<ProfileEditPage />} />
+
+            {/* 포인트샵 - 공개 페이지 */}
+            <Route path="/pointshop" element={<PointShopPage />} />
+            {/* <Route path="/pointshop/:id" element={<ProductDetailPage />} /> */}
+            <Route path="/items/list" element={<ItemSellListPage />} />
+            <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
+            {/* 기부페이지 */}
             <Route path="/donate/info" element={<DonationInfoPage />} />
             <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
             <Route path="/donate" element={<DonationPage />} />
+
+            {/* 고객센터 */}
             <Route path="/inquiry/new" element={<InquiryForm />} />
+
+            {/* 인증/적립 */}
             <Route path="/saving/map" element={<SavingMap />} />
             <Route path="/saving/bicycle" element={<SavingBicycle />} />
             <Route path="/saving/point" element={<CalcPointPage />} />
