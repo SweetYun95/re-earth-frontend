@@ -1,4 +1,4 @@
-import React from 'react';
+// re-earth-frontend/src/components/main/HeroBanner.jsx
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import ArrowIcon from '../common/ArrowIcon';

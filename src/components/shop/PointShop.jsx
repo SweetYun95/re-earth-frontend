@@ -1,9 +1,9 @@
-import React from 'react'
-import './PointShop.scss'
+// re-earth-frontend/src/components/shop/PointShop.jsx
 import cupImage from '../../assets/images/친환경컵.png'
 import towelImage from '../../assets/images/친환경수건.png'
 import chargerImage from '../../assets/images/태양광충전기.png'
 import lampImage from '../../assets/images/나무조명.png'
+import './PointShop.scss'
 
 const ITEMS = [
    {

@@ -70,6 +70,7 @@ export default function AppRouter() {
             {/* <Route path="/pointshop/:id" element={<ProductDetailPage />} /> */}
             <Route path="/items/list" element={<ItemSellListPage />} />
             <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
+            
             {/* 기부페이지 */}
             <Route path="/donate/info" element={<DonationInfoPage />} />
             <Route path="/donate/complete/:id" element={<DonationCompletePage />} />

@@ -1,4 +1,4 @@
-import React from 'react';
+// re-earth-frontend/src/components/common/ArrowIcon.jsx
 import './ArrowIcon.scss';
 
 const ArrowIcon = ({ 
