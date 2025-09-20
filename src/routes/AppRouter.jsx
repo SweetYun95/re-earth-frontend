@@ -39,8 +39,8 @@ import ItemSellListPage from '../pages/user/Item/ItemSellListPage'
 import ItemSellDetailPage from '../pages/user/Item/ItemSellDetailPage'
 
 // 관리자 페이지
-import AdminPage from '../pages/admin/AdminPage'
-import ItemCreatePage from '../pages/admin/ItemCreate/ItemCreatePage'
+import AdminPage from '../pages/Admin/AdminPage'
+import ItemCreatePage from '../pages/Admin/ItemCreate/ItemCreatePage'
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
