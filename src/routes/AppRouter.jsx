@@ -40,7 +40,7 @@ import ItemSellDetailPage from '../pages/user/Item/ItemSellDetailPage'
 
 // 관리자 페이지
 import AdminPage from '../pages/Admin/AdminPage'
-import ItemCreatePage from '../pages/Admin/ItemCreate/ItemCreatePage'
+import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
 
 // Extra
 import LoadingPage from '../pages_extra/Unloaded/LoadingPage'
