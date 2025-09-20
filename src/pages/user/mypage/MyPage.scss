@@ -1,0 +1,375 @@
+.mypage {
+  min-height: 100vh;
+  background-color: var( --bg-gray);
+  
+  &__container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  // 사이드바
+  &__sidebar {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    align-self: flex-start;
+    box-sizing: border-box;
+  }
+
+  &__sidebar__card__list {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+  }
+
+  // 홈 버튼
+  &__home-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__home-btn {
+    padding: 4px 8px;
+    background: none;
+    border: none;
+    color: var(--maincolor);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: inline-block;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: var(--point-b);
+    }
+  }
+
+  &__profile__card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__card {
+    background-color: var(--subcolor-m);
+    border-radius: var(--border-radius);
+    padding: 8px;
+  }
+
+
+  &__avatar {
+    min-height: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+
+  &__user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__username {
+    font-weight: 600;
+    color: var(--maintext);
+  }
+
+  &__edit-profile {
+    background: none;
+    text-decoration: none;
+    color: var(--subtext);
+    padding: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: var(--point-y);
+      border: none;
+      color: #fff;
+    }
+  }
+
+  &__sprout {
+    span {
+      font-size: 0.875rem;
+      color: var(--maintext);
+    }
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--subcolor-m);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    width: 60%;
+    height: 100%;
+    background-color: var(--subcolor-d);
+    border-radius: 4px;
+  }
+
+  &__practice-count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    
+    span {
+      font-size: 0.875rem;
+      color: var(--maintext);
+    }
+    
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: 0;
+    }
+  }
+
+  &__count-number {
+    color: var(--point-b);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  &__point-balance {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--maintext);
+    }
+  }
+
+  &__point-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--maintext);
+    margin-bottom: 15px;
+  }
+
+  &__collect-points {
+    width: 100%;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    
+    img {
+      width: 16px;
+      height: 16px;
+      border-radius: 0;
+    }
+  }
+
+  &__carbon-reduction {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--maintext);
+    }
+    
+    p {
+      font-size: 0.875rem;
+      color: var(--subtext);
+      margin-bottom: 15px;
+    }
+  }
+
+  &__tree-icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__tree {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    opacity: 0.3;
+    
+    &--filled {
+      opacity: 1;
+    }
+  }
+
+  &__bottom-links {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__link {
+    color: var(--subtext);
+    font-size: 0.875rem;
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--maintext);
+      text-decoration: underline;
+    }
+  }
+
+  // 메인 컨텐츠
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  &__tabs {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-gray);
+    z-index: 10;
+    padding: 10px 0;
+    
+    .nav-tabs {
+      display: flex;
+      width: 100%;
+      gap: 8px;
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    
+    .nav-item {
+      flex: 1;
+      
+      .nav-link {
+        width: 100%;
+        text-align: center;
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--subtext);
+        background-color: #ffff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+        &:hover {
+          color: var(--maintext);
+        }
+        
+        &.active {
+          color: var(--maintext);
+          font-weight: 600;
+          background-color: var(--maincolor);
+        }
+      }
+    }
+  }
+
+
+  &__content {
+    // 탭 컨텐츠 영역
+    padding: 30px;
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-top: 0;
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .mypage {
+    &__container {
+      flex-direction: column;
+    }
+    
+    &__sidebar {
+      width: 100%;
+      order: 2;
+      position: static;
+      height: auto;
+      overflow-y: visible;
+    }
+    
+    &__main {
+      order: 1;
+      padding: 20px;
+    }
+    
+    &__tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-gray);
+      z-index: 10;
+      padding: 10px 0;
+    }
+    
+    &__tab {
+      white-space: nowrap;
+      min-width: max-content;
+    }
+    
+  }
+}
+
+@media (max-width: 480px) {
+  .mypage {
+    &__sidebar {
+      padding: 20px 15px;
+    }
+    
+    &__main {
+      padding: 15px;
+    }
+    
+    &__profile {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    &__user-info {
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+  }
+}
+

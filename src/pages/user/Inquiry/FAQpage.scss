@@ -1,0 +1,115 @@
+.faq-area {
+   padding-top: 120px;
+   margin: 0 auto;
+}
+
+.faq {
+   width: 100%;
+   background-color: #ffffff;
+   border-radius: 20px;
+   padding: 40px;
+}
+
+.faq--tab {
+   margin: 40px auto;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   max-width: 780px;
+   background-color: var(--maincolor);
+   border-radius: 20px;
+}
+.faq--tab .tab {
+   padding: 15px 0;
+   width: 100%;
+   height: 100%;
+   max-height: 50px;
+   text-align: center;
+   font-family: var(--headings);
+   &:not(:last-child) {
+      border-right: 1px solid white;
+   }
+   &:hover {
+      cursor: pointer;
+      background-color: #b2d700;
+   }
+   &:hover:first-child {
+      border-radius: 20px 0 0 20px;
+   }
+   &:hover:last-child {
+      border-radius: 0 20px 20px 0;
+   }
+   &:hover:not(:first-child):not(:last-child) {
+      border-radius: 0;
+   }
+}
+.faq--tab .tab.active {
+   background-color: var(--subcolor-d);
+   color: var(--subcolor-m);
+   &:first-child {
+      border-radius: 20px 0 0 20px;
+   }
+   &:last-child {
+      border-radius: 0 20px 20px 0;
+   }
+}
+.faq--board--title {
+   padding: 0 40px;
+   & .board--toggle {
+      border-top: 2px dashed rgb(158, 158, 158);
+   }
+}
+
+.board--content,
+.board--toggle {
+   display: flex;
+   gap: 40px;
+   padding: 20px 0;
+   & :nth-child(2) {
+      width: 90%;
+   }
+   & p {
+      margin: 0;
+   }
+}
+
+.board--toggle {
+   max-height: 0;
+   padding: 0;
+   overflow: hidden;
+   opacity: 0;
+   transition: all 0.5s ease;
+   &.open {
+      max-height: 600px;
+      opacity: 1;
+      padding: 20px 0;
+   }
+}
+
+.board--toggle span {
+   color: var(--subcolor-d);
+}
+.board--toggle div {
+   white-space: pre-line;
+}
+
+.btn.link-btn {
+   width: 100%;
+   max-height: 60px;
+   border-radius: 20px;
+   display: flex;
+   align-items: center;
+   padding: 15px 20px;
+   gap: 40px;
+
+   & img {
+      width: 24px;
+      height: 24px;
+   }
+   & p {
+      width: 90%;
+      text-align: left;
+      margin: 0;
+   }
+}

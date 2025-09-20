@@ -1,0 +1,114 @@
+/* 포인트샵 상품 카드 */
+.product {
+  &__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background: transparent;
+    transition: all 0.3s ease;
+    height: auto;
+
+    // 카드 바디
+    &__body {
+      padding: 12px;
+      
+      // flex 레이아웃
+      &.d-flex.flex-column {
+        gap: 8px;
+      }
+      
+      .d-flex.flex-column {
+        gap: 8px;
+      }
+    }
+
+    // 카드 제목
+    &__title {
+      font-size: 16px;
+      color: var(--maintext);
+      
+      // 부트스트랩 유틸리티 클래스들
+      &.font-weight-bold {
+        font-weight: 700;
+      }
+      
+      &.text-ellipsis-1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      
+      &.mb-0 {
+        margin-bottom: 0;
+      }
+    }
+
+    // 포인트 표시 스타일
+   &__point {
+     color: var(--maintext);
+     font-weight: 500;
+     }
+
+    // 상품 이미지
+    img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      transition: all 0.3s ease;
+      
+      // 부트스트랩 이미지 클래스
+      &.img-fluid {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      &.rounded {
+        border-radius: var(--border-radius);
+      }
+    }
+
+    // 호버 효과
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow);
+
+      img {
+        transform: scale(1.05);
+      }
+
+      // 반짝이는 효과
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: shimmer 1.5s ease-in-out;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+// 부트스트랩 유틸리티 클래스 보완
+.mt-auto {
+  margin-top: auto;
+}
+
+// 반짝이는 애니메이션
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

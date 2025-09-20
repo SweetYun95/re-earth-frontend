@@ -1,0 +1,325 @@
+// TableContent.scss
+@import '../../assets/styles/commons.scss';
+
+.table-content {
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--maintext);
+  }
+
+  &__main {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__table-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sub-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  &__sub-tab {
+    background: none;
+    border: 2px solid #e9ecef;
+    width: 120px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--subtext);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: var(--maincolor);
+     color: var(--maintext);
+
+    }
+    
+    &--active {
+      background-color: var(--maincolor);
+      border-color: var(--maincolor);
+      color: var(--maintext);
+    }
+  }
+
+  &__filter-bar {
+    background-color: var(--point-r);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  &__filter-content {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+  }
+
+  &__filter-dropdown {
+    position: relative;
+  }
+
+  &__filter-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  &__filter-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--point-y);
+    border-radius: var(--border-radius);
+    z-index: 1000;
+    min-width: 300px;
+    margin-top: 8px;
+  }
+
+  &__filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  &__filter-clear {
+    background: none;
+    border: none;
+    color: var(--point-b);
+    font-size: 0.75rem;
+    cursor: pointer;
+    
+    &:hover {
+      font-weight: 700;
+    }
+  }
+
+  &__filter-options {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__filter-group .table-content__filter-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--maintext);
+  }
+
+  &__date-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__date-separator {
+    font-size: 0.875rem;
+    color: var(--subtext);
+    font-weight: 500;
+  }
+
+  &__amount-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input {
+      flex: 1;
+      min-width: 80px;
+    }
+  }
+
+  &__amount-separator {
+    font-size: 0.875rem;
+    color: var(--subtext);
+    font-weight: 500;
+  }
+
+  &__table-container {
+    flex: 1;
+    overflow-x: auto;
+    margin-bottom: 30px;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    th {
+      background-color: #f8f9fa;
+      padding: 15px 20px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--maintext);
+      font-size: 0.875rem;
+      white-space: nowrap;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    td {
+      padding: 15px 20px;
+      border-bottom: 1px solid #f8f9fa;
+      font-size: 0.875rem;
+      color: var(--maintext);
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr {
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: var(--bg-gray);
+      }
+    }
+  }
+
+  &__filter-icon {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__details-link {
+    background: none;
+    border: none;
+    color: var(--point-b);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__pagination-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__pagination-pages {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__pagination-page {
+    background: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--maintext);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: var(--subcolor-m);
+      border-color: var(--subcolor-d);
+    }
+    
+    &--active {
+      background-color: var(--subcolor-d);
+      border-color: var(--subcolor-d);
+      color: #ffffff;
+    }
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 991.98px) { // Bootstrap lg breakpoint
+  .table-content {
+    &__main {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    &__sub-tabs {
+      flex-direction: row;
+      width: 100%;
+      overflow-x: auto;
+      gap: 8px;
+    }
+    
+    &__sub-tab {
+      white-space: nowrap;
+      min-width: max-content;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+    }
+    
+    &__table {
+      font-size: 0.75rem;
+      
+      th, td {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) { // Bootstrap sm breakpoint
+  .table-content {
+    &__table {
+      th, td {
+        padding: 8px;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

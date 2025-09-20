@@ -1,0 +1,73 @@
+/* PrinmaryService.scss */
+
+:root {
+   --green-main: #72c63a;
+   --green-light: #d1e95d;
+   --green-bg: #f2f6eb;
+}
+
+.showcase {
+   text-align: center;
+   padding: 120px 24px 40px;
+
+   background: linear-gradient(to bottom, #d1e95d 0%, #ffffff 60%, #ffffff 100%);
+}
+
+.highlight-text {
+   font-size: clamp(20px, 3vw, 32px);
+   font-weight: 800;
+   color: #000;
+   text-shadow: none;
+}
+
+.ps-wrapper {
+   width: 100%;
+   padding: 40px 16px 56px;
+   background: #fff;
+}
+
+.ps-wrapper .container {
+   text-align: center;
+   margin-bottom: 24px;
+}
+
+/* 서비스 타이틀 */
+.service-text1 {
+   font-size: 18px;
+   color: #333;
+   margin-top: 8px;
+}
+
+.service-text2 {
+   font-size: 36px;
+   font-weight: 900;
+   margin-top: 10px;
+   color: #222;
+}
+
+/* 카드 레일 */
+.ps-rail {
+   display: flex;
+   justify-content: flex-end;
+   align-items: stretch;
+   gap: 16px;
+   flex-wrap: wrap;
+}
+
+/* 카드 */
+.ps-card {
+   flex: 0 0 auto;
+   width: clamp(200px, 26vw, 300px);
+   aspect-ratio: 4 / 3;
+   border-radius: 20px;
+   background: #fff;
+   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+   display: grid;
+   place-items: center;
+   padding: 16px;
+}
+.ps-card img {
+   max-width: 100%;
+   max-height: 100%;
+   object-fit: contain;
+}

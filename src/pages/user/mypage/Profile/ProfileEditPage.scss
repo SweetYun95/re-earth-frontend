@@ -1,0 +1,131 @@
+.profile-edit {
+  min-height: 100vh;
+  background-color: var(--subcolor-m);
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--maintext);
+    padding: 8px 15px;
+  }
+
+  &__content {
+    min-height: calc(100vh - 60px);
+  }
+
+  &__left {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    padding: 40px 20px;
+    max-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__avatar-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__right {
+    min-height: calc(100vh - 60px);
+  }
+
+
+
+  &__form {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+// 커스텀 모달 스타일 (부트스트랩과 구분)
+.profile-edit .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.profile-edit .modal-content {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  border: 2px solid #dee2e6;
+  
+}
+
+.password-change-form {
+  text-align: left;
+  margin-bottom: 30px;
+
+}
+
+.profile-edit .modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .profile-edit {
+    &__content {
+      flex-direction: column;
+    }
+
+    &__left {
+      width: 100%;
+      padding: 30px 20px;
+    }
+
+    &__right {
+      padding: 30px 20px;
+    }
+
+    &__input-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__phone-group {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}
