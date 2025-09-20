@@ -1,44 +1,55 @@
 section {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .error {
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .error--img {
-   padding-right: 50px;
+  padding-right: 50px;
 }
 
 .error--text {
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .error--text a {
-   font-weight: 700;
-   @media (max-width: 768px) {
-      width: 100%;
-      margin: 40px auto;
-   }
+  font-weight: 700;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 40px auto;
+  }
 }
 
 .error--text p {
-   margin-bottom: 0;
+  margin-bottom: 0;
 }
 .error--text p:nth-child(1) {
-   font-size: 3rem;
-   font-weight: 700;
-   color: var(--maintext);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--maintext);
 }
 .error--text p:nth-child(2) {
-   font-size: 2rem;
-   color: var(--maintext);
+  font-size: 2rem;
+  color: var(--maintext);
 }
 .error--text p:nth-child(3) {
-   font-size: 1.5rem;
-   color: var(--subtext);
+  font-size: 1.5rem;
+  color: var(--subtext);
+}
+.underconstruction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & h3 {
+    font-size: 1.75rem;
+  }
+  & h4 {
+    color: var(--subtext);
+  }
 }
