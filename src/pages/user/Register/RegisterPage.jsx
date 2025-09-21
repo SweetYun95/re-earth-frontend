@@ -126,11 +126,12 @@ export default function RegisterPage() {
             password: form.password,
             phoneNumber,
          }
-         const res = await registerUser(payload).then(() => {
-            alert('회원가입이 완료되었습니다!')
-            console.log('가입 결과:', res.data)
-            navigate('/login')
-         })
+
+         const res = await registerUser(payload)
+         console.log('가입 결과:', res.data)
+
+         alert('회원가입이 완료되었습니다!')
+         navigate('/login', { replace: true })
       } catch (err) {
          const msg = err?.response?.data?.message || '회원가입 중 오류가 발생했습니다.'
          alert(msg)

@@ -19,9 +19,9 @@ export default function PrimaryService() {
          </section>
 
          <section className="ps-wrapper">
-            <div class="container">
-               <div class="service-text1">이렇게 해결할 수 있어요.</div>
-               <div class="service-text2">Primary Service</div>
+            <div className="container">
+               <div className="service-text1">이렇게 해결할 수 있어요.</div>
+               <div className="service-text2">Primary Service</div>
             </div>
             <div className="ps-rail">
                {slides.map((src, idx) => (
