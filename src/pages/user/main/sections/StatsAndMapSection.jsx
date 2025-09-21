@@ -78,7 +78,7 @@ export default function StatsAndMapSection() {
                       Community
                     </h5>
                     {/* 커뮤니티페이지이동 */}
-                    <a href="#">
+                    <a href="/readysoon">
                       <ArrowIcon variant="section" size={32} />
                     </a>
                   </div>
@@ -103,14 +103,14 @@ export default function StatsAndMapSection() {
               <div className="custom-card-body map-custom-card-content">
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <h5 className="custom-card-title font-weight-bold mb-0 mr-2">
-                    내 주변 수거함
+                    내 주변 따릉이 대여소
                   </h5>
-                  <a href="#">
+                  <a href="/saving/map">
                     <ArrowIcon variant="section" size={32} />
                   </a>
                 </div>
                 <p className="text-muted mb-3">
-                  간편하게 내 주변 수거함을 찾아보세요
+                  간편하게 내 주변 따릉이 대여소를 찾아보세요
                 </p>
                 <MapComponent position={position} setPosition={setPosition} />
               </div>
