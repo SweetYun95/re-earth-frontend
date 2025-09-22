@@ -22,8 +22,16 @@ const reEarth = axios.create({
 reEarth.interceptors.request.use(
    (config) => {
       const token = localStorage.getItem('token')
-      if (token) {
-         // 서버가 Bearer 토큰을 인식할 때만 사용하세요.
+
+      // ✅ 로그인/회원가입/내정보 요청에는 Authorization 헤더를 붙이지 않는다
+      // - /auth/login
+      // - /auth/register
+      // - /auth/me
+      const url = (config.url || '').toString()
+      const skipAuthHeader = /\/auth\/(login|register|me)\b/i.test(url)
+
+      if (token && !skipAuthHeader) {
+         // 서버가 Bearer 토큰을 인식할 때만 아래 중 하나 선택
          config.headers.Authorization = `${token}`
          // config.headers.Authorization = `Bearer ${token}`
       }
@@ -32,7 +40,7 @@ reEarth.interceptors.request.use(
    (error) => Promise.reject(error)
 )
 
-// ✅ 응답 인터셉터 추가
+// ✅ 응답 인터셉터
 reEarth.interceptors.response.use(
    (response) => response,
    (error) => {
