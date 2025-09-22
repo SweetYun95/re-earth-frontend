@@ -36,7 +36,8 @@ export default function StatsAndMapSection() {
                       <br />
                       달성시 <span className="text-warning">nn P</span> 적립
                     </p>
-                    <button className="btn-point">미션 시작하기 →</button>
+                    <button className="btn-point">
+                      <a href="/readysoon">미션 시작하기 →</a></button>
                   </div>
                 </div>
               </div>

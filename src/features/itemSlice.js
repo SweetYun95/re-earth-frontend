@@ -4,10 +4,13 @@ import { createItem, updateItem, deleteItem, getItems, getItemById } from '../ap
 //상품등록
 export const createItemThunk = createAsyncThunk('items/createItem', async (itemData, { rejectWithValue }) => {
    try {
-      console.log('itemData:', itemData)
+      console.log('🔄 createItemThunk 시작...')
+      console.log('📤 itemData:', itemData)
       const response = await createItem(itemData)
+      console.log('✅ createItemThunk 성공, response:', response)
       return response.data.item
    } catch (error) {
+      console.error('❌ createItemThunk 실패:', error)
       return rejectWithValue(error.response?.data?.message || '상품 등록 실패')
    }
 })
@@ -33,9 +36,12 @@ export const deleteItemThunk = createAsyncThunk('items/deleteItem', async (id, {
 // 전체 상품 리스트 가져오기
 export const fetchItemsThunk = createAsyncThunk('items/getItems', async (_, { rejectWithValue }) => {
    try {
+      console.log('🔄 fetchItemsThunk 시작...')
       const items = await getItems() // getItems가 이미 배열을 반환함
+      console.log('✅ fetchItemsThunk 성공, items:', items)
       return items // << 배열 그대로 반환
    } catch (error) {
+      console.error('❌ fetchItemsThunk 실패:', error)
       return rejectWithValue(error.response?.data?.message || '전체 상품 리스트 가져오기 실패')
    }
 })
