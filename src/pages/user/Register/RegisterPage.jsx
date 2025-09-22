@@ -136,6 +136,7 @@ export default function RegisterPage() {
       .filter(Boolean)
       .join("-");
 
+<<<<<<< HEAD
     try {
       const payload = {
         ...(userId ? { userId } : {}), // 입력 시 보존, 미입력 시 서버 훅에서 자동 생성
@@ -156,6 +157,28 @@ export default function RegisterPage() {
       alert(msg);
     }
   };
+=======
+      try {
+         const payload = {
+            ...(userId ? { userId } : {}), // 입력 시 보존, 미입력 시 서버 훅에서 자동 생성
+            name: form.nick.trim(),
+            email: form.email.trim().toLowerCase(),
+            address,
+            password: form.password,
+            phoneNumber,
+         }
+
+         const res = await registerUser(payload)
+         console.log('가입 결과:', res.data)
+
+         alert('회원가입이 완료되었습니다!')
+         navigate('/login', { replace: true })
+      } catch (err) {
+         const msg = err?.response?.data?.message || '회원가입 중 오류가 발생했습니다.'
+         alert(msg)
+      }
+   }
+>>>>>>> a8e8adc8150a987c33332d5fedec4489ec12900d
 
   return (
     <section id="main1">

@@ -31,10 +31,10 @@ export const deleteItemThunk = createAsyncThunk('items/deleteItem', async (id, {
    }
 })
 // 전체 상품 리스트 가져오기
-export const fetchItemsThunk = createAsyncThunk('items/getItems', async (data, { rejectWithValue }) => {
+export const fetchItemsThunk = createAsyncThunk('items/getItems', async (_, { rejectWithValue }) => {
    try {
-      const response = await getItems(data)
-      return response.data
+      const items = await getItems() // getItems가 이미 배열을 반환함
+      return items // << 배열 그대로 반환
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '전체 상품 리스트 가져오기 실패')
    }

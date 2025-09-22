@@ -34,11 +34,13 @@ import ProfileEditPage from "../pages/user/mypage/Profile/ProfileEditPage";
 
 // 마켓 페이지
 import PointShopPage from "../pages/market/PointShopPage";
-import ProductDetailPage from "../pages/market/ProductDetailPage";
+// import ProductDetailPage from '../pages/market/ProductDetailPage'
+import ItemSellListPage from "../pages/user/Item/ItemSellListPage";
+import ItemSellDetailPage from "../pages/user/Item/ItemSellDetailPage";
 
 // 관리자 페이지
-import AdminPage from "../pages/admin/AdminPage";
-import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
+import AdminPage from '../pages/Admin/AdminPage'
+import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
 
 // Extra
 import LoadingPage from "../pages_extra/Unloaded/LoadingPage";
@@ -49,37 +51,46 @@ export default function AppRouter() {
   return (
     <Routes>
       {/* 손님 전용(로그인/회원가입/FAQ 등 공개 페이지) */}
-      {/* <Route element={<GuestOnly />}> */}
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/faq" element={<FAQPage />} />
-      <Route path="/finding" element={<FindingPage />} />
-
-      {/* 포인트샵 - 공개 페이지 */}
-      <Route path="/pointshop" element={<PointShopPage />} />
-      <Route path="/pointshop/:id" element={<ProductDetailPage />} />
-      {/* </Route> */}
+      <Route element={<GuestOnly />}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/finding" element={<FindingPage />} />
+      </Route>
 
       {/* 로그인 유저 전용 */}
-      {/* <Route element={<UserOnly />}> */}
-      <Route path="/user" element={<MainPage />} />
-      <Route path="/user/my" element={<MyPage />} />
-      <Route path="/user/my/edit" element={<ProfileEditPage />} />
-      <Route path="/donate/info" element={<DonationInfoPage />} />
-      <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
-      <Route path="/donate" element={<DonationPage />} />
-      <Route path="/inquiry/new" element={<InquiryForm />} />
-      <Route path="/saving/map" element={<SavingMap />} />
-      <Route path="/saving/bicycle" element={<SavingBicycle />} />
-      <Route path="/saving/point" element={<CalcPointPage />} />
-      {/* </Route> */}
+      <Route element={<UserOnly />}>
+        <Route path="/user" element={<MainPage />} />
+        <Route path="/user/my" element={<MyPage />} />
+        <Route path="/user/my/edit" element={<ProfileEditPage />} />
 
-      {/* 관리자 전용 (임시 주석처리) */}
-      {/* <Route element={<AdminOnly />}> */}
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/items/create" element={<ItemCreatePage />} />
-      {/* </Route> */}
+        {/* 포인트샵 - 공개 페이지 */}
+        <Route path="/pointshop" element={<PointShopPage />} />
+        {/* <Route path="/pointshop/:id" element={<ProductDetailPage />} /> */}
+        <Route path="/items/list" element={<ItemSellListPage />} />
+        <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
+
+        {/* 기부페이지 */}
+        <Route path="/donate/info" element={<DonationInfoPage />} />
+        <Route path="/donate/complete/:id" element={<DonationCompletePage />} />
+        <Route path="/donate" element={<DonationPage />} />
+
+        {/* 고객센터 */}
+        <Route path="/inquiry/new" element={<InquiryForm />} />
+        <Route path="/inquiry/faq" element={<FAQPage />} />
+
+        {/* 인증/적립 */}
+        <Route path="/saving/map" element={<SavingMap />} />
+        <Route path="/saving/bicycle" element={<SavingBicycle />} />
+        <Route path="/saving/point" element={<CalcPointPage />} />
+      </Route>
+
+      {/* 관리자 전용 */}
+      <Route element={<AdminOnly />}>
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/items/create" element={<ItemCreatePage />} />
+      </Route>
 
       {/* 유틸 페이지 */}
       <Route path="/loading" element={<LoadingPage />} />

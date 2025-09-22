@@ -1,124 +1,127 @@
 /* ========== Section Title Colors ========== */
 .main--section__title--pointshop,
 .main--section__title--news {
-  color: var(--point-r); 
+  color: var(--point-r);
 }
 
 .main--section__title--support {
-  color: var(--point-b) ; 
+  color: var(--point-b);
 }
 
 /* Hero */
 .main-hero {
-  background: linear-gradient(180deg, rgba(209,233,93,.80) 0%, rgba(255, 255, 255, 100%) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(209, 233, 93, 0.8) 0%,
+    rgba(255, 255, 255, 100%) 100%
+  );
   height: 100%;
 }
 
-
 /* ========== StatsAndMapSection ========== */
 .main--stats {
-   background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .custom-card {
-   background-color: var(--subcolor-m);
-   border-radius: var(--border-radius);
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   min-height: 230px;
-   padding: 20px;
-   margin: 0;
-   box-shadow: var( --box-shadow);
-   transition: all 0.3s ease;
-   cursor: pointer;
-   
-   &:hover {
-     transform: translateY(-4px);
-     box-shadow: var(--box-shadow);
-   }
-   
-   &:active {
-     transform: translateY(-2px);
-   }
+  background-color: var(--subcolor-m);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+  padding: 20px;
+  margin: 0;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
 }
 
 .custom-card-content {
-   padding: 1.5rem;
+  padding: 1.5rem;
 }
 
 .custom-card-text {
-   margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .custom-card-body {
-   flex: unset;
-   padding: 0;
+  flex: unset;
+  padding: 0;
 }
 
-
 .col-md-6 .custom-card .custom-card-content {
-   height: 100%;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* 커스텀 카드 색상 클래스 */
-body .section .custom-card.custom-card-green-bg { 
-   background: var(--subcolor-d) ; 
-   color: #fff;
+body .section .custom-card.custom-card-green-bg {
+  background: var(--subcolor-d);
+  color: #fff;
 }
-body .section .custom-card.custom-card-green-border { 
-   border-color: var(--subcolor-d) ; 
+body .section .custom-card.custom-card-green-border {
+  border-color: var(--subcolor-d);
 }
-body .section .custom-card.custom-card-yellow-bg { 
-   background: #FFE4B5 ; 
+body .section .custom-card.custom-card-yellow-bg {
+  background: #ffe4b5;
 }
 
-body .section .custom-card.map-custom-card-green-bg { 
-background-color: var(--maincolor) ; 
-
+body .section .custom-card.map-custom-card-green-bg {
+  background-color: var(--maincolor);
 }
 
 /* 텍스트 색상 클래스 */
-body .text-green { color: var(--subcolor-d) ; }
-body .text-white { color: #fff; }
-
+body .text-green {
+  color: var(--subcolor-d);
+}
+body .text-white {
+  color: #fff;
+}
 
 /* 미션 버튼 - commons.scss로 이동됨 */
 
 /* 나무 아이콘 */
 .tree-icon {
-   width: 24px;
-   height: 24px;
-   margin-right: 4px;
-   
-   svg {
-     width: 100%;
-     height: 100%;
-     
-     path {
-       fill: #fff; /* 기본 흰색 */
-       transition: fill 0.3s ease;
-     }
-   }
-   
-   &.active svg path {
-     fill: var(--subcolor-d); /* 활성화된 나무는 초록색 */
-   }
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: #fff; /* 기본 흰색 */
+      transition: fill 0.3s ease;
+    }
+  }
+
+  &.active svg path {
+    fill: var(--subcolor-d); /* 활성화된 나무는 초록색 */
+  }
 }
 
 /* 커뮤니티 */
 .community-custom-card {
-   border-radius: var(--border-radius);
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
-   min-height: 230px;
-   height: 100%;
-   cursor: pointer;
-
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 230px;
+  height: 100%;
+  cursor: pointer;
 }
 
 .community-title {
@@ -129,37 +132,35 @@ body .text-white { color: #fff; }
   padding: 10px;
   border-radius: var(--border-radius);
   transition: all 0.3s ease;
-  
 
-     &:hover {
-     transform: translateY(-4px);
-     box-shadow: var(--box-shadow);
-   }
-   
-   &:active {
-     transform: translateY(-2px);
-   }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
 }
 
 .community-feed {
-   padding: 10px;
-   height: 80%;
-   border-radius: var(--border-radius);
-   background-color: #FFE7AA; //연한 --point-y
-   display: flex;
-   flex-direction: column;
-   justify-content: space-around;
-   transition: all 0.3s ease;
+  padding: 10px;
+  height: 80%;
+  border-radius: var(--border-radius);
+  background-color: #ffe7aa; //연한 --point-y
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: all 0.3s ease;
 
-      
-   &:hover {
-     transform: translateY(-4px);
-     box-shadow: var(--box-shadow);
-   }
-   
-   &:active {
-     transform: translateY(-2px);
-   }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
 }
 /* ========== pointshop ========== */
 .main--pointshop {
@@ -168,30 +169,30 @@ body .text-white { color: #fff; }
 
 /* ========== news ========== */
 .main-news {
-   background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 /* 뉴스 카드 호버 효과 */
 .news--card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--border-radius); 
+  border-radius: var(--border-radius);
   background: #fff;
   padding: 1rem;
   transition: all 0.3s ease;
-  
+
   &:hover {
     background: var(--maincolor); /* 포인트 연두색 배경 */
     transform: translateY(-2px);
-    box-shadow: var( --box-shadow);
+    box-shadow: var(--box-shadow);
   }
 }
 
 /* 뉴스 카드 */
-.news--card .news--card__img { 
-   border-radius: var(--border-radius); 
-   aspect-ratio: 1/1;
-   object-fit:cover; 
+.news--card .news--card__img {
+  border-radius: var(--border-radius);
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 /* Swiper 기본 네비게이션 스타일 조정 */
@@ -201,12 +202,12 @@ body .text-white { color: #fff; }
     color: var(--subcolor-d);
     width: 40px;
     height: 40px;
-    
+
     &:after {
       font-size: 20px;
       font-weight: bold;
     }
-    
+
     &:hover {
       color: var(--maincolor);
     }
@@ -215,16 +216,16 @@ body .text-white { color: #fff; }
 
 /* ============ SupportSection ========= */
 .main-support {
-   background-color: var(--subcolor-m);
-   
-   .support-icon {
-     width: 100%;
-     height: 100px;
-     object-fit: contain;
-     display: flex;
-     justify-content: end;
-   }
-   
+  background-color: var(--subcolor-m);
+
+  .support-icon {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    display: flex;
+    justify-content: end;
+  }
+
   /* 카드 커스터마이징 */
   .support-card {
     border: none;
@@ -232,46 +233,46 @@ body .text-white { color: #fff; }
     transition: all 0.3s ease;
     background: #fff;
     cursor: pointer;
-    
+
     &:hover {
       transform: translateY(-4px);
       box-shadow: var(--box-shadow);
     }
-    
+
     &:active {
       transform: translateY(-2px);
       box-shadow: var(--box-shadow);
     }
-     
-     .support-card-body {
-       padding: 2rem;
-       text-align: left;
-       
-       .support-card-title {
-         color: var(--maintext);
-         font-size: 1.1rem;
-         margin-bottom: 0.75rem;
-       }
-       
-       .support-card-text {
-         color: #666;
-         line-height: 1.5;
-         margin-bottom: 1rem;
-       }
-     }
-   }
+
+    .support-card-body {
+      padding: 2rem;
+      text-align: left;
+
+      .support-card-title {
+        color: var(--maintext);
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .support-card-text {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+    }
+  }
 }
 
 /* 하단 앱 배너 */
-.app-cta { 
-  background:var( --maincolor) ;
-  
+.app-cta {
+  background: var(--maincolor);
+
   img {
     max-width: 100%;
     height: auto;
     display: block;
   }
-  
+
   h4 {
     color: var(--maintext);
   }
@@ -285,7 +286,8 @@ body .text-white { color: #fff; }
 
 /* phone 살짝 흔들리는 애니메이션 키프레임 */
 @keyframes phoneShake {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(20deg);
   }
   25% {
@@ -299,8 +301,13 @@ body .text-white { color: #fff; }
   }
 }
 
-
 /* 반응형 */
 @media (max-width: 991.98px) {
-  .section { padding:48px 0; }
+  .section {
+    padding: 48px 0;
+  }
+}
+
+.app-cta .qr-image {
+  max-width: 120px;
 }
