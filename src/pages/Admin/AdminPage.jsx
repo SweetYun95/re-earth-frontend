@@ -13,7 +13,7 @@ import PartnershipContent from '../../components/admin/PartnershipContent'
 import EventManagementContent from '../../components/admin/EventManagementContent'
 import CustomerServiceContent from '../../components/admin/CustomerServiceContent'
 import SettingsContent from '../../components/admin/SettingsContent'
-
+import profile from '../../assets/icons/profile.png'
 import './AdminPage.scss'
 
 const AdminPage = () => {
@@ -71,7 +71,7 @@ const AdminPage = () => {
                      {/* 프로필 섹션 */}
                      <div className="admin-page__profile">
                         <div className="admin-page__avatar">
-                           <img src="/src/assets/icons/profile.png" alt="관리자" />
+                           <img src={profile} alt="관리자" />
                         </div>
                         <span className="admin-page__username">관리자</span>
                      </div>
