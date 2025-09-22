@@ -21,6 +21,7 @@ import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
 import DonationPage from "../pages/user/Donate/DonationPage";
 import DonationCompletePage from "../pages/user/Donate/DonationCompletePage";
 // 인증/적립
+import SavingInfoPage from "../pages/user/saving/SavingInfoPage";
 import SavingMap from "../pages/user/saving/SavingMap";
 import SavingBicycle from "../pages/user/saving/SavingBicycle";
 import CalcPointPage from "../pages_extra/Point/CalcPointPage";
@@ -34,9 +35,7 @@ import ProfileEditPage from "../pages/user/mypage/Profile/ProfileEditPage";
 
 // 마켓 페이지
 import PointShopPage from "../pages/market/PointShopPage";
-// import ProductDetailPage from '../pages/market/ProductDetailPage'
-import ItemSellListPage from "../pages/user/Item/ItemSellListPage";
-import ItemSellDetailPage from "../pages/user/Item/ItemSellDetailPage";
+import ItemDetailPage from '../pages/market/ItemDetailPage'
 
 // 관리자 페이지
 import AdminPage from '../pages/Admin/AdminPage'
@@ -60,16 +59,14 @@ export default function AppRouter() {
       </Route>
 
       {/* 로그인 유저 전용 */}
-      <Route element={<UserOnly />}>
+       <Route element={<UserOnly />}> 
         <Route path="/user" element={<MainPage />} />
         <Route path="/user/my" element={<MyPage />} />
         <Route path="/user/my/edit" element={<ProfileEditPage />} />
 
         {/* 포인트샵 - 공개 페이지 */}
         <Route path="/pointshop" element={<PointShopPage />} />
-        {/* <Route path="/pointshop/:id" element={<ProductDetailPage />} /> */}
-        <Route path="/items/list" element={<ItemSellListPage />} />
-        <Route path="/items/detail/:id" element={<ItemSellDetailPage />} />
+        <Route path="/pointshop/detail/:id" element={<ItemDetailPage/>} />
 
         {/* 기부페이지 */}
         <Route path="/donate/info" element={<DonationInfoPage />} />
@@ -81,16 +78,17 @@ export default function AppRouter() {
         <Route path="/inquiry/faq" element={<FAQPage />} />
 
         {/* 인증/적립 */}
+        <Route path="/saving/info" element={<SavingInfoPage />} />
         <Route path="/saving/map" element={<SavingMap />} />
         <Route path="/saving/bicycle" element={<SavingBicycle />} />
         <Route path="/saving/point" element={<CalcPointPage />} />
-      </Route>
+       </Route> 
 
       {/* 관리자 전용 */}
-      <Route element={<AdminOnly />}>
+       <Route element={<AdminOnly />}> 
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/items/create" element={<ItemCreatePage />} />
-      </Route>
+       </Route> 
 
       {/* 유틸 페이지 */}
       <Route path="/loading" element={<LoadingPage />} />

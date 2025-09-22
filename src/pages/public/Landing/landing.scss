@@ -305,9 +305,9 @@ body {
 
 /* ========== Solution section========== */
 .panel:has(.cards-swiper) {
-   height: auto; /* 100dvh 오버라이드 → 내용 높이만큼 */
-   min-height: 0;
-   place-items: start center; /* 세로 가운데 정렬 → 위쪽 정렬로 변경 */
+   height: 100vh; /* 100dvh로 복원 */
+   min-height: 100vh;
+   place-items: center center; /* 세로 가운데 정렬로 복원 */
    margin-top: -40px;
 }
 
@@ -317,6 +317,9 @@ body {
    padding-top: 120px;
    padding-bottom: 120px;
    scroll-snap-align: start;
+   height: 100vh;
+   min-height: 100vh;
+   overflow: hidden;
 }
 .randing--section__title {
    width: 100%;
@@ -632,10 +635,105 @@ body {
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
       color: var(--point-b); /* ← 글자색 변화 없음 보강 */
       border-color: #fff; /* ← 보더도 고정 */
+      animation-play-state: paused; /* 호버 시 애니메이션 일시정지 */
    }
    &:active {
       transform: translateY(0);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+   }
+}
+
+/* 둥둥 떠있는 버튼 애니메이션 */
+.floating-btn {
+   position: relative;
+   animation: floating-carbon 3s ease-in-out infinite;
+   
+   &:hover {
+      animation-play-state: paused; /* 호버 시 애니메이션 일시정지 */
+   }
+}
+
+/* 둥둥 떠있는 키프레임 애니메이션 */
+@keyframes floating-carbon {
+   0% {
+      transform: translateY(0px);
+   }
+   50% {
+      transform: translateY(-12px);
+   }
+   100% {
+      transform: translateY(0px);
+   }
+}
+
+/* 부가 효과: 그림자 애니메이션 */
+.carbon-point__cta .floating-btn::before {
+   content: '';
+   position: absolute;
+   bottom: -15px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 70%;
+   height: 8px;
+   background: rgba(0, 0, 0, 0.1);
+   border-radius: 50%;
+   filter: blur(6px);
+   animation: shadow-floating-carbon 3s ease-in-out infinite;
+}
+
+@keyframes shadow-floating-carbon {
+   0% {
+      opacity: 0.2;
+      transform: translateX(-50%) scale(1);
+   }
+   50% {
+      opacity: 0.1;
+      transform: translateX(-50%) scale(0.8);
+   }
+   100% {
+      opacity: 0.2;
+      transform: translateX(-50%) scale(1);
+   }
+}
+
+/* 모바일에서 floating 애니메이션 조정 */
+@media (max-width: 768px) {
+   @keyframes floating-carbon {
+      0% {
+         transform: translateY(0px);
+      }
+      50% {
+         transform: translateY(-6px);
+      }
+      100% {
+         transform: translateY(0px);
+      }
+   }
+   
+   .carbon-point__cta .floating-btn::before {
+      bottom: -8px;
+      height: 5px;
+   }
+}
+
+/* 작은 모바일에서 floating 애니메이션 더 축소 */
+@media (max-width: 576px) {
+   @keyframes floating-carbon {
+      0% {
+         transform: translateY(0px);
+      }
+      50% {
+         transform: translateY(-4px);
+      }
+      100% {
+         transform: translateY(0px);
+      }
+   }
+   
+   .carbon-point__cta .floating-btn::before {
+      bottom: -6px;
+      height: 4px;
+      width: 60%;
    }
 }
 
@@ -653,6 +751,14 @@ body {
 }
 
 /* 이미지: 컬럼 밖으로 안 튀게 상한 설정 */
+.image-box {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+}
+
 .image-box img {
    width: 100%;
    max-width: 520px; /* 피그마 크기 상한 */
@@ -676,7 +782,13 @@ body {
       padding-block: clamp(16px, 4vh, 48px);
    }
    .q-card {
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 1fr;
+      padding: 20px;
+      gap: 16px;
+   }
+   .q-card__media {
+      aspect-ratio: 16 / 9;
+      max-height: 200px;
    }
    .blog-slider__item {
       height: 100%;
@@ -684,6 +796,11 @@ body {
       flex-direction: column;
       gap: 12px;
       align-items: stretch;
+      padding: 10px;
+   }
+   .s-card {
+      padding: 16px;
+      min-height: 200px;
    }
 
    /* ===== Pagination — Mobile: Bottom horizontal ===== */
@@ -764,11 +881,12 @@ body {
    /* 화면에 맞춤 높이(안정 단위 사용) */
    .cards-swiper {
       height: auto;
-      min-height: calc(100svh - 96px);
+      min-height: calc(100svh - 120px);
+      padding: 0 10px;
    }
    @supports (height: 1dvh) {
       .cards-swiper {
-         min-height: calc(100dvh - 96px);
+         min-height: calc(100dvh - 120px);
       }
    }
 
@@ -777,49 +895,51 @@ body {
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr;
       margin-bottom: 8px;
+      padding: 15px;
    }
    .q-card__media {
       width: 100%;
       height: auto;
       aspect-ratio: 16/10;
-      border-radius: 14px;
+      border-radius: 12px;
+      max-height: 180px;
    }
    .q-card__body .eyebrow {
-      font-size: 12px;
-      margin-bottom: 6px;
+      font-size: 11px;
+      margin-bottom: 4px;
    }
    .q-title {
-      font-size: 1.05rem;
-      line-height: 1.25;
-      margin: 0 0 6px;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      margin: 0 0 4px;
    }
    .q-desc {
-      font-size: 0.85rem;
-      line-height: 1.45;
+      font-size: 0.8rem;
+      line-height: 1.4;
    }
 
    .s-card {
       min-height: 0;
-      padding: 16px;
+      padding: 12px;
       place-items: center;
    }
    .s-title {
-      font-size: 1.05rem;
-      margin: 6px 0 8px;
+      font-size: 0.95rem;
+      margin: 4px 0 6px;
    }
    .s-visual {
-      width: 84px;
-      height: 84px;
+      width: 70px;
+      height: 70px;
    }
    .s-cta {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
    }
    .s-cta span {
-      font-size: 11px;
+      font-size: 10px;
    }
 
    .cards-swiper .blog-slider {
-      padding-bottom: 48px;
+      padding-bottom: 40px;
    }
 }
 
@@ -872,6 +992,73 @@ body {
   }
 }
 
+/* ========== SolutionInActionSection 모바일 ========== */
+@media (max-width: 991.98px) {
+   .contents--cards {
+      padding-top: clamp(60px, 8vw, 100px);
+      padding-bottom: clamp(40px, 6vw, 80px);
+      padding-left: 15px;
+      padding-right: 15px;
+   }
+   
+   .contents--cards .container {
+      padding-left: 10px;
+      padding-right: 10px;
+      max-width: 100%;
+   }
+   
+   .contents--cards .randing--section__title {
+      margin-bottom: 20px;
+   }
+   
+   .contents--cards .randing--section__title > p {
+      font-size: clamp(12px, 2.5vw, 14px);
+      margin-bottom: 6px;
+   }
+   
+   .contents--cards .randing--section__title > h2 {
+      font-size: clamp(20px, 4vw, 32px);
+      line-height: 1.2;
+   }
+   
+   .contents--cards .mt-40 {
+      margin-top: 20px !important;
+   }
+}
+
+@media (max-width: 576px) {
+   .contents--cards {
+      padding-top: clamp(40px, 6vw, 60px);
+      padding-bottom: clamp(30px, 5vw, 50px);
+      padding-left: 10px;
+      padding-right: 10px;
+   }
+   
+   .contents--cards .container {
+      padding-left: 5px;
+      padding-right: 5px;
+   }
+   
+   .contents--cards .randing--section__title > p {
+      font-size: clamp(10px, 2.2vw, 12px);
+      margin-bottom: 4px;
+   }
+   
+   .contents--cards .randing--section__title > h2 {
+      font-size: clamp(16px, 3.5vw, 24px);
+      line-height: 1.1;
+   }
+   
+   .contents--cards .mt-40 {
+      margin-top: 15px !important;
+   }
+   
+   .contents--cards .col-md-10 {
+      padding-left: 5px;
+      padding-right: 5px;
+   }
+}
+
 /* ========== CarbonPointSection 모바일 ========== */
 /* 모바일에서 중앙정렬 유지 */
 @media (max-width: 991.98px) {
@@ -879,6 +1066,194 @@ body {
    .point-title,
    .cta-box {
       text-align: center;
+   }
+   
+   /* 모바일에서 레이아웃 조정 */
+   .panel.randing--carbon-point {
+      padding: clamp(30px, 5vw, 60px) 15px;
+      min-height: auto;
+   }
+   
+   .panel.randing--carbon-point .container {
+      padding-left: 10px;
+      padding-right: 10px;
+      max-width: 100%;
+   }
+   
+   /* 모바일에서 컬럼 스택 */
+   .panel.randing--carbon-point .row.align-items-center {
+      flex-direction: column;
+      align-items: center !important;
+      margin-top: 20px;
+   }
+   
+   .panel.randing--carbon-point .col-lg-6,
+   .panel.randing--carbon-point .col-lg-4 {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+   }
+   
+   .panel.randing--carbon-point .offset-lg-1 {
+      margin-left: 0;
+   }
+   
+   /* 헤드라인 크기 축소 */
+   .panel.randing--carbon-point .headline {
+      font-size: clamp(20px, 4.5vw, 32px);
+      margin-bottom: 8px;
+   }
+   
+   .panel.randing--carbon-point .title__sub {
+      font-size: clamp(12px, 2.8vw, 16px);
+      margin-top: 15px;
+   }
+   
+   .panel.randing--carbon-point .point-title {
+      font-size: clamp(18px, 4vw, 36px);
+      margin-top: 40px;
+   }
+   
+   /* 값 박스 크기 축소 */
+   .panel.randing--carbon-point .value-box {
+      padding: 6px 12px;
+      font-size: clamp(14px, 3vw, 22px);
+      margin: 0 4px;
+   }
+   
+   /* CTA 영역 축소 */
+   .panel.randing--carbon-point .cta-box {
+      padding: 20px 15px;
+   }
+   
+   .panel.randing--carbon-point .lead-ask {
+      font-size: clamp(14px, 3vw, 18px);
+      margin-bottom: 15px;
+   }
+   
+   /* 버튼 패딩 조정 */
+   .carbon-point__cta .btn--register {
+      padding: 10px 25px;
+      font-size: 13px;
+   }
+   
+   .panel.randing--carbon-point .login-text {
+      font-size: clamp(12px, 2.5vw, 14px);
+      margin-top: 15px;
+   }
+   
+   /* 이미지 박스 중앙 정렬 */
+   .panel.randing--carbon-point .image-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 10px;
+   }
+   
+   /* 이미지 크기 조정 */
+   .panel.randing--carbon-point .image-box img {
+      max-width: 200px;
+      height: auto;
+   }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 576px) {
+   .panel.randing--carbon-point {
+      padding: clamp(20px, 4vw, 40px) 8px;
+      min-height: auto;
+   }
+   
+   .panel.randing--carbon-point .container {
+      padding-left: 5px;
+      padding-right: 5px;
+      max-width: 100%;
+   }
+   
+   /* 헤드라인 폰트 크기 대폭 축소 */
+   .panel.randing--carbon-point .headline {
+      font-size: clamp(16px, 4vw, 24px);
+      margin-bottom: 6px;
+      line-height: 1.2;
+   }
+   
+   .panel.randing--carbon-point .title__sub {
+      font-size: clamp(10px, 2.2vw, 14px);
+      margin-top: 10px;
+   }
+   
+   .panel.randing--carbon-point .point-title {
+      font-size: clamp(14px, 3.5vw, 28px);
+      margin-top: 25px;
+      line-height: 1.1;
+   }
+   
+   /* 값 박스 크기 대폭 축소 */
+   .panel.randing--carbon-point .value-box {
+      padding: 4px 8px;
+      font-size: clamp(12px, 2.8vw, 18px);
+      margin: 0 2px;
+      border-radius: 6px;
+   }
+   
+   .panel.randing--carbon-point .value-box small {
+      font-size: 0.6em;
+      margin-left: 3px;
+   }
+   
+   /* CTA 영역 축소 */
+   .panel.randing--carbon-point .cta-box {
+      padding: 15px 10px;
+   }
+   
+   .panel.randing--carbon-point .lead-ask {
+      font-size: clamp(12px, 2.8vw, 16px);
+      margin-bottom: 12px;
+   }
+   
+   /* 버튼 더 작게 */
+   .carbon-point__cta {
+      margin-top: 20px !important;
+   }
+   
+   .carbon-point__cta .btn--register {
+      padding: 8px 16px;
+      font-size: 12px;
+      border-radius: 25px;
+   }
+   
+   .panel.randing--carbon-point .login-text {
+      font-size: clamp(10px, 2.2vw, 12px);
+      margin-top: 12px;
+   }
+   
+   /* 간격 축소 */
+   .panel.randing--carbon-point .mt-60 {
+      margin-top: 20px !important;
+   }
+   
+   .panel.randing--carbon-point .mt-40 {
+      margin-top: 15px !important;
+   }
+   
+   .panel.randing--carbon-point .mt-20 {
+      margin-top: 10px !important;
+   }
+   
+   /* 이미지 박스 중앙 정렬 */
+   .panel.randing--carbon-point .image-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 5px;
+   }
+   
+   /* 이미지 더 작게 */
+   .panel.randing--carbon-point .image-box img {
+      max-width: 150px;
+      height: auto;
    }
 }
 

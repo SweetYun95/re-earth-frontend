@@ -1,5 +1,6 @@
-import { TextField, Button, Box, MenuItem, Select, InputLabel, FormControl } from '@mui/material'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import InputField from '../common/InputField'
+import FormSelect from '../common/FormSelect'
 import { formatWithComma, stripComma } from '../../utils/priceSet'
 
 function ItemCreateForm({ onCreateSubmit }) {
@@ -10,6 +11,7 @@ function ItemCreateForm({ onCreateSubmit }) {
    const [stockNumber, setStockNumber] = useState('') // 재고
    const [itemSellStatus, setItemSellStatus] = useState('SELL') // 판매상태
    const [itemDetail, setItemDetail] = useState('') // 상품설명
+   const [itemSummary, setItemSummary] = useState('') // 상품요약
    const [brandName, setBrandName] = useState('') //브랜드명
    const [vendorName, setVendorName] = useState('') //업체명
 
@@ -77,6 +79,7 @@ function ItemCreateForm({ onCreateSubmit }) {
       formData.append('stockNumber', stockNumber)
       formData.append('itemSellStatus', itemSellStatus)
       formData.append('itemDetail', itemDetail)
+      formData.append('itemSummary', itemSummary)
       formData.append('brandName', brandName)
       formData.append('vendorName', vendorName)
 
@@ -108,84 +111,194 @@ function ItemCreateForm({ onCreateSubmit }) {
    }
 
    return (
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }} encType="multipart/form-data">
-         {/* 이미지 업로드 필드 */}
-         <Button variant="contained" component="label">
-            이미지 업로드 (최대 5개)
-            <input type="file" name="img" accept="image/*" hidden multiple onChange={handleImageChange} />
-         </Button>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+         {/* 이미지 업로드 섹션 */}
+         <div className="row mb-4">
+            <div className="col-12">
+               <div className="card">
+                  <div className="card-header">
+                     <h5 className="mb-0">
+                        <iconify-icon icon="mdi:image" width="20" height="20" className="mr-2"></iconify-icon>
+                        상품 이미지
+                     </h5>
+                  </div>
+                  <div className="card-body">
+                     <div className="mb-3">
+                        <label className="btn btn-outline-primary btn-lg">
+                           <iconify-icon icon="mdi:upload" width="20" height="20" className="mr-2"></iconify-icon>
+                           이미지 업로드 (최대 5개)
+                           <input 
+                              type="file" 
+                              name="img" 
+                              accept="image/*" 
+                              className="d-none" 
+                              multiple 
+                              onChange={handleImageChange} 
+                           />
+                        </label>
+                        <small className="form-text text-muted ml-2">
+                           JPG, PNG, GIF 파일만 업로드 가능합니다.
+                        </small>
+                     </div>
 
-         {/* 업로드된 이미지 미리보기 */}
-         <Box
-            display="flex"
-            flexWrap="wrap"
-            gap={2}
-            mt={2}
-            sx={{
-               justifyContent: 'flex-start',
-            }}
-         >
-            {imgUrls.map((url, index) => (
-               <Box
-                  key={index}
-                  sx={{
-                     width: '200px',
-                     height: '300px',
-                     border: '1px solid #ccc',
-                     borderRadius: '8px',
-                     overflow: 'hidden',
-                     display: 'flex',
-                     justifyContent: 'center',
-                     alignItems: 'center',
-                  }}
-               >
-                  <img src={url} alt={`업로드 이미지 ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-               </Box>
-            ))}
-         </Box>
+                     {/* 업로드된 이미지 미리보기 */}
+                     {imgUrls.length > 0 && (
+                        <div className="row">
+                           {imgUrls.map((url, index) => (
+                              <div key={index} className="col-md-3 col-sm-6 mb-3">
+                                 <div className="card">
+                                    <img 
+                                       src={url} 
+                                       alt={`업로드 이미지 ${index + 1}`} 
+                                       className="card-img-top" 
+                                       style={{ height: '200px', objectFit: 'cover' }}
+                                    />
+                                    <div className="card-body p-2">
+                                       <small className="text-muted">이미지 {index + 1}</small>
+                                    </div>
+                                 </div>
+                              </div>
+                           ))}
+                        </div>
+                     )}
+                  </div>
+               </div>
+            </div>
+         </div>
 
-         {/* 상품명 입력 필드 */}
-         <TextField label="상품명" variant="outlined" fullWidth value={itemNm} onChange={(e) => setItemNm(e.target.value)} placeholder="상품명" sx={{ mt: 2 }} inputProps={{ maxLength: 15 }} />
+         {/* 상품 정보 입력 섹션 */}
+         <div className="row mb-4">
+            <div className="col-12">
+               <div className="card">
+                  <div className="card-header">
+                     <h5 className="mb-0">
+                        <iconify-icon icon="mdi:information" width="20" height="20" className="mr-2"></iconify-icon>
+                        상품 정보
+                     </h5>
+                  </div>
+                  <div className="card-body">
+                     <div className="row">
+                        <div className="col-md-6">
+                           <InputField
+                              label="상품명"
+                              type="text"
+                              name="itemNm"
+                              value={itemNm}
+                              inputChange={(e) => setItemNm(e.target.value)}
+                              placeholder="상품명을 입력하세요"
+                              required
+                              maxLength={80}
+                           />
+                        </div>
+                        <div className="col-md-6">
+                           <InputField
+                              label="가격 (포인트)"
+                              type="text"
+                              name="price"
+                              value={formatWithComma(price)}
+                              inputChange={handlePriceChange}
+                              placeholder="가격을 입력하세요"
+                              required
+                              maxLength={10}
+                           />
+                        </div>
+                     </div>
 
-         {/* 가격 입력 필드 */}
-         {/* input type='text'에 입력한 텍스트는 숫자여도 JS에서는 문자로 인식한다 */}
-         <TextField
-            label="가격"
-            variant="outlined"
-            fullWidth
-            value={formatWithComma(price)} // 콤마 추가된 값 표시
-            onChange={handlePriceChange} // 입력 핸들러
-            placeholder="가격"
-            sx={{ mt: 2 }}
-            inputProps={{ maxLength: 10 }}
-         />
+                     <div className="row">
+                        <div className="col-md-4">
+                           <InputField
+                              label="재고 수량"
+                              type="number"
+                              name="stockNumber"
+                              value={stockNumber}
+                              inputChange={handleStockChange}
+                              placeholder="재고 수량"
+                              required
+                              min="0"
+                           />
+                        </div>
+                        <div className="col-md-4">
+                           <FormSelect
+                              label="판매 상태"
+                              value={itemSellStatus}
+                              onChange={(e) => setItemSellStatus(e.target.value)}
+                              options={[
+                                 { value: 'SELL', label: '판매중' },
+                                 { value: 'SOLD_OUT', label: '품절' }
+                              ]}
+                              required
+                           />
+                        </div>
+                        <div className="col-md-4">
+                           <InputField
+                              label="브랜드명"
+                              type="text"
+                              name="brandName"
+                              value={brandName}
+                              inputChange={(e) => setBrandName(e.target.value)}
+                              placeholder="브랜드명을 입력하세요"
+                              required
+                              maxLength={100}
+                           />
+                        </div>
+                     </div>
 
-         {/* 재고 입력 필드 */}
-         <TextField label="재고수량" variant="outlined" fullWidth value={stockNumber} onChange={handleStockChange} placeholder="재고수량" sx={{ mt: 2 }} inputProps={{ maxLength: 10 }} />
+                     <div className="row">
+                        <div className="col-md-6">
+                           <InputField
+                              label="판매업체명"
+                              type="text"
+                              name="vendorName"
+                              value={vendorName}
+                              inputChange={(e) => setVendorName(e.target.value)}
+                              placeholder="판매업체명을 입력하세요"
+                              required
+                              maxLength={100}
+                           />
+                        </div>
+                        <div className="col-md-6">
+                           <InputField
+                              label="상품 요약"
+                              type="text"
+                              name="itemSummary"
+                              value={itemSummary}
+                              inputChange={(e) => setItemSummary(e.target.value)}
+                              placeholder="상품 요약을 입력하세요"
+                              maxLength={180}
+                           />
+                        </div>
+                     </div>
 
-         {/* 판매 상태 선택 필드 */}
-         <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel id="item-sell-status-label">판매 상태</InputLabel>
-            <Select labelId="item-sell-status-label" label="판매상태" value={itemSellStatus} onChange={(e) => setItemSellStatus(e.target.value)}>
-               {/* value는 실제 items 테이블의 itemSellStatus 컬럼에 저장될 값 */}
-               <MenuItem value="SELL">판매중</MenuItem>
-               <MenuItem value="SOLD_OUT">품절</MenuItem>
-            </Select>
-         </FormControl>
-         {/* 업체명 입력 필드 */}
-         <TextField label="업체명" variant="outlined" fullWidth value={vendorName} onChange={(e) => setVendorName(e.target.value)} placeholder="업체명" sx={{ mt: 2 }} inputProps={{ maxLength: 15 }} />
+                     <InputField
+                        label="상품 상세 설명"
+                        type="textarea"
+                        name="itemDetail"
+                        value={itemDetail}
+                        inputChange={(e) => setItemDetail(e.target.value)}
+                        placeholder="상품에 대한 상세한 설명을 입력하세요"
+                        rows={4}
+                     />
+                  </div>
+               </div>
+            </div>
+         </div>
 
-         {/* 브랜드명 입력 필드 */}
-         <TextField label="브랜드명" variant="outlined" fullWidth value={brandName} onChange={(e) => setBrandName(e.target.value)} placeholder="브랜드명" sx={{ mt: 2 }} inputProps={{ maxLength: 15 }} />
-
-         {/* 상품설명 입력 필드 */}
-         <TextField label="상품설명" variant="outlined" fullWidth multiline rows={4} value={itemDetail} onChange={(e) => setItemDetail(e.target.value)} sx={{ mt: 2 }} />
-
-         {/* 등록 버튼 */}
-         <Button type="submit" class="btn default main1 mt-40">
-            등록하기
-         </Button>
-      </Box>
+         {/* 버튼 섹션 */}
+         <div className="row">
+            <div className="col-12">
+               <div className="d-flex justify-content-end">
+                  <button type="button" className="btn btn-secondary btn-lg mr-3" onClick={() => window.history.back()}>
+                     <iconify-icon icon="mdi:arrow-left" width="20" height="20" className="mr-2"></iconify-icon>
+                     취소
+                  </button>
+                  <button type="submit" className="btn btn-primary btn-lg">
+                     <iconify-icon icon="mdi:check" width="20" height="20" className="mr-2"></iconify-icon>
+                     상품 등록
+                  </button>
+               </div>
+            </div>
+         </div>
+      </form>
    )
 }
 

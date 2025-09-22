@@ -31,58 +31,60 @@
 React(Vite) ↔ Axios ↔ Express API ↔ MySQL
         ↘ Redux Toolkit (global state)
 ```
+🎨 [피그마 디자인](https://www.figma.com/design/ID3Xv1FVKKLLkShATsMbZc/Re-earth?node-id=1-3&p=f&t=2AdX5CuueWXUlT9p-0)
+🗺️ [피그마 유저플로우](https://www.figma.com/board/0sSLFXCv2imiZmehWyHVJX/Re-Earth?node-id=0-1&p=f&t=i5jIedgo3uKCRvBr-0)
 
+---
 ## 📁 re-earth-frontend(Frontend)
 
 ```bash
-[re-earth-frontend]
-├── [node_modules]
-│
-├── [public]
-│   └── [images] # 공용 이미지 폴더
-│
-├── [src]
-│   ├── [api]
-│   ├── [assets] # 공용 css
-│   ├── [components] # componets파일
-│   ├── [features]
-│   ├── [pages]
-│   ├── [store]
-│   ├── App.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .env
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package-lock.json
-├── package.json
-├── README.md
-└── vite.config.js
+re-earth-frontend/
+├─ node_modules/
+├─ src/
+│  ├─ api/              # 서버 통신 관련 함수 (axios, fetch 등 API 호출)
+│  ├─ app/              # 전역 상태(store, 리듀서 등)와 앱 초기 설정
+│  ├─ assets/           # 이미지, 폰트, 전역 스타일 등 정적 리소스
+│  │  ├─ icons/         # 아이콘 파일
+│  │  ├─ images/        # 이미지 리소스
+│  │  └─ styles/        # 전역 스타일 시트
+│  │     └─ commons.scss
+│  │
+│  ├─ components/       # 재사용 가능한 UI 컴포넌트
+│  │  ├─ admin/         # 관리자 전용 컴포넌트
+│  │  ├─ chat/          # 채팅 관련 컴포넌트
+│  │  ├─ common/        # 공통 UI 컴포넌트 (버튼, 입력창 등)
+│  │  ├─ layout/        # 레이아웃 컴포넌트 (헤더, 푸터, 사이드바 등)
+│  │  ├─ main/          # 메인 페이지 구성 요소
+│  │  ├─ map/           # 지도 관련 컴포넌트
+│  │  ├─ modal/         # 모달 UI 컴포넌트
+│  │  ├─ mypage/        # 마이페이지 관련 컴포넌트
+│  │  ├─ point/         # 포인트 관련 컴포넌트
+│  │  ├─ randing/       # 랜딩 페이지 관련 컴포넌트
+│  │  ├─ shop/          # 포인트샵 관련 컴포넌트
+│  │  └─ slide/         # 슬라이드/배너 컴포넌트
+│  │
+│  ├─ features/         # Redux slice 또는 특정 도메인별 상태/로직
+│  ├─ hooks/            # 커스텀 훅 모음
+│  │
+│  ├─ pages/            # 주요 페이지 단위 컴포넌트
+│  │  ├─ Admin/         # 관리자 페이지
+│  │  ├─ chat/          # 채팅 페이지
+│  │  ├─ market/        # 장터 페이지
+│  │  ├─ public/        # 공용 페이지 (로그인, 회원가입 등)
+│  │  └─ user/          # 일반 사용자 페이지
+│  │
+│  ├─ pages_extra/      # 보조 페이지(테스트/임시/서브 기능용)
+│  │
+│  ├─ routes/           # 라우팅 관련 정의
+│  │  ├─ guards/        # 라우트 접근 제한 (권한별)
+│  │  │  ├─ AdminOnly.jsx
+│  │  │  ├─ GuestOnly.jsx
+│  │  │  └─ UserOnly.jsx
+│  │  └─ AppRouter.jsx  # 전체 라우팅 설정
+│  │
+│  └─ utils/            # 유틸 함수 모음
 ```
-
 ---
-
-## 파일명 작성 규칙
-
-React 컴포넌트 이름 → SubCard (파스칼 케이스)
-대문자로 시작 단어구분 대문자
-
-```bash
-# 예시
-MainPage.jsx
-```
-
-Api및 Slice 이름 → subCard (카멜 케이스)
-소문자로 시작 단어구분 대문자
-
-```bash
-# 예시
-axiosApi.js
-userSlice.js
-```
-
 ## 📦 Import 순서 가이드
 
 > 코드 작성 시, 다음과 같은 순서로 import 문을 정렬해주세요. 각 그룹 사이에는 한 줄 공백을 추가합니다.
@@ -242,3 +244,54 @@ git commit -m "[style] 버튼 정렬 개선"
 -  [test] orderSlice 테스트 코드 작성
 -  [chore] ESLint 룰 추가 및 적용
 -  [docs] README.md에 커밋 규칙 추가
+---
+## 🔧 배포 이후 유지보수 및 패치 전략
+
+1. **배포(main) 안정성 유지**
+   - `main` 브랜치는 항상 **배포 가능한 안정 상태**를 유지합니다.
+   - 급한 버그 수정은 `hotfix` 브랜치에서 작업 후 바로 `main`으로 병합합니다.
+
+2. **지속 개발(develop)**
+   - 미구현 기능 및 신규 기능은 기존대로 `develop` 브랜치에서 통합합니다.
+   - 모든 기능은 **feature 브랜치** → `develop` → 테스트 검증 → `main` 순으로 병합됩니다.
+   - 아래 **브랜치 네이밍 규칙 확인하시고 브랜치 생성**하여 개발 하시면 됩니다.
+
+3. **브랜치 네이밍**
+   - `feature/기능명` : 새로운 기능 개발
+   - `fix/버그명` : 버그 수정
+   - `hotfix/긴급수정` : 배포 후 긴급 패치
+   - `refactor/코드명` : 리팩토링 작업
+
+4. **실험/테스트 작업**
+   - 단순 테스트 목적의 `test` 브랜치는 생성하지 않습니다.
+   - 실험적 코드가 필요하면 개인 브랜치에서 작업 후 `develop`에 합칩니다.
+
+5. **릴리즈 주기**
+   - 발표 이후에도 정기적으로 `develop`에서 기능을 안정화 후 `main`에 반영합니다.
+   - 필요 시 **태그(tag)**를 붙여 배포 버전을 관리합니다. (예: `v1.0.1`, `v1.1.0`)
+---
+### ✅ 커밋 태그 종류 (운영 단계 포함)
+
+| 태그        | 설명                                                                 |
+|-------------|----------------------------------------------------------------------|
+| `feat`      | 새로운 기능 추가                                                      |
+| `fix`       | 일반적인 버그 수정                                                    |
+| `hotfix`    | 배포(main) 이후 **긴급한 운영 이슈** 수정 (서비스 중단, 치명적 오류 등) |
+| `patch`     | 배포 이후의 **경미한 수정/보완** (UI, 텍스트, 사소한 동작 개선)        |
+| `refactor`  | 코드 리팩토링 (기능 변화 없음)                                        |
+| `style`     | 스타일, 포맷팅, 주석 등 UI 외 변경                                    |
+| `docs`      | 문서 (README 등) 변경                                                 |
+| `test`      | 테스트 코드 추가/수정                                                 |
+| `chore`     | 빌드, 패키지 매니저, 설정 파일 등 기타 작업                           |
+| `remove`    | 불필요한 코드/파일 제거                                               |
+
+---
+
+### 💬 운영 단계 예시
+
+- `[hotfix] 결제 API 응답 지연 문제 해결`
+- `[patch] 관리자 페이지 버튼 문구 수정`
+- `[fix] 포인트 적립 계산 로직 오류 수정`
+- `[refactor] DonationService 모듈 분리`
+- `[chore] pm2 설정 업데이트`
+---

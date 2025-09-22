@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingPage from "../../../pages_extra/Unloaded/LoadingPage";
 import "./MyPage.scss";
+import MenuBar from "../../../components/menu/MenuBar";
 
 // 탭 컨텐츠 컴포넌트들
 import PointInquiryContent from "../../../components/mypage/PointInquiryContent";
@@ -73,7 +73,8 @@ const MyPage = () => {
   }
 
   return (
-    <section id="main1" className="mypage">
+    <div className="mypage">
+      <MenuBar />
       <div className="container">
         <div className="row">
           {/* 사이드바 */}
@@ -208,7 +209,7 @@ const MyPage = () => {
           </main>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

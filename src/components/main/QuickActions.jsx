@@ -9,7 +9,7 @@ const QUICK_ITEMS = [
     sub: "나의 작은 루틴이 지구를 바꿔요",
     color: "#FFCE55",
     className: "action-certify",
-    path: "/saving/map",
+    path: "/saving/info",
   },
   {
     title: "기부하기",
