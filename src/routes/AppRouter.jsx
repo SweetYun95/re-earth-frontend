@@ -38,8 +38,8 @@ import PointShopPage from "../pages/market/PointShopPage";
 import ItemDetailPage from '../pages/market/ItemDetailPage'
 
 // 관리자 페이지
-import AdminPage from "../pages/admin/AdminPage";
-import ItemCreatePage from "../pages/Admin/ItemCreate/itemCreatePage";
+import AdminPage from '../pages/Admin/AdminPage'
+import ItemCreatePage from '../pages/Admin/ItemCreate/itemCreatePage'
 
 // Extra
 import LoadingPage from "../pages_extra/Unloaded/LoadingPage";

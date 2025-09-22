@@ -31,58 +31,60 @@
 React(Vite) ↔ Axios ↔ Express API ↔ MySQL
         ↘ Redux Toolkit (global state)
 ```
+🎨 [피그마 디자인](https://www.figma.com/design/ID3Xv1FVKKLLkShATsMbZc/Re-earth?node-id=1-3&p=f&t=2AdX5CuueWXUlT9p-0)
+🗺️ [피그마 유저플로우](https://www.figma.com/board/0sSLFXCv2imiZmehWyHVJX/Re-Earth?node-id=0-1&p=f&t=i5jIedgo3uKCRvBr-0)
 
+---
 ## 📁 re-earth-frontend(Frontend)
 
 ```bash
-[re-earth-frontend]
-├── [node_modules]
-│
-├── [public]
-│   └── [images] # 공용 이미지 폴더
-│
-├── [src]
-│   ├── [api]
-│   ├── [assets] # 공용 css
-│   ├── [components] # componets파일
-│   ├── [features]
-│   ├── [pages]
-│   ├── [store]
-│   ├── App.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .env
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package-lock.json
-├── package.json
-├── README.md
-└── vite.config.js
+re-earth-frontend/
+├─ node_modules/
+├─ src/
+│  ├─ api/              # 서버 통신 관련 함수 (axios, fetch 등 API 호출)
+│  ├─ app/              # 전역 상태(store, 리듀서 등)와 앱 초기 설정
+│  ├─ assets/           # 이미지, 폰트, 전역 스타일 등 정적 리소스
+│  │  ├─ icons/         # 아이콘 파일
+│  │  ├─ images/        # 이미지 리소스
+│  │  └─ styles/        # 전역 스타일 시트
+│  │     └─ commons.scss
+│  │
+│  ├─ components/       # 재사용 가능한 UI 컴포넌트
+│  │  ├─ admin/         # 관리자 전용 컴포넌트
+│  │  ├─ chat/          # 채팅 관련 컴포넌트
+│  │  ├─ common/        # 공통 UI 컴포넌트 (버튼, 입력창 등)
+│  │  ├─ layout/        # 레이아웃 컴포넌트 (헤더, 푸터, 사이드바 등)
+│  │  ├─ main/          # 메인 페이지 구성 요소
+│  │  ├─ map/           # 지도 관련 컴포넌트
+│  │  ├─ modal/         # 모달 UI 컴포넌트
+│  │  ├─ mypage/        # 마이페이지 관련 컴포넌트
+│  │  ├─ point/         # 포인트 관련 컴포넌트
+│  │  ├─ randing/       # 랜딩 페이지 관련 컴포넌트
+│  │  ├─ shop/          # 포인트샵 관련 컴포넌트
+│  │  └─ slide/         # 슬라이드/배너 컴포넌트
+│  │
+│  ├─ features/         # Redux slice 또는 특정 도메인별 상태/로직
+│  ├─ hooks/            # 커스텀 훅 모음
+│  │
+│  ├─ pages/            # 주요 페이지 단위 컴포넌트
+│  │  ├─ Admin/         # 관리자 페이지
+│  │  ├─ chat/          # 채팅 페이지
+│  │  ├─ market/        # 장터 페이지
+│  │  ├─ public/        # 공용 페이지 (로그인, 회원가입 등)
+│  │  └─ user/          # 일반 사용자 페이지
+│  │
+│  ├─ pages_extra/      # 보조 페이지(테스트/임시/서브 기능용)
+│  │
+│  ├─ routes/           # 라우팅 관련 정의
+│  │  ├─ guards/        # 라우트 접근 제한 (권한별)
+│  │  │  ├─ AdminOnly.jsx
+│  │  │  ├─ GuestOnly.jsx
+│  │  │  └─ UserOnly.jsx
+│  │  └─ AppRouter.jsx  # 전체 라우팅 설정
+│  │
+│  └─ utils/            # 유틸 함수 모음
 ```
-
 ---
-
-## 파일명 작성 규칙
-
-React 컴포넌트 이름 → SubCard (파스칼 케이스)
-대문자로 시작 단어구분 대문자
-
-```bash
-# 예시
-MainPage.jsx
-```
-
-Api및 Slice 이름 → subCard (카멜 케이스)
-소문자로 시작 단어구분 대문자
-
-```bash
-# 예시
-axiosApi.js
-userSlice.js
-```
-
 ## 📦 Import 순서 가이드
 
 > 코드 작성 시, 다음과 같은 순서로 import 문을 정렬해주세요. 각 그룹 사이에는 한 줄 공백을 추가합니다.
