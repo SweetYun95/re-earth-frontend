@@ -20,7 +20,13 @@ export default function LoginForm() {
 
    // 이미 로그인 상태로 /login 접근 시 역할별 자동 이동
    useEffect(() => {
-      console.log('[LoginForm] auth state changed →', { isAuthenticated, user, loading, error, hydrated })
+      console.log('[LoginForm] auth state changed →', {
+         isAuthenticated,
+         user,
+         loading,
+         error,
+         hydrated,
+      })
       if (hydrated && isAuthenticated && user && !didRedirect.current) {
          didRedirect.current = true
          if (user.role === 'ADMIN') navigate('/admin', { replace: true })
@@ -37,11 +43,15 @@ export default function LoginForm() {
       e.preventDefault()
       if (loading) return
 
+      // ✅ 이미 로그인 상태라면 /auth/login 다시 치지 않음
+      if (hydrated && isAuthenticated) return
+
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
       if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
+      // 백엔드 호환: idOrEmail, userId 둘 다 전달
       const payload = { idOrEmail, userId: idOrEmail, password }
       console.log('[LoginForm] submitting login payload:', payload)
 
@@ -49,6 +59,7 @@ export default function LoginForm() {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[LoginForm] loginUserThunk success →', loggedUser)
 
+         // 세션 정보 최신화
          await dispatch(hydrateAuthThunk())
 
          // 역할별 리다이렉트
@@ -89,7 +100,7 @@ export default function LoginForm() {
             <InputField label="아이디" type="text" name="idOrEmail" placeholder="아이디 또는 이메일을 입력하세요." value={form.idOrEmail} inputChange={onChange} disabled={loading} required autoComplete="username" />
             <InputField label="비밀번호" type="password" name="password" placeholder="비밀번호를 입력하세요." required value={form.password} inputChange={onChange} disabled={loading} marginTop="mt-20" autoComplete="current-password" />
 
-            <a href="#" className="btn find" onClick={(e) => e.preventDefault()}>
+            <a href="/finding" className="btn find">
                아이디 / 비밀번호 찾기
             </a>
 

@@ -1,34 +1,29 @@
-// ===============================
 // re-earth-frontend/src/app/rootReducer.js
-// 설명: 각 slice reducer를 하나의 루트 리듀서로 병합
-// ===============================
 import { combineReducers } from '@reduxjs/toolkit'
 
-// --- feature slices ---
+// 기존 리듀서들
 import authReducer from '../features/authSlice'
 import donationReducer from '../features/donationSlice'
 import itemReducer from '../features/itemSlice'
-
-// ✅ 관리자 관련 리듀서 추가
 import adminMemberReducer from '../features/adminMemberSlice'
 import adminDonationReducer from '../features/adminDonationSlice'
-
 import pointOrderReducer from '../features/pointOrderSlice'
-// import pointReducer from '../features/pointSlice'
-// import marketReducer from '../features/marketSlice'
-// import chatReducer from '../features/chatSlice'
-// import adminReducer from '../features/adminSlice'
+
+// 신규: QnA
+import qnaReducer from '../features/qnaSlice'
+import adminQnaReducer from '../features/adminQnaSlice'
 
 const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
-   item: itemReducer,
-
-   // ✅ 관리자 관련 리듀서 추가
    items: itemReducer,
-   adminMembers: adminMemberReducer,
+   adminMember: adminMemberReducer,
    adminDonation: adminDonationReducer,
    pointOrder: pointOrderReducer,
+
+   // 신규
+   qna: qnaReducer,
+   adminQna: adminQnaReducer,
 })
 
 export default rootReducer

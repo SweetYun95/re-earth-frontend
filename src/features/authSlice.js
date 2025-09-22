@@ -1,5 +1,6 @@
+// re-earth-frontend/src/features/authSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { registerUser, loginUser, logoutUser, fetchMe, adminLogin } from '../api/authApi'
+import { registerUser, loginUser, logoutUser, fetchMe, adminLogin, userUpdate } from '../api/authApi'
 
 // ───────── Thunks ─────────
 export const hydrateAuthThunk = createAsyncThunk('auth/hydrate', async (_, { rejectWithValue }) => {
@@ -19,14 +20,13 @@ export const registerUserThunk = createAsyncThunk('auth/registerUser', async (us
       const response = await registerUser(userData)
       return response.data.user
    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '회원가입 실패')
+      return rejectWithValue(error?.response?.data?.message || '회원가입 실패')
    }
 })
 
 export const loginUserThunk = createAsyncThunk('auth/loginUser', async (credentials, { rejectWithValue }) => {
    try {
       const response = await loginUser(credentials)
-      // 안전검사 (인터셉터가 resolve로 넘겨도 방지)
       const ok = response?.status === 200
       const user = response?.data?.user
       if (!ok || !user) {
@@ -34,14 +34,14 @@ export const loginUserThunk = createAsyncThunk('auth/loginUser', async (credenti
       }
       return user
    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '로그인 실패')
+      return rejectWithValue(error?.response?.data?.message || '로그인 실패')
    }
 })
 
 // ★ 관리자 전용 로그인 (status/user/role 모두 검증)
 export const adminLoginThunk = createAsyncThunk('auth/adminLogin', async (credentials, { rejectWithValue }) => {
    try {
-      const response = await adminLogin(credentials) // adminLogin에서 200/ADMIN 아닌 경우 throw
+      const response = await adminLogin(credentials) // 실패 시 내부에서 throw
       const user = response?.data?.user
       if (!user || user.role !== 'ADMIN') {
          return rejectWithValue(response?.data?.message || '관리자 권한이 없습니다.')
@@ -52,28 +52,41 @@ export const adminLoginThunk = createAsyncThunk('auth/adminLogin', async (creden
    }
 })
 
-export const logoutUserThunk = createAsyncThunk('auth/logoutUser', async (_, { rejectWithValue }) => {
+// 회원 정보 수정
+export const userUpdateThunk = createAsyncThunk('auth/userUpdate', async (formData, { rejectWithValue }) => {
    try {
-      const response = await logoutUser()
+      const response = await userUpdate(formData)
       return response.data
    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '로그아웃 실패')
+      return rejectWithValue(error?.response?.data?.message || '회원 정보 수정 실패')
+   }
+})
+
+export const logoutUserThunk = createAsyncThunk('auth/logoutUser', async (_, { rejectWithValue }) => {
+   try {
+      const response = await logoutUser() // 서버 세션 파기 + token 제거(authApi에서)
+      return response.data
+   } catch (error) {
+      // 서버 실패여도 클라이언트 상태는 비우도록 reducer에서 처리
+      return rejectWithValue(error?.response?.data?.message || '로그아웃 실패')
    }
 })
 
 // ───────── Slice ─────────
+const initialState = {
+   user: null,
+   isAuthenticated: false,
+   hydrated: false,
+   googleAuthenticated: false,
+   kakaoAuthenticated: false,
+   localAuthenticated: false,
+   loading: false,
+   error: null,
+}
+
 const authSlice = createSlice({
    name: 'auth',
-   initialState: {
-      user: null,
-      isAuthenticated: false,
-      hydrated: false,
-      googleAuthenticated: false,
-      kakaoAuthenticated: false,
-      localAuthenticated: false,
-      loading: false,
-      error: null,
-   },
+   initialState,
    reducers: {},
    extraReducers: (builder) => {
       builder
@@ -132,7 +145,7 @@ const authSlice = createSlice({
             state.error = action.payload
          })
 
-         // ★ 관리자 로그인 (fulfilled는 오직 ADMIN에서만)
+         // ★ 관리자 로그인
          .addCase(adminLoginThunk.pending, (state) => {
             state.loading = true
             state.error = null
@@ -147,7 +160,20 @@ const authSlice = createSlice({
          .addCase(adminLoginThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
-            // 중요한 점: rejected에서 isAuthenticated를 true로 바꾸지 않음!
+         })
+
+         // 회원 정보 수정
+         .addCase(userUpdateThunk.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(userUpdateThunk.fulfilled, (state) => {
+            state.loading = false
+            state.error = null
+         })
+         .addCase(userUpdateThunk.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
          })
 
          // logout
@@ -164,8 +190,14 @@ const authSlice = createSlice({
             state.kakaoAuthenticated = false
          })
          .addCase(logoutUserThunk.rejected, (state, action) => {
+            // 서버 응답이 실패해도 클라 상태는 비운다(강제 로그아웃)
             state.loading = false
             state.error = action.payload
+            state.isAuthenticated = false
+            state.user = null
+            state.localAuthenticated = false
+            state.googleAuthenticated = false
+            state.kakaoAuthenticated = false
          })
    },
 })
