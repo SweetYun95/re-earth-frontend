@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { fetchMemberStats } from '../../api/adminMemberApi'
 import { fetchDonationStats } from '../../api/adminDonationApi'
 import AdminChart from './common/AdminChart'
+import profile from '../../assets/icons/profile.png'
 
 const DashboardContent = () => {
    const [stats, setStats] = useState(null) // { member, donation }
@@ -138,7 +139,7 @@ const DashboardContent = () => {
                            {recentMembers.map((u) => (
                               <div key={u.id} className="dashboard-activity-item">
                                  <div className="dashboard-activity-item__avatar">
-                                    <img src="../../assets/icons/profile.png" alt="사용자" />
+                                    <img src={profile} alt="사용자" />
                                  </div>
                                  <div className="dashboard-activity-item__info">
                                     <span className="dashboard-activity-item__name">{u.name}</span>
