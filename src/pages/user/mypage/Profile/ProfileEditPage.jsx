@@ -7,7 +7,10 @@ import InputCheckPassword from "../../../../components/common/InputCheckPassword
 import InputField from "../../../../components/common/InputField";
 import "./ProfileEditPage.scss";
 import { useDispatch } from "react-redux";
-import { userUpdateThunk } from "../../../../features/authSlice";
+import {
+  logoutUserThunk,
+  userUpdateThunk,
+} from "../../../../features/authSlice";
 
 const ProfileEditPage = () => {
   const navigate = useNavigate();
@@ -23,11 +26,10 @@ const ProfileEditPage = () => {
     confirmPassword: "",
   });
   const [phoneData, setPhoneData] = useState({
-    phone1: formData?.phoneNumber.split("-")[0],
-    phone2: formData?.phoneNumber.split("-")[1],
-    phone3: formData?.phoneNumber.split("-")[2],
+    phone1: formData?.phoneNumber?.split("-")[0],
+    phone2: formData?.phoneNumber?.split("-")[1],
+    phone3: formData?.phoneNumber?.split("-")[2],
   });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -174,8 +176,8 @@ const ProfileEditPage = () => {
 
                   {/* 주소 */}
                   <InputAddress
-                    value1={formData?.address.split("/")[0]}
-                    value2={formData?.address.split("/")[1]}
+                    value1={formData?.address?.split("/")[0]}
+                    value2={formData?.address?.split("/")[1]}
                     inputChange={handleInputChange}
                     required={true}
                   />

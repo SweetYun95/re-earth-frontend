@@ -125,6 +125,9 @@ const authSlice = createSlice({
       })
       .addCase(hydrateAuthThunk.fulfilled, (state, action) => {
         state.loading = false;
+        if (state.user?.id === action.payload.user?.id) {
+          return; // 동일 유저라면 상태 갱신하지 않음
+        }
         state.isAuthenticated = action.payload.isAuthenticated;
         state.user = action.payload.user;
         state.localAuthenticated = !!action.payload.isAuthenticated;

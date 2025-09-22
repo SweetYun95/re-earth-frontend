@@ -11,21 +11,13 @@ const SUPPORT = [
     title: "1:1 문의",
     desc: "고객님의 소중한 의견을 신속하게 접수하고 처리합니다.",
     img: inquiryIcon,
-<<<<<<< HEAD
-    path: "/inquiry/create",
-=======
     path: "/inquiry/new",
->>>>>>> a8e8adc8150a987c33332d5fedec4489ec12900d
   },
   {
     title: "FAQ",
     desc: "자주 묻는 질문을 모아 보다 빠르게 문제를 해결하실 수 있습니다.",
     img: faqIcon,
-<<<<<<< HEAD
-    path: "/faq",
-=======
     path: "/inquiry/faq",
->>>>>>> a8e8adc8150a987c33332d5fedec4489ec12900d
   },
   {
     title: "공지사항",
