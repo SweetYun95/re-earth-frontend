@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
    items: itemReducer,
-   adminMember: adminMemberReducer,
+   adminMembers: adminMemberReducer,
    adminDonation: adminDonationReducer,
    pointOrder: pointOrderReducer,
 
