@@ -1,18 +1,18 @@
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-// 임시로 기존 이미지 사용 (나중에 실제 이미지로 교체)
-import savingBusImg from '../../../assets/images/친환경컵.png' // 버스 이미지 (임시)
-import ttareungiImg from '../../../assets/images/따릉이.png' // 따릉이 이미지 (추가 예정)
+
+import ttareungiImg from '../../../assets/images/따릉이.png' // 따릉이 이미지
 import savingBottleImg from '../../../assets/images/태양광충전기.png' // 텀블러/물병 이미지 (임시)
 import savingIcon from '../../../assets/icons/re-earth_donation_icon.png' // 인증 아이콘 (기존 기부 아이콘 재사용)
 import MenuBar from '../../../components/menu/MenuBar'
 import './savingInfo.scss'
 
+
 export default function SavingInfoPage() {
    const navigate = useNavigate()
    const guideRef = useRef(null)
 
-   const goSaving = () => navigate('/saving/bicycle') // SavingBicycle로 이동
+   const goSaving = () => navigate('/saving/map') // SavingMap으로 이동
    const scrollToGuide = () => guideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
    return (
@@ -51,7 +51,12 @@ export default function SavingInfoPage() {
                      {/* 좌측: 이미지 */}
                      <div className="col-4 col-lg-5 mb-4 mb-lg-0">
                         <div className="guide-card">
-                           <img src={ttareungiImg} alt="따릉이 자전거" className="ttareungi-full-img" />
+                           <div className="saving-images">
+                              <div className="bike-icon-container">
+                                 <iconify-icon icon="mdi:bike" width="200" height="200" style={{ color: '#72C63A' }}></iconify-icon>
+                                 <p className="bike-label">따릉이</p>
+                              </div>
+                           </div>
                         </div>
                      </div>
 
@@ -104,7 +109,7 @@ export default function SavingInfoPage() {
                            </p>
                            
                            <div className="cta mt-4">
-                              <button type="button" className="btn-finder" onClick={() => navigate('/saving/map')}>
+                              <button type="button" className="btn-finder" onClick={() => navigate('/saving/recycling')}>
                                  내 주변 네프론 찾기
                               </button>
                               <img className="cta-icon" src={savingIcon} alt="" aria-hidden="true" />

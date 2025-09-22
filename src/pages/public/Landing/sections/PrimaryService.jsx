@@ -16,7 +16,6 @@ export default function PrimaryService() {
 
    return (
       <>
-
          <section className="panel ps-wrapper">
             <div className="container">
                <div className="row justify-content-center">

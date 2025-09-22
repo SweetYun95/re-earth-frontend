@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MyPage.scss';
 import CarbonReductionCard from '../../../components/layout/CarbonReductionCard';
-import MenuBar from '../../../components/menu/MenuBar';
 
 // 탭 컨텐츠 컴포넌트들
 import PointInquiryContent from '../../../components/mypage/PointInquiryContent';
@@ -48,7 +47,6 @@ const MyPage = () => {
 
   return (
     <div className="mypage">
-      <MenuBar />
       <div className="container">
         <div className="row">
           {/* 사이드바 */}

@@ -44,9 +44,9 @@ export default function QuickActions() {
   return (
     <div className="col-md-6">
       <div className="quick-actions">
-        <div className="row">
+        <div className="row h-100">
           {QUICK_ITEMS.map((item, idx) => (
-            <div className="col-md-6 col-sm-6 mb-3" key={idx}>
+            <div className="col-6  mb-3" key={idx}>
               <div
                 className={`card h-100 border-0 quick-action-card ${item.className}`}
                 onClick={() => handleCardClick(item.path)}

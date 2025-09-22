@@ -139,8 +139,9 @@ export default function PointShopPage() {
   };
 
   return (
-    <div className="pointshop-page">
-      <MenuBar />
+    <>
+    <MenuBar/>
+    <section className="pointshop-page">
       <div className="container-fluid">
         <div className="row">
           {/* 사이드바 - 필터 영역 */}
@@ -329,6 +330,7 @@ export default function PointShopPage() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    </>
   );
 }

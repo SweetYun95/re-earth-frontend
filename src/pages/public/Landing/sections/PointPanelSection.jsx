@@ -13,8 +13,6 @@ export default function PointPanelSection() {
    const textRef2 = useRef(null)
    const sectionRef1 = useRef(null)
    const sectionRef2 = useRef(null)
-   const animated1 = useRef(false)
-   const animated2 = useRef(false)
 
    useEffect(() => {
       const animateText1 = (element) => {
@@ -102,9 +100,8 @@ export default function PointPanelSection() {
 
       const observer1 = new IntersectionObserver((entries) => {
          entries.forEach((entry) => {
-            if (entry.isIntersecting && textRef1.current && !animated1.current) {
+            if (entry.isIntersecting && textRef1.current) {
                console.log('Section 1 is visible, starting animation')
-               animated1.current = true
                animateText1(textRef1.current)
             }
          })
@@ -112,9 +109,8 @@ export default function PointPanelSection() {
 
       const observer2 = new IntersectionObserver((entries) => {
          entries.forEach((entry) => {
-            if (entry.isIntersecting && textRef2.current && !animated2.current) {
+            if (entry.isIntersecting && textRef2.current) {
                console.log('Section 2 is visible, starting animation')
-               animated2.current = true
                setTimeout(() => {
                   animateText2(textRef2.current)
                }, 500) // 0.5초 지연
@@ -139,21 +135,7 @@ export default function PointPanelSection() {
 
    return (
       <>
-         <section 
-            id="showcase1" 
-            className="panel showcase1" 
-            ref={sectionRef1}
-            style={{
-               background: 'linear-gradient(to bottom, #ff6b6b 0%, #ffd93d 60%, #ffffff 100%)',
-               textAlign: 'center',
-               padding: '120px 24px 40px',
-               height: '100vh',
-               minHeight: '100vh',
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center'
-            }}
-         >
+         <section id="showcase1" className="panel showcase1" ref={sectionRef1}>
             <div className="container text-center">
                <div className="highlight-text1" ref={textRef1} style={{ opacity: 0 }}>
                   환경보호, 기부, 세제혜택... 너무복잡했죠?
@@ -161,21 +143,7 @@ export default function PointPanelSection() {
             </div>
          </section>
 
-         <section 
-            id="showcase2" 
-            className="panel showcase2" 
-            ref={sectionRef2}
-            style={{
-               background: 'linear-gradient(to bottom, #d1e95d 0%, #ffffff 60%, #ffffff 100%)',
-               textAlign: 'center',
-               padding: '120px 24px 40px',
-               height: '100vh',
-               minHeight: '100vh',
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'center'
-            }}
-         >
+         <section id="showcase2" className="panel showcase2" ref={sectionRef2}>
             <div className="container text-center">
                <div className="highlight-text2" ref={textRef2} style={{ opacity: 0 }}>
                   이제 이 앱 하나면 끝.

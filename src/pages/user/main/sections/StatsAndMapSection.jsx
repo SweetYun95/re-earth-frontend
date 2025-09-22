@@ -6,10 +6,10 @@ import ArrowIcon from "../../../../components/common/ArrowIcon";
 import CarbonReductionCard from "../../../../components/layout/CarbonReductionCard";
 
 const COMMUNITY = [
-  "제인도가 방금 5kg의 옷을 기부했습니다.",
+  "쫑알이님이 방금 5kg의 옷을 기부했습니다.",
   "이번 주말에 해변 청소 이벤트가 열립니다!",
-  "제인도가 방금 5kg의 옷을 기부했습니다.",
-  "000님 nnnnn P 달성!",
+  "이젠님이 방금 3kg의 옷을 기부했습니다.",
+  "콩만이님 10,000 P 달성!",
 ];
 
 export default function StatsAndMapSection() {
@@ -25,7 +25,7 @@ export default function StatsAndMapSection() {
           <div className="col-md-6">
             <div className="row">
               {/* 오늘의 미션 */}
-              <div className="col-md-6 mb-3">
+              <div className="col-6 mb-3">
                 <div className="custom-card border-0 custom-card-green-bg">
                   <div className="text-white text-center custom-custom-card-content">
                     <h5 className="custom-card-title font-weight-bold mb-2">
@@ -34,7 +34,7 @@ export default function StatsAndMapSection() {
                     <p className="custom-custom-card-text mb-3">
                       일회용 컵 대신 텀블러를 사용하세요!
                       <br />
-                      달성시 <span className="text-warning">nn P</span> 적립
+                      달성시 <span className="text-warning">10 P</span> 적립
                     </p>
                     <button className="btn-point">
                       <a href="/readysoon">미션 시작하기 →</a></button>
@@ -43,7 +43,7 @@ export default function StatsAndMapSection() {
               </div>
 
               {/* 내 탄소 포인트 */}
-              <div className="col-md-6 mb-3">
+              <div className="col-6 mb-3">
                 <div className="custom-card">
                   <div className="text-center custom-custom-card-content">
                     <h5 className="custom-card-title font-weight-bold mb-2 text-green">
@@ -53,13 +53,13 @@ export default function StatsAndMapSection() {
                       포인트 분석한마디
                     </p>
                     <p className="text-muted mb-1">Total</p>
-                    <h3 className="font-weight-bold text-green">nn,nnn P</h3>
+                    <h3 className="font-weight-bold text-green">150,000 P</h3>
                   </div>
                 </div>
               </div>
 
               {/* 이달 탄소 절감량 */}
-              <div className="col-md-6 mb-3">
+              <div className="col-6 mb-3">
                 <div className="custom-card">
                   <div className="text-center custom-custom-card-content">
                     <CarbonReductionCard
@@ -72,7 +72,7 @@ export default function StatsAndMapSection() {
               </div>
 
               {/* 커뮤니티 */}
-              <div className="col-md-6 mb-3">
+              <div className="col-6 mb-3">
                 <div className="community-custom-card custom-card-yellow-bg">
                   <div className="community-title d-flex align-items-center justify-content-between">
                     <h5 className="custom-card-title font-weight-bold m-0">

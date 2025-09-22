@@ -59,7 +59,7 @@ export default function AppRouter() {
       </Route>
 
       {/* 로그인 유저 전용 */}
-       <Route element={<UserOnly />}> 
+      <Route element={<UserOnly />}>
         <Route path="/user" element={<MainPage />} />
         <Route path="/user/my" element={<MyPage />} />
         <Route path="/user/my/edit" element={<ProfileEditPage />} />
@@ -82,13 +82,13 @@ export default function AppRouter() {
         <Route path="/saving/map" element={<SavingMap />} />
         <Route path="/saving/bicycle" element={<SavingBicycle />} />
         <Route path="/saving/point" element={<CalcPointPage />} />
-       </Route> 
+      </Route>
 
       {/* 관리자 전용 */}
-       <Route element={<AdminOnly />}> 
+      <Route element={<AdminOnly />}>
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/items/create" element={<ItemCreatePage />} />
-       </Route> 
+      </Route>
 
       {/* 유틸 페이지 */}
       <Route path="/loading" element={<LoadingPage />} />

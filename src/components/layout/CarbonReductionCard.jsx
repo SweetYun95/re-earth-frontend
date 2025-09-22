@@ -3,7 +3,7 @@ import './CarbonReductionCard.scss';
 
 const CarbonReductionCard = ({ 
   title = "이달 탄소 절감량",
-  description = "나무 n 그루 심은 것과 같은 효과",
+  description = "나무 3 그루 심은 것과 같은 효과",
   treeCount = 3,
   totalTrees = 5,
   className = ""

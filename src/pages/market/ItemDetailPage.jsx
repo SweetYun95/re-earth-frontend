@@ -15,8 +15,8 @@ export default function ProductDetailPage() {
    // Redux 상태
    const { item: product, loading, error } = useSelector((state) => state.items)
    
-   const [userPoints, setUserPoints] = useState(150000) // 임시 사용자 포인트
    const quantity = 1 // 수량 고정
+   const [userPoints, setUserPoints] = useState(150000) // 임시 사용자 포인트
 
    // 기본 이미지 배열
    const DEFAULT_IMAGES = [cupImage, towelImage, chargerImage, lampImage]
@@ -169,9 +169,9 @@ export default function ProductDetailPage() {
                            <span className="text-muted">내 포인트: {userPoints.toLocaleString()}P</span>
                         </div>
 
-                        {/* 가격 정보 */}
+                        {/* 총 가격 */}
                         <div className="total-price mb-4">
-                           <h5>결제 금액: {product.price.toLocaleString()}P</h5>
+                           <h5>결제 금액: {product.price?.toLocaleString()}P</h5>
                         </div>
 
                         {/* 구매 버튼 */}
