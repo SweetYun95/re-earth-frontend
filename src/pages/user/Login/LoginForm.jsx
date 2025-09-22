@@ -37,11 +37,15 @@ export default function LoginForm() {
       e.preventDefault()
       if (loading) return
 
+      // ✅ 이미 로그인된 상태라면 서버에 다시 /auth/login 요청하지 않음
+      if (hydrated && isAuthenticated) return
+
       const idOrEmail = form.idOrEmail.trim()
       const password = form.password
       if (!idOrEmail) return alert('아이디 또는 이메일을 입력하세요.')
       if (!password) return alert('비밀번호를 입력하세요.')
 
+      // 백엔드 호환: idOrEmail, userId 둘 다 전달
       const payload = { idOrEmail, userId: idOrEmail, password }
       console.log('[LoginForm] submitting login payload:', payload)
 
@@ -49,6 +53,7 @@ export default function LoginForm() {
          const loggedUser = await dispatch(loginUserThunk(payload)).unwrap()
          console.log('[LoginForm] loginUserThunk success →', loggedUser)
 
+         // 세션 정보 최신화
          await dispatch(hydrateAuthThunk())
 
          // 역할별 리다이렉트

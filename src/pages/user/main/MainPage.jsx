@@ -1,5 +1,5 @@
 // re-earth-frontend/src/pages/user/main/MainPage.jsx
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchItemsThunk } from '../../../features/itemSlice'
 import MenuBar from '../../../components/menu/MenuBar'
@@ -25,8 +25,8 @@ export default function MainPage() {
    const displayItems = items?.slice(0, 4) || []
 
    return (
-      <main className='main-content'>
-         <MenuBar/>
+      <main className="main-content">
+         <MenuBar />
          <HeroSection />
          <StatsAndMapSection />
          <section id="pointshop" className="main--pointshop section">
