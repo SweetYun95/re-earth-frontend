@@ -45,7 +45,7 @@ export default function NewsSection() {
   const navigate = useNavigate();
 
   const handleArrowClick = () => {
-    navigate('/news');
+    navigate('/readysoon');
   };
 
   return (

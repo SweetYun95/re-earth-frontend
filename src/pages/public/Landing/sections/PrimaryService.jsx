@@ -1,4 +1,8 @@
 // re-earth-frontend/src/pages/public/Landing/sections/PrimaryService.jsx
+import React from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Mousewheel } from 'swiper/modules'
+import 'swiper/css'
 import './PrinmaryService.scss'
 
 // 이미지 임포트
@@ -12,29 +16,74 @@ export default function PrimaryService() {
 
    return (
       <>
-         <section id="showcase" className="showcase">
-            <div className="container">
-               <div className="highlight-text">이제 이 앱 하나면 끝.</div>
-            </div>
-         </section>
 
-         <section className="ps-wrapper">
+         <section className="panel ps-wrapper">
             <div className="container">
-               <div className="service-text1">이렇게 해결할 수 있어요.</div>
-               <div className="service-text2">Primary Service</div>
-            </div>
-            <div className="ps-rail">
-               {slides.map((src, idx) => (
-                  <div className="ps-card" key={idx}>
-                     <img
-                        src={src}
-                        alt={`benefit-${idx + 1}`}
-                        onError={(e) => {
-                           e.currentTarget.style.visibility = 'hidden'
-                        }}
-                     />
+               <div className="row justify-content-center">
+                  <div className="col-12 col-md-10">
+                     <div className="randing--section__title mt-40">
+                        <p>이렇게 해결할 수 있어요.</p>
+                        <h2>Primary Service</h2>
+                     </div>
                   </div>
-               ))}
+
+                  <div className="col-12 col-md-10 mt-40">
+                     <div className="ps-swiper-container">
+               <Swiper
+                  modules={[Autoplay, Mousewheel]}
+                  spaceBetween={30}
+                  slidesPerView={3}
+                  autoplay={{
+                     delay: 3000,
+                     disableOnInteraction: false,
+                  }}
+                  mousewheel={{
+                     forceToAxis: true,
+                     sensitivity: 1,
+                     releaseOnEdges: true,
+                  }}
+                  loop={true}
+                  breakpoints={{
+                     480: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                     },
+                     768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                     },
+                     1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                     },
+                     1200: {
+                        slidesPerView: 3,
+                        spaceBetween: 50,
+                     }
+                  }}
+                  className="ps-swiper"
+               >
+                  {slides.map((src, idx) => (
+                     <SwiperSlide key={idx}>
+                        <div className="ps-card">
+                           <img 
+                              src={src} 
+                              alt={`Service ${idx + 1}`}
+                              className="ps-card-image"
+                              onError={(e) => {
+                                 console.error('이미지 로딩 실패:', src);
+                                 e.target.style.display = 'none';
+                              }}
+                           />
+
+                        </div>
+                     </SwiperSlide>
+                  ))}
+               </Swiper>
+                     </div>
+
+                  </div>
+               </div>
             </div>
          </section>
       </>

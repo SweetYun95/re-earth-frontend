@@ -5,6 +5,7 @@ import ReEarthSection from './sections/ReEarthSection'
 import SolutionInActionSection from './sections/SolutionInActionSection'
 import CarbonPointSection from './sections/CarbonPointSection'
 import PrimaryService from './sections/PrimaryService'
+import PointPanelSection from './sections/PointPanelSection'
 import './landing.scss'
 
 export default function LandingPage() {
@@ -15,6 +16,7 @@ export default function LandingPage() {
             <PanelFull />
             <ReEarthSection />
             <SolutionInActionSection />
+            <PointPanelSection/>
             <PrimaryService />
             <CarbonPointSection totalCO2="12,345" unitCO2="kg" totalPoint="98,765" unitPoint="P" treeCount="1,234" />
          </main>

@@ -5,11 +5,11 @@ import EarthImage from '../../../../assets/images/re_Earth-Freepik-Photoroom__1.
 export default function CarbonPointSection({ totalCO2 = '？', unitCO2 = 'kg', totalPoint = '？', unitPoint = 'P', treeCount = '？' }) {
    return (
       <section className="panel randing--carbon-point content">
-         <div className="container">
+         <div className="container ">
             <div className="row text-center">
                <div className="col-lg-10 offset-lg-1">
                   {/* 헤드라인 */}
-                  <h2 className="gmarket headline">
+                  <h2 className="gmarket headline text-center">
                      지금까지 절감한 탄소 배출량
                      <span className="value-box ms-2">
                         {totalCO2}
@@ -30,14 +30,14 @@ export default function CarbonPointSection({ totalCO2 = '？', unitCO2 = 'kg', t
             </div>
 
             {/* ROW 4: CTA(좌) + 이미지(우) 박스 */}
-            <div className="row align-items-end mt-40">
+            <div className="row d-flex align-items-center mt-40">
                {/* CTA 박스: col-6, 왼쪽에서 시작 */}
                <div className="col-lg-6 offset-lg-1 mb-40">
                   <div className="cta-box text-center">
                      <p className="lead-ask">저희와 함께하시겠어요?</p>
 
                      <div className="carbon-point__cta mt-40">
-                        <Link to="/register" className="btn btn--register">
+                        <Link to="/register" className="btn btn--register floating-btn">
                            Re:earth 프로젝트 참여하기
                         </Link>
                      </div>

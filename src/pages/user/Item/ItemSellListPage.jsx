@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ItemSellList from "../../../components/shop/ItemSellList";
-// Pagination 위치가 다를 수 있어 경로 확인 필요
-// import Pagination from '../../../components/common/Pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItemsThunk } from '../../../features/itemSlice';
+import { formatWithComma } from '../../../utils/priceSet';
+import Pagination from '../../../components/common/Pagination';
 import "./PointShopPage.scss";
 
 const CATEGORIES = [
@@ -227,7 +228,130 @@ function ItemSellListPage() {
 
                     {/* 상품 그리드: 실제 데이터 리스트 */}
                     <div className="products-grid">
-                      <ItemSellList />
+                      {loading ? (
+                        <div className="text-center py-5">
+                          <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
+                          </div>
+                          <p className="mt-3">상품을 불러오는 중...</p>
+                        </div>
+                      ) : error ? (
+                        <div className="text-center py-5">
+                          <div className="alert alert-danger" role="alert">
+                            <iconify-icon icon="mdi:alert-circle" width="24" height="24" className="mr-2"></iconify-icon>
+                            에러 발생: {String(error)}
+                          </div>
+                          <button className="btn btn-primary mt-3" onClick={() => dispatch(fetchItemsThunk({}))}>
+                            다시 시도
+                          </button>
+                        </div>
+                      ) : items?.length > 0 ? (
+                        <div className="row">
+                          {items.map((item) => {
+                            // 대표 이미지 안전 접근
+                            const images = item.ItemImages ?? item.Imgs ?? []
+                            const repImg = images.find((img) => img?.repImgYn === 'Y') ?? images[0]
+                            const imageUrl = repImg?.imgUrl ? `${import.meta.env.VITE_APP_API_URL}${repImg.imgUrl}` : '/placeholder.png'
+                            
+                            return (
+                              <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                <div className="card h-100 shadow-sm product-card" onClick={() => navigate(`/items/detail/${item.id}`)} style={{ cursor: 'pointer' }}>
+                                  {/* 상품 이미지 */}
+                                  <div className="position-relative">
+                                    <img
+                                      src={imageUrl}
+                                      alt={item.itemNm ?? 'item image'}
+                                      className="card-img-top product-image"
+                                      style={{ height: '200px', objectFit: 'cover' }}
+                                      onError={(e) => {
+                                        e.target.src = '/placeholder.png'
+                                      }}
+                                    />
+                                    {/* 판매 상태 배지 */}
+                                    {item.itemSellStatus === 'SELL' ? (
+                                      <span className="badge badge-success position-absolute" style={{ top: '10px', right: '10px' }}>
+                                        <iconify-icon icon="mdi:check-circle" width="12" height="12" className="mr-1"></iconify-icon>
+                                        판매중
+                                      </span>
+                                    ) : (
+                                      <span className="badge badge-secondary position-absolute" style={{ top: '10px', right: '10px' }}>
+                                        <iconify-icon icon="mdi:close-circle" width="12" height="12" className="mr-1"></iconify-icon>
+                                        품절
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* 상품 정보 */}
+                                  <div className="card-body d-flex flex-column">
+                                    <h6 className="card-title text-dark mb-2" style={{ 
+                                      overflow: 'hidden', 
+                                      textOverflow: 'ellipsis', 
+                                      whiteSpace: 'nowrap',
+                                      minHeight: '1.5em'
+                                    }}>
+                                      {item.itemNm}
+                                    </h6>
+                                    
+                                    {/* 브랜드 정보 */}
+                                    {item.brandName && (
+                                      <p className="text-muted small mb-2">
+                                        <iconify-icon icon="mdi:tag" width="14" height="14" className="mr-1"></iconify-icon>
+                                        {item.brandName}
+                                      </p>
+                                    )}
+
+                                    {/* 상품 요약 */}
+                                    {item.itemSummary && (
+                                      <p className="text-muted small mb-3" style={{
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        minHeight: '2.4em'
+                                      }}>
+                                        {item.itemSummary}
+                                      </p>
+                                    )}
+
+                                    {/* 가격 정보 */}
+                                    <div className="mt-auto">
+                                      <div className="d-flex justify-content-between align-items-center">
+                                        <span className="h5 text-primary mb-0 font-weight-bold">
+                                          {formatWithComma(String(item.price))}P
+                                        </span>
+                                        {item.stockNumber && (
+                                          <small className="text-muted">
+                                            재고: {item.stockNumber}개
+                                          </small>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* 카드 푸터 */}
+                                  <div className="card-footer bg-transparent border-0 p-3">
+                                    <div className="d-flex justify-content-center">
+                                      <span className="btn btn-outline-primary btn-sm">
+                                        <iconify-icon icon="mdi:eye" width="16" height="16" className="mr-1"></iconify-icon>
+                                        상품 보기
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      ) : (
+                        <div className="col-12">
+                          <div className="text-center py-5">
+                            <iconify-icon icon="mdi:package-variant-remove" width="64" height="64" style={{ color: '#ccc' }}></iconify-icon>
+                            <h5 className="mt-3 text-muted">등록된 상품이 없습니다</h5>
+                            <p className="text-muted">새로운 상품이 등록되면 여기에 표시됩니다.</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* 페이지네이션이 필요하다면 여기 배치 */}

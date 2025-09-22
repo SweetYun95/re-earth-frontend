@@ -2,7 +2,6 @@
 .pointshop-page {
   min-height: 100vh;
   background-color: #ffffff;
-  padding: 20px 0;
 }
 
 /* 사이드바 스타일 */
@@ -203,10 +202,6 @@
 }
 
 @media (max-width: 767.98px) {
-  .pointshop-page {
-    padding: 10px 0;
-  }
-
   .pointshop-sidebar {
     .tab-menu {
       .tab-item {
