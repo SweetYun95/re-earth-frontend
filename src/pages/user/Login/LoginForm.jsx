@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { loginUserThunk, hydrateAuthThunk } from '../../../features/authSlice'
-import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
+// ⛔ 임시 비활성화: 소셜 리다이렉트 함수 import 제거
+// import { redirectToGoogleLogin, redirectToKakaoLogin } from '../../../api/authApi'
 
 import InputField from '../../../components/common/InputField'
 import googleIcon from '../../../assets/icons/google.svg'
@@ -82,16 +83,17 @@ export default function LoginForm() {
       }
    }
 
+   // ✅ 소셜 로그인 임시 비활성화: /login 페이지 유지 + 알림만 표시
    const handleGoogle = () => {
       if (loading) return
-      console.log('[LoginForm] redirecting to Google OAuth')
-      redirectToGoogleLogin()
+      alert('구글 로그인은 기능 구현 예정입니다.')
+      // redirectToGoogleLogin()  // ← 재활성화 시 복구
    }
 
    const handleKakao = () => {
       if (loading) return
-      console.log('[LoginForm] redirecting to Kakao OAuth')
-      redirectToKakaoLogin()
+      alert('카카오 로그인은 기능 구현 예정입니다.')
+      // redirectToKakaoLogin()  // ← 재활성화 시 복구
    }
 
    return (
