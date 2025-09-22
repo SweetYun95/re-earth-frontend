@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import AdminTableLayout from './common/AdminTableLayout'
 import AdminBaseModal from '../modal/AdminBaseModal'
-import FormInput from '../../components/common/FormInput'
+import InputField from '../../components/common/InputField'
 import FormSelect from '../../components/common/FormSelect'
-import FormTextarea from '../../components/common/FormTextarea'
 
 const PointShopContent = () => {
    const [activeSubTab, setActiveSubTab] = useState('pointshop-management')
@@ -470,7 +469,7 @@ const PointShopContent = () => {
                         </div>
                      )}
                      <div className={activeSubTab === 'pointshop-management' ? 'col-md-6' : 'col-md-6'}>
-                        <FormInput label="상품명" type="text" value={formData.productName} onChange={(e) => handleFormChange('productName', e.target.value)} placeholder="상품명을 입력하세요" required={true} />
+                        <InputField label="상품명" type="text" name="productName" value={formData.productName} inputChange={(e) => handleFormChange('productName', e.target.value)} placeholder="상품명을 입력하세요" required={true} />
                      </div>
                      <div className="col-md-6">
                         <FormSelect
@@ -490,15 +489,15 @@ const PointShopContent = () => {
                   </div>
                   <div className="row">
                      <div className="col-md-6">
-                        <FormInput label="포인트" type="number" value={formData.point} onChange={(e) => handleFormChange('point', e.target.value)} placeholder="포인트를 입력하세요" required={true} />
+                        <InputField label="포인트" type="number" name="point" value={formData.point} inputChange={(e) => handleFormChange('point', e.target.value)} placeholder="포인트를 입력하세요" required={true} />
                      </div>
                      <div className="col-md-6">
-                        <FormInput label="재고 수량" type="number" value={formData.stock} onChange={(e) => handleFormChange('stock', e.target.value)} placeholder="재고 수량을 입력하세요" required={true} />
+                        <InputField label="재고 수량" type="number" name="stock" value={formData.stock} inputChange={(e) => handleFormChange('stock', e.target.value)} placeholder="재고 수량을 입력하세요" required={true} />
                      </div>
                   </div>
                   <div className="row">
                      <div className="col-12">
-                        <FormTextarea label="상품 설명" value={formData.description} onChange={(e) => handleFormChange('description', e.target.value)} placeholder="상품에 대한 설명을 입력하세요" rows={3} />
+                        <InputField label="상품 설명" type="textarea" name="description" value={formData.description} inputChange={(e) => handleFormChange('description', e.target.value)} placeholder="상품에 대한 설명을 입력하세요" rows={3} />
                      </div>
                   </div>
                   <div className="d-flex justify-content-end gap-2 mt-20">

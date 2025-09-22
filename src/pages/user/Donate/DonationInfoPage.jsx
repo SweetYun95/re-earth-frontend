@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import donateImg from '../../../assets/images/re-earth_donation_bannerCard.png'
 import donateIcon from '../../../assets/icons/re-earth_donation_icon.png'
+import MenuBar from '../../../components/menu/MenuBar'
 import './donationInfo.scss'
 
 export default function DonationInfoPage() {
@@ -13,10 +14,11 @@ export default function DonationInfoPage() {
 
    return (
       <>
+        <MenuBar/>
          {/* ─────────── Hero (섹션 1) ─────────── */}
          <section className="donation-hero">
             <div className="overlay" />
-            <div className="hero-inner">
+            <div className="hero-inner container">
                <div className="hero-block">
                   <h2 className="hero-title">기부하기</h2>
                   <p className="hero-sub mt-40">Re:Wear(헌옷 기부하기)</p>

@@ -15,11 +15,11 @@ const FormSelect = ({
       {label && (
         <label className="form-label">
           {label}
-          {required && <span className="text-danger ms-1">*</span>}
+          {required && <span className="text-danger ml-1">*</span>}
         </label>
       )}
       <select
-        className="form-select"
+        className="form-control"
         value={value}
         onChange={onChange}
         required={required}

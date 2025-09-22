@@ -23,13 +23,13 @@ const SUPPORT = [
     title: "공지사항",
     desc: "원활한 서비스를 위해 공지를 확인해주세요.",
     img: noticeIcon,
-    path: "/notice",
+    path: "/readysoon",
   },
   {
     title: "고객의 소리",
     desc: "다양한 의견을 듣고 더 나은 서비스를 위해 반영하겠습니다.",
     img: feedbackIcon,
-    path: "/feedback",
+    path: "/readysoon",
   },
 ];
 
