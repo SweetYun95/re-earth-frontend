@@ -16,7 +16,7 @@ import adminQnaReducer from '../features/adminQnaSlice'
 const rootReducer = combineReducers({
    auth: authReducer,
    donation: donationReducer,
-   item: itemReducer,
+   items: itemReducer,
    adminMember: adminMemberReducer,
    adminDonation: adminDonationReducer,
    pointOrder: pointOrderReducer,
