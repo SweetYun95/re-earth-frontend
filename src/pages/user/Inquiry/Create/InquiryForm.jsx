@@ -1,3 +1,4 @@
+// re-earth-frontend/src/pages/user/Inquiry/Create/InquiryForm.jsx
 import { useNavigate } from "react-router-dom";
 import "./inquiryForm.scss";
 function InquiryForm() {
