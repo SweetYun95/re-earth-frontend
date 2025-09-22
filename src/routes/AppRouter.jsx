@@ -21,7 +21,7 @@ import DonationInfoPage from "../pages/user/Donate/DonationInfoPage";
 import DonationPage from "../pages/user/Donate/DonationPage";
 import DonationCompletePage from "../pages/user/Donate/DonationCompletePage";
 // 인증/적립
-import SavingInfoPage from "../pages/user/Saving/SavingInfoPage";
+import SavingInfoPage from "../pages/user/saving/SavingInfoPage";
 import SavingMap from "../pages/user/saving/SavingMap";
 import SavingBicycle from "../pages/user/saving/SavingBicycle";
 import CalcPointPage from "../pages_extra/Point/CalcPointPage";
