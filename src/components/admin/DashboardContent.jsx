@@ -138,7 +138,7 @@ const DashboardContent = () => {
                            {recentMembers.map((u) => (
                               <div key={u.id} className="dashboard-activity-item">
                                  <div className="dashboard-activity-item__avatar">
-                                    <img src="/src/assets/icons/profile.png" alt="사용자" />
+                                    <img src="../../assets/icons/profile.png" alt="사용자" />
                                  </div>
                                  <div className="dashboard-activity-item__info">
                                     <span className="dashboard-activity-item__name">{u.name}</span>
