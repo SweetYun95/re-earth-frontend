@@ -3,9 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import './MyPage.scss'
 import MenuBar from '../../../components/menu/MenuBar'
-
 // 탭 컨텐츠 컴포넌트들
 import PointInquiryContent from '../../../components/mypage/PointInquiryContent'
 import OrderDeliveryContent from '../../../components/mypage/OrderDeliveryContent'
@@ -17,6 +15,12 @@ import CarbonReductionCard from '../../../components/layout/CarbonReductionCard'
 import LoadingPage from '../../../pages_extra/Unloaded/LoadingPage'
 
 import { hydrateAuthThunk, logoutUserThunk } from '../../../features/authSlice'
+
+// 아이콘 import
+import profileIcon from '../../../assets/icons/profile.png'
+import rightArrow from '../../../assets/icons/right-line.svg'
+
+import './MyPage.scss'
 
 const MyPage = () => {
    const navigate = useNavigate()
@@ -98,7 +102,7 @@ const MyPage = () => {
                         <div className="card-body">
                            <div className="h-100 d-flex flex-column align-items-center">
                               <div className="mypage__avatar mr-3">
-                                 <img src="/src/assets/icons/profile.png" alt="프로필" className="img-fluid rounded-circle" />
+                                 <img src={profileIcon} alt="프로필" className="img-fluid rounded-circle" />
                               </div>
                               <div className="mypage__user-info">
                                  <span className="mypage__username">{user?.name}</span>
@@ -132,7 +136,7 @@ const MyPage = () => {
                            <div className="d-flex justify-content-between align-items-center">
                               <span>환경보호 실천 건수</span>
                               <span className="mypage__count-number">{practiceCount}</span>
-                              <img src="/src/assets/icons/right-line.svg" alt="화살표" />
+                              <img src={rightArrow} alt="화살표" />
                            </div>
                         </div>
                      </div>
@@ -143,7 +147,7 @@ const MyPage = () => {
                            <p className="mypage__point-amount h3 text-primary">1,274 P</p>
                            <button className="d-flex btn-point">
                               포인트 모으러 가기
-                              <img src="/src/assets/icons/right-line.svg" alt="화살표" className="ml-2" />
+                              <img src={rightArrow} alt="화살표" className="ml-2" />
                            </button>
                         </div>
                      </div>
