@@ -1,9 +1,22 @@
-import React, { useState } from 'react'
+// re-earth-frontend/src/components/admin/CustomerServiceContent.jsx
+import { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AdminTableLayout from './common/AdminTableLayout'
+import { adminFetchQnaListThunk, adminAnswerQnaThunk, adminUpdateQnaStatusThunk } from '../../features/adminQnaSlice'
 
 const CustomerServiceContent = () => {
+   const dispatch = useDispatch()
    const [activeSubTab, setActiveSubTab] = useState('inquiry-1on1')
    const [expandedRows, setExpandedRows] = useState({})
+
+   // 페이징/필터 상태 (관리자 1:1 문의 탭에서만 사용)
+   const [page, setPage] = useState(1)
+   const [size] = useState(20)
+   const [statusFilter, setStatusFilter] = useState('') // '', OPEN, ANSWERED, CLOSED
+
+   // Redux - 관리자 QnA 목록
+   const { items, total, loading, error } = useSelector((s) => s.adminQna || { items: [], total: 0, loading: false, error: null })
+   const totalPages = useMemo(() => Math.max(1, Math.ceil((total || 0) / size)), [total, size])
 
    // 서브 탭 목록
    const subTabs = [
@@ -15,211 +28,89 @@ const CustomerServiceContent = () => {
       { id: 'admin-board-category', label: '관리자 게시판 카테고리', icon: 'mdi:folder-multiple' },
    ]
 
-   // 1:1문의 데이터
-   const inquiry1on1Data = [
-      {
-         id: 1,
-         문의일: '2025-01-15',
-         회원ID: 'user001',
-         카테고리: '기부',
-         제목: '기부 승인 문의',
-         내용: '기부 신청 후 3일이 지났는데 아직 승인이 안 되었습니다. 언제쯤 처리가 될까요?',
-         우선순위: '보통',
-         상태: '답변완료',
-         담당자: '관리자1',
-         처리일: '2025-01-15',
-      },
-      {
-         id: 4,
-         문의일: '2025-01-12',
-         회원ID: 'user004',
-         카테고리: '계정',
-         제목: '비밀번호 재설정 오류',
-         내용: '비밀번호 재설정 메일이 오지 않습니다.',
-         우선순위: '높음',
-         상태: '대기',
-         담당자: '',
-         처리일: '',
-      },
-   ]
-
-   // FAQ 데이터
+   // ─────────────────────────────
+   // 더미 데이터 (다른 서브탭은 그대로)
+   // ─────────────────────────────
    const inquiryFaqData = [
-      {
-         id: 2,
-         문의일: '2025-01-14',
-         회원ID: 'user002',
-         카테고리: '포인트',
-         제목: '포인트 적립 방법',
-         내용: '대중교통 이용 시 포인트는 어떻게 적립되나요?',
-         우선순위: '낮음',
-         상태: '답변완료',
-         담당자: '관리자2',
-         처리일: '2025-01-14',
-      },
-      {
-         id: 5,
-         문의일: '2025-01-10',
-         회원ID: 'user005',
-         카테고리: '포인트샵',
-         제목: '상품 교환 정책',
-         내용: '구매한 상품의 교환이 가능한가요?',
-         우선순위: '보통',
-         상태: '답변완료',
-         담당자: '관리자3',
-         처리일: '2025-01-10',
-      },
+      { id: 2, 문의일: '2025-01-14', 회원ID: 'user002', 카테고리: '포인트', 제목: '포인트 적립 방법', 내용: '대중교통 이용 시 포인트는...', 우선순위: '낮음', 상태: '답변완료', 담당자: '관리자2', 처리일: '2025-01-14' },
+      { id: 5, 문의일: '2025-01-10', 회원ID: 'user005', 카테고리: '포인트샵', 제목: '상품 교환 정책', 내용: '구매한 상품의 교환이 가능한가요?', 우선순위: '보통', 상태: '답변완료', 담당자: '관리자3', 처리일: '2025-01-10' },
    ]
-
-   // 고객의소리 데이터
    const inquiryVoiceData = [
-      {
-         id: 3,
-         문의일: '2025-01-13',
-         회원ID: 'user003',
-         카테고리: '서비스개선',
-         제목: '앱 사용성 개선 요청',
-         내용: '포인트샵 페이지의 로딩 속도가 너무 느려서 불편합니다. 개선 부탁드립니다.',
-         우선순위: '높음',
-         상태: '처리중',
-         담당자: '관리자1',
-         처리일: '',
-      },
-      {
-         id: 6,
-         문의일: '2025-01-09',
-         회원ID: 'user006',
-         카테고리: 'UI/UX',
-         제목: '메뉴 구조 개선 제안',
-         내용: '메인 메뉴가 너무 복잡해서 원하는 기능을 찾기 어렵습니다.',
-         우선순위: '보통',
-         상태: '검토중',
-         담당자: '관리자2',
-         처리일: '',
-      },
+      { id: 3, 문의일: '2025-01-13', 회원ID: 'user003', 카테고리: '서비스개선', 제목: '앱 사용성 개선 요청', 내용: '포인트샵 로딩이 느립니다.', 우선순위: '높음', 상태: '처리중', 담당자: '관리자1', 처리일: '' },
+      { id: 6, 문의일: '2025-01-09', 회원ID: 'user006', 카테고리: 'UI/UX', 제목: '메뉴 구조 개선 제안', 내용: '메뉴가 너무 복잡합니다.', 우선순위: '보통', 상태: '검토중', 담당자: '관리자2', 처리일: '' },
    ]
-
-   // 문의사항 카테고리 데이터
    const inquiryCategoryData = [
-      {
-         카테고리명: '기부',
-         문의건수: '45건',
-         정렬순서: '1',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '포인트',
-         문의건수: '123건',
-         정렬순서: '2',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '계정',
-         문의건수: '67건',
-         정렬순서: '3',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '서비스개선',
-         문의건수: '89건',
-         정렬순서: '4',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '기타',
-         문의건수: '34건',
-         정렬순서: '5',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
+      { 카테고리명: '기부', 문의건수: '45건', 정렬순서: '1', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '포인트', 문의건수: '123건', 정렬순서: '2', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '계정', 문의건수: '67건', 정렬순서: '3', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '서비스개선', 문의건수: '89건', 정렬순서: '4', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '기타', 문의건수: '34건', 정렬순서: '5', 생성일: '2024-12-01', 상태: '활성' },
    ]
-
-   // 관리자 게시판 데이터 (커뮤니티 관리 카테고리 제외)
    const adminBoardData = [
-      {
-         제목: '고객센터 운영 가이드라인',
-         카테고리: '운영정책',
-         작성자: '관리자',
-         작성일: '2025-01-15',
-         조회수: '45',
-         상태: '게시',
-      },
-      {
-         제목: '신규 FAQ 등록 안내',
-         카테고리: 'FAQ관리',
-         작성자: '관리자',
-         작성일: '2025-01-14',
-         조회수: '23',
-         상태: '게시',
-      },
-      {
-         제목: '고객 응대 매뉴얼 업데이트',
-         카테고리: '매뉴얼',
-         작성자: '관리자',
-         작성일: '2025-01-13',
-         조회수: '67',
-         상태: '게시',
-      },
+      { 제목: '고객센터 운영 가이드라인', 카테고리: '운영정책', 작성자: '관리자', 작성일: '2025-01-15', 조회수: '45', 상태: '게시' },
+      { 제목: '신규 FAQ 등록 안내', 카테고리: 'FAQ관리', 작성자: '관리자', 작성일: '2025-01-14', 조회수: '23', 상태: '게시' },
+      { 제목: '고객 응대 매뉴얼 업데이트', 카테고리: '매뉴얼', 작성자: '관리자', 작성일: '2025-01-13', 조회수: '67', 상태: '게시' },
    ]
-
-   // 관리자 게시판 카테고리 데이터 (커뮤니티 관리 카테고리 제외)
    const adminBoardCategoryData = [
-      {
-         카테고리명: '운영정책',
-         게시글수: '12개',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: 'FAQ관리',
-         게시글수: '8개',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '매뉴얼',
-         게시글수: '15개',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
-      {
-         카테고리명: '교육자료',
-         게시글수: '6개',
-         생성일: '2024-12-01',
-         상태: '활성',
-      },
+      { 카테고리명: '운영정책', 게시글수: '12개', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: 'FAQ관리', 게시글수: '8개', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '매뉴얼', 게시글수: '15개', 생성일: '2024-12-01', 상태: '활성' },
+      { 카테고리명: '교육자료', 게시글수: '6개', 생성일: '2024-12-01', 상태: '활성' },
    ]
 
    // 행 확장/축소 토글
    const toggleRowExpansion = (rowId) => {
-      setExpandedRows((prev) => ({
-         ...prev,
-         [rowId]: !prev[rowId],
-      }))
+      setExpandedRows((prev) => ({ ...prev, [rowId]: !prev[rowId] }))
    }
 
-   // 문의사항 액션 핸들러
-   const handleInquiryAction = (action, item) => {
+   // ─────────────────────────────
+   // 관리자 1:1 문의 실제 연동
+   // ─────────────────────────────
+   useEffect(() => {
+      if (activeSubTab !== 'inquiry-1on1') return
+      dispatch(
+         adminFetchQnaListThunk({
+            page,
+            size,
+            status: statusFilter || undefined, // '' → undefined로 보내면 필터 미적용
+         })
+      )
+   }, [dispatch, activeSubTab, page, size, statusFilter])
+
+   const handleInquiryAction = async (action, item) => {
       switch (action) {
-         case 'answer':
-            alert(`${item['제목']}에 대한 답변 작성 모달을 열겠습니다.`)
-            break
-         case 'edit':
-            alert(`${item['제목']} 수정 기능을 실행합니다.`)
-            break
-         case 'delete':
-            if (window.confirm(`"${item['제목']}"을(를) 삭제하시겠습니까?`)) {
-               alert('문의사항이 삭제되었습니다.')
+         case 'answer': {
+            const body = window.prompt('답변 내용을 입력하세요:')
+            if (!body || !body.trim()) return
+            try {
+               await dispatch(adminAnswerQnaThunk({ id: item.id, body: body.trim() })).unwrap()
+               // 서버에서 OPEN → ANSWERED로 자동 변경하므로 목록 갱신
+               await dispatch(adminFetchQnaListThunk({ page, size, status: statusFilter || undefined }))
+               alert('답변이 등록되었습니다.')
+            } catch (e) {
+               console.error(e)
+               alert('답변 등록 실패')
             }
             break
-         case 'assign': {
-            const manager = prompt('담당자를 입력하세요:', item['담당자'] || '')
-            if (manager !== null) {
-               alert(`담당자가 "${manager}"로 지정되었습니다.`)
+         }
+         case 'close': {
+            if (!window.confirm('해당 문의를 종료(CLOSED) 처리할까요?')) return
+            try {
+               await dispatch(adminUpdateQnaStatusThunk({ id: item.id, status: 'CLOSED' })).unwrap()
+               alert('종료되었습니다.')
+            } catch (e) {
+               console.error(e)
+               alert('상태 변경 실패')
+            }
+            break
+         }
+         case 'markAnswered': {
+            try {
+               await dispatch(adminUpdateQnaStatusThunk({ id: item.id, status: 'ANSWERED' })).unwrap()
+               alert('답변완료로 변경했습니다.')
+            } catch (e) {
+               console.error(e)
+               alert('상태 변경 실패')
             }
             break
          }
@@ -228,10 +119,12 @@ const CustomerServiceContent = () => {
       }
    }
 
-   // 서브탭별 컬럼 설정
+   // 컬럼 구성
    const getColumns = () => {
       switch (activeSubTab) {
          case 'inquiry-1on1':
+            // 백엔드 필드 기준으로 단순화
+            return ['문의일', '회원ID', '제목', '상태']
          case 'inquiry-faq':
          case 'inquiry-voice':
             return ['문의일', '회원ID', '카테고리', '제목', '우선순위', '상태', '담당자']
@@ -246,66 +139,70 @@ const CustomerServiceContent = () => {
       }
    }
 
-   // 서브탭별 데이터 설정 (고객문의사항은 드롭다운 형태로 처리)
+   // 목록 데이터 매핑
    const getData = () => {
       switch (activeSubTab) {
-         case 'inquiry-1on1':
-            return inquiry1on1Data.map((item) => {
-               const isExpanded = expandedRows[item.id]
+         case 'inquiry-1on1': {
+            // 실제 서버 데이터 → 테이블 렌더용으로 매핑 (제목 셀을 펼침 가능하게 구성)
+            return (items || []).map((q) => {
+               const isExpanded = !!expandedRows[q.id]
+               const created = q.createdAt ? new Date(q.createdAt) : null
+               const dateText = created ? created.toISOString().slice(0, 10) : ''
+
+               const userIdText = q.User ? `${q.User.userId ?? q.User.name ?? q.User.email ?? '-'}` : '-'
+
                return {
-                  ...item,
+                  id: q.id,
+                  문의일: dateText,
+                  회원ID: userIdText,
+                  상태: q.status,
                   제목: (
-                     <div key={`inquiry-${item.id}`} className="inquiry-dropdown">
-                        <button className="dropdown-header" onClick={() => toggleRowExpansion(item.id)}>
+                     <div key={`qna-${q.id}`} className="inquiry-dropdown">
+                        <button className="dropdown-header" onClick={() => toggleRowExpansion(q.id)}>
                            <span className={`dropdown-icon ${isExpanded ? 'expanded' : ''}`}>▶</span>
-                           <span className="dropdown-title">{item['제목']}</span>
+                           <span className="dropdown-title">{q.title}</span>
                         </button>
 
                         {isExpanded && (
                            <div className="dropdown-content">
                               <div className="content-section">
-                                 <div className="section-meta">
-                                    <span>
-                                       우선순위: <span className={`priority ${item['우선순위'] === '높음' ? 'high' : item['우선순위'] === '보통' ? 'normal' : 'low'}`}>{item['우선순위']}</span>
-                                    </span>
-                                    <span>담당자: {item['담당자'] || '미지정'}</span>
-                                 </div>
                                  <div className="section-label">문의 내용</div>
-                                 <div className="section-content">{item['내용']}</div>
+                                 <div className="section-content" style={{ whiteSpace: 'pre-wrap' }}>
+                                    {q.question}
+                                 </div>
                               </div>
 
                               <div className="action-buttons">
-                                 <button className="btn default main1" onClick={() => handleInquiryAction('answer', item)}>
+                                 <button className="btn default main1" onClick={() => handleInquiryAction('answer', q)} disabled={loading}>
                                     답변 작성
                                  </button>
-                                 <button className="btn default main2" onClick={() => handleInquiryAction('edit', item)}>
-                                    수정
+                                 <button className="btn default" onClick={() => handleInquiryAction('markAnswered', q)} disabled={loading || q.status === 'ANSWERED'}>
+                                    답변완료로 변경
                                  </button>
-                                 <button className="btn default main3" onClick={() => handleInquiryAction('delete', item)}>
-                                    삭제
-                                 </button>
-                                 <button className="btn default" onClick={() => handleInquiryAction('assign', item)}>
-                                    담당자 지정
+                                 <button className="btn default main3" onClick={() => handleInquiryAction('close', q)} disabled={loading || q.status === 'CLOSED'}>
+                                    종료 처리
                                  </button>
                               </div>
+
+                              {error && <div className="text-danger mt-2">에러: {String(error)}</div>}
                            </div>
                         )}
                      </div>
                   ),
                }
             })
-         case 'inquiry-faq':
+         }
+         case 'inquiry-faq': {
             return inquiryFaqData.map((item) => {
                const isExpanded = expandedRows[item.id]
                return {
                   ...item,
                   제목: (
-                     <div key={`inquiry-${item.id}`} className="inquiry-dropdown">
+                     <div key={`faq-${item.id}`} className="inquiry-dropdown">
                         <button className="dropdown-header" onClick={() => toggleRowExpansion(item.id)}>
                            <span className={`dropdown-icon ${isExpanded ? 'expanded' : ''}`}>▶</span>
                            <span className="dropdown-title">{item['제목']}</span>
                         </button>
-
                         {isExpanded && (
                            <div className="dropdown-content">
                               <div className="content-section">
@@ -318,19 +215,15 @@ const CustomerServiceContent = () => {
                                  <div className="section-label">문의 내용</div>
                                  <div className="section-content">{item['내용']}</div>
                               </div>
-
                               <div className="action-buttons">
-                                 <button className="btn default main1" onClick={() => handleInquiryAction('answer', item)}>
+                                 <button className="btn default main1" onClick={() => alert('답변 작성 모달')}>
                                     답변 작성
                                  </button>
-                                 <button className="btn default main2" onClick={() => handleInquiryAction('edit', item)}>
+                                 <button className="btn default main2" onClick={() => alert('수정')}>
                                     수정
                                  </button>
-                                 <button className="btn default main3" onClick={() => handleInquiryAction('delete', item)}>
+                                 <button className="btn default main3" onClick={() => window.confirm('삭제?') && alert('삭제')}>
                                     삭제
-                                 </button>
-                                 <button className="btn default" onClick={() => handleInquiryAction('assign', item)}>
-                                    담당자 지정
                                  </button>
                               </div>
                            </div>
@@ -339,18 +232,18 @@ const CustomerServiceContent = () => {
                   ),
                }
             })
-         case 'inquiry-voice':
+         }
+         case 'inquiry-voice': {
             return inquiryVoiceData.map((item) => {
                const isExpanded = expandedRows[item.id]
                return {
                   ...item,
                   제목: (
-                     <div key={`inquiry-${item.id}`} className="inquiry-dropdown">
+                     <div key={`voice-${item.id}`} className="inquiry-dropdown">
                         <button className="dropdown-header" onClick={() => toggleRowExpansion(item.id)}>
                            <span className={`dropdown-icon ${isExpanded ? 'expanded' : ''}`}>▶</span>
                            <span className="dropdown-title">{item['제목']}</span>
                         </button>
-
                         {isExpanded && (
                            <div className="dropdown-content">
                               <div className="content-section">
@@ -363,19 +256,15 @@ const CustomerServiceContent = () => {
                                  <div className="section-label">문의 내용</div>
                                  <div className="section-content">{item['내용']}</div>
                               </div>
-
                               <div className="action-buttons">
-                                 <button className="btn default main1" onClick={() => handleInquiryAction('answer', item)}>
+                                 <button className="btn default main1" onClick={() => alert('답변 작성 모달')}>
                                     답변 작성
                                  </button>
-                                 <button className="btn default main2" onClick={() => handleInquiryAction('edit', item)}>
+                                 <button className="btn default main2" onClick={() => alert('수정')}>
                                     수정
                                  </button>
-                                 <button className="btn default main3" onClick={() => handleInquiryAction('delete', item)}>
+                                 <button className="btn default main3" onClick={() => window.confirm('삭제?') && alert('삭제')}>
                                     삭제
-                                 </button>
-                                 <button className="btn default" onClick={() => handleInquiryAction('assign', item)}>
-                                    담당자 지정
                                  </button>
                               </div>
                            </div>
@@ -384,6 +273,7 @@ const CustomerServiceContent = () => {
                   ),
                }
             })
+         }
          case 'inquiry-category':
             return inquiryCategoryData
          case 'admin-board':
@@ -395,10 +285,24 @@ const CustomerServiceContent = () => {
       }
    }
 
-   // 서브탭별 필터 옵션
+   // 필터 옵션 (관리자 1:1 문의 탭에 간단히 상태 필터만 제공)
    const getFilterOptions = () => {
       switch (activeSubTab) {
          case 'inquiry-1on1':
+            return {
+               status: {
+                  label: '상태',
+                  type: 'select',
+                  options: [
+                     { value: '', label: '전체' },
+                     { value: 'OPEN', label: 'OPEN' },
+                     { value: 'ANSWERED', label: 'ANSWERED' },
+                     { value: 'CLOSED', label: 'CLOSED' },
+                  ],
+                  // AdminTableLayout 내부에서 onChange를 지원하지 않는다면
+                  // 외부 컨트롤러를 별도로 붙여야 함. 일단 select를 따로 하나 보여줌:
+               },
+            }
          case 'inquiry-faq':
          case 'inquiry-voice':
             return {
@@ -412,66 +316,10 @@ const CustomerServiceContent = () => {
                      { value: '고객의소리', label: '고객의소리' },
                   ],
                },
-               category: {
-                  label: '카테고리',
-                  type: 'select',
-                  options: [
-                     { value: '', label: '전체' },
-                     { value: '기부', label: '기부' },
-                     { value: '포인트', label: '포인트' },
-                     { value: '계정', label: '계정' },
-                     { value: '서비스개선', label: '서비스개선' },
-                     { value: '기타', label: '기타' },
-                  ],
-               },
-               status: {
-                  label: '상태',
-                  type: 'select',
-                  options: [
-                     { value: '', label: '전체' },
-                     { value: '대기', label: '대기' },
-                     { value: '처리중', label: '처리중' },
-                     { value: '답변완료', label: '답변완료' },
-                     { value: '보류', label: '보류' },
-                  ],
-               },
-               priority: {
-                  label: '우선순위',
-                  type: 'select',
-                  options: [
-                     { value: '', label: '전체' },
-                     { value: '높음', label: '높음' },
-                     { value: '보통', label: '보통' },
-                     { value: '낮음', label: '낮음' },
-                  ],
-               },
-               userId: {
-                  label: '회원ID',
-                  type: 'input',
-                  placeholder: '회원ID를 입력하세요',
-               },
-               title: {
-                  label: '제목',
-                  type: 'input',
-                  placeholder: '제목을 입력하세요',
-               },
-               dateRange: {
-                  label: '문의일',
-                  type: 'daterange',
-               },
-               manager: {
-                  label: '담당자',
-                  type: 'input',
-                  placeholder: '담당자를 입력하세요',
-               },
             }
          case 'inquiry-category':
             return {
-               categoryName: {
-                  label: '카테고리명',
-                  type: 'input',
-                  placeholder: '카테고리명을 입력하세요',
-               },
+               categoryName: { label: '카테고리명', type: 'input', placeholder: '카테고리명을 입력하세요' },
                status: {
                   label: '상태',
                   type: 'select',
@@ -480,11 +328,6 @@ const CustomerServiceContent = () => {
                      { value: '활성', label: '활성' },
                      { value: '비활성', label: '비활성' },
                   ],
-               },
-               inquiryCountRange: {
-                  label: '문의건수 범위',
-                  type: 'range',
-                  placeholder: { min: '최소 건수', max: '최대 건수' },
                },
             }
          case 'admin-board':
@@ -510,28 +353,10 @@ const CustomerServiceContent = () => {
                      { value: '숨김', label: '숨김' },
                   ],
                },
-               title: {
-                  label: '제목',
-                  type: 'input',
-                  placeholder: '제목을 입력하세요',
-               },
-               author: {
-                  label: '작성자',
-                  type: 'input',
-                  placeholder: '작성자를 입력하세요',
-               },
-               dateRange: {
-                  label: '작성일',
-                  type: 'daterange',
-               },
             }
          case 'admin-board-category':
             return {
-               categoryName: {
-                  label: '카테고리명',
-                  type: 'input',
-                  placeholder: '카테고리명을 입력하세요',
-               },
+               categoryName: { label: '카테고리명', type: 'input', placeholder: '카테고리명을 입력하세요' },
                status: {
                   label: '상태',
                   type: 'select',
@@ -547,56 +372,37 @@ const CustomerServiceContent = () => {
       }
    }
 
-   // 서브탭별 액션 버튼
    const getActionButtons = () => {
       switch (activeSubTab) {
-         case 'inquiry-management':
+         case 'inquiry-1on1':
             return [
-               {
-                  label: '일괄 답변',
-                  className: 'btn default main1',
-                  onClick: () => console.log('일괄 답변'),
-               },
-               {
-                  label: '담당자 일괄 지정',
-                  className: 'btn default main2',
-                  onClick: () => console.log('담당자 일괄 지정'),
-               },
-               {
-                  label: '엑셀 다운로드',
-                  className: 'btn btn-success',
-                  onClick: () => console.log('엑셀 다운로드'),
-               },
+               // 상태 필터를 외부로 노출 (AdminTableLayout의 내부 필터 핸들링이 없다면)
+               <div key="status-filter" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span>상태:</span>
+                  <select
+                     value={statusFilter}
+                     onChange={(e) => {
+                        setPage(1)
+                        setStatusFilter(e.target.value)
+                     }}
+                     disabled={loading}
+                  >
+                     <option value="">전체</option>
+                     <option value="OPEN">OPEN</option>
+                     <option value="ANSWERED">ANSWERED</option>
+                     <option value="CLOSED">CLOSED</option>
+                  </select>
+               </div>,
             ]
          case 'inquiry-category':
             return [
-               {
-                  label: '카테고리 추가',
-                  className: 'btn default main1',
-                  onClick: () => console.log('카테고리 추가'),
-               },
-               {
-                  label: '정렬순서 변경',
-                  className: 'btn default main2',
-                  onClick: () => console.log('정렬순서 변경'),
-               },
+               { label: '카테고리 추가', className: 'btn default main1', onClick: () => console.log('카테고리 추가') },
+               { label: '정렬순서 변경', className: 'btn default main2', onClick: () => console.log('정렬순서 변경') },
             ]
          case 'admin-board':
-            return [
-               {
-                  label: '게시글 작성',
-                  className: 'btn default main1',
-                  onClick: () => console.log('게시글 작성'),
-               },
-            ]
+            return [{ label: '게시글 작성', className: 'btn default main1', onClick: () => console.log('게시글 작성') }]
          case 'admin-board-category':
-            return [
-               {
-                  label: '카테고리 추가',
-                  className: 'btn default main1',
-                  onClick: () => console.log('카테고리 추가'),
-               },
-            ]
+            return [{ label: '카테고리 추가', className: 'btn default main1', onClick: () => console.log('카테고리 추가') }]
          default:
             return []
       }
@@ -623,12 +429,18 @@ const CustomerServiceContent = () => {
             data={getData()}
             filterOptions={getFilterOptions()}
             actionButtons={getActionButtons()}
-            currentPage={1}
-            totalPages={5}
-            onPageChange={(page) => console.log('페이지 변경:', page)}
-            enableCheckbox={activeSubTab === 'inquiry-category' || activeSubTab === 'admin-board' || activeSubTab === 'admin-board-category'}
-            enableDoubleClick={activeSubTab === 'inquiry-category' || activeSubTab === 'admin-board' || activeSubTab === 'admin-board-category'}
+            currentPage={activeSubTab === 'inquiry-1on1' ? page : 1}
+            totalPages={activeSubTab === 'inquiry-1on1' ? totalPages : 5}
+            onPageChange={(p) => {
+               if (activeSubTab === 'inquiry-1on1') setPage(p)
+               else console.log('페이지 변경:', p)
+            }}
+            enableCheckbox={['inquiry-category', 'admin-board', 'admin-board-category'].includes(activeSubTab)}
+            enableDoubleClick={['inquiry-category', 'admin-board', 'admin-board-category'].includes(activeSubTab)}
          />
+
+         {loading && activeSubTab === 'inquiry-1on1' && <div className="mt-2">불러오는 중…</div>}
+         {error && activeSubTab === 'inquiry-1on1' && <div className="mt-2 text-danger">에러: {String(error)}</div>}
       </div>
    )
 }
